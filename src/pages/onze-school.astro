@@ -19,22 +19,27 @@ const waarden = [
     </div>
   </section>
 
+  <!-- Missie & Visie -->
   <section id="visie" class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-16">
         <div>
           <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide mb-2">Visie & missie</div>
           <h2 class="text-3xl font-extrabold text-[#07153b] mb-5">Wie zijn wij?</h2>
           <p class="text-gray-600 mb-4 leading-relaxed">
-            Sint-Victor Alsemberg is een katholieke Nederlandstalige school die een brede algemene vorming biedt. We bereiden leerlingen voor op het hoger onderwijs, maar hebben ook oog voor hun persoonlijke groei en welzijn.
+            Sint-Victor Alsemberg is een katholieke Nederlandstalige school die een brede algemene vorming aanbiedt. We bereiden leerlingen voor op het hoger onderwijs, maar hebben ook oog voor hun persoonlijke groei en welzijn.
           </p>
           <p class="text-gray-600 mb-4 leading-relaxed">
             We willen een leeromgeving creëren waar leerlingen kritisch leren denken, verantwoordelijk leren handelen en actief bijdragen aan de samenleving.
           </p>
-          <div class="bg-[#07153b] text-white rounded-2xl p-5 mt-6">
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            Alle jongeren moeten zich goed voelen bij ons. Daarom investeren we in een positief schoolklimaat, continue professionalisering van ons team en een moderne infrastructuur die 21ste-eeuws onderwijs mogelijk maakt.
+          </p>
+          <div class="bg-[#07153b] text-white rounded-2xl p-5 mt-2">
             <div class="text-yellow-400 font-bold mb-1 text-sm">Ons motto</div>
-            <div class="italic text-blue-100">"Honor Deo, Labor mihi, Utilitas proximo"</div>
-            <div class="text-blue-300 text-xs mt-2">Eer aan God, Arbeid is mijn deel, Nut voor de naaste</div>
+            <div class="italic text-blue-100 text-lg">"Honor Deo, Labor mihi, Utilitas proximo"</div>
+            <div class="text-blue-300 text-xs mt-2">Eer aan God &mdash; Arbeid is mijn deel &mdash; Nut voor de naaste</div>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -52,6 +57,29 @@ const waarden = [
         </div>
       </div>
 
+      <!-- Missie & visie kolommen -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100">
+          <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze missie</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een brede algemene vorming aanbieden voor elke leerling</li>
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Jongeren degelijk voorbereiden op het hoger onderwijs</li>
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Elke leerling zich thuis laten voelen op school</li>
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een leeromgeving creëren die kritisch en verantwoordelijk denken stimuleert</li>
+          </ul>
+        </div>
+        <div class="bg-yellow-50 rounded-2xl p-6 border border-yellow-100">
+          <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze visie</h3>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Rijke ontplooiingskansen voor elke leerling met aandacht en respect</li>
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Ambitieus lesgeven met een stevige cognitieve basis</li>
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Actieve betrokkenheid van leerlingen, ouders en leerkrachten</li>
+            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Inspiratie door het opvoedingsproject van Broeder Victor Scheppers</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Waarden -->
       <h2 class="text-2xl font-extrabold text-[#07153b] mb-8">Onze waarden</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
         {waarden.map(w => (
@@ -65,6 +93,54 @@ const waarden = [
         ))}
       </div>
 
+    </div>
+  </section>
+
+  <!-- Victor Scheppers sectie -->
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Onze roots</div>
+          <h2 class="text-3xl font-extrabold mb-5">Victor Scheppers</h2>
+          <p class="text-blue-100 leading-relaxed mb-4">
+            Onze school is geïnspireerd door het opvoedingsproject van Broeder Victor Scheppers, die kansarme jongeren wilde opvoeden door een voortdurende aanwezigheid die discipline met mildheid verzoende.
+          </p>
+          <p class="text-blue-100 leading-relaxed mb-4">
+            Zijn doelstellingen omvatten geloofsopvoeding, deugdvorming en dienstbaarheid aan de medemens. Karaktervorming en emotionele ontwikkeling stonden naast intellectuele vorming centraal.
+          </p>
+          <p class="text-blue-100 leading-relaxed mb-6">
+            Vandaag vertalen we dit naar een pedagogisch project met evangelische inspiratie, empathische betrokkenheid bij jongeren en een verantwoorde zorg voor kwetsbare leerlingen en de samenleving.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/Opvoedingsconcept Scheppersscholen.pdf" target="_blank" rel="noopener"
+              class="inline-flex items-center gap-2 bg-yellow-400 text-[#07153b] font-bold px-5 py-3 rounded-xl hover:bg-yellow-300 transition text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Opvoedingsconcept Scheppersscholen
+            </a>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-4">
+          {[
+            { titel: "Evangelische inspiratie", tekst: "Met een hoopvol humanisme als fundament voor ons onderwijs." },
+            { titel: "Empathische betrokkenheid", tekst: "Toegewijde aanwezigheid bij elke jongere, met aandacht voor wie ze echt zijn." },
+            { titel: "Zorg voor de kwetsbare", tekst: "Bijzondere aandacht voor leerlingen die extra ondersteuning nodig hebben." },
+          ].map(p => (
+            <div class="bg-white/10 rounded-xl p-4">
+              <div class="font-bold text-yellow-400 text-sm mb-1">{p.titel}</div>
+              <div class="text-blue-100 text-sm leading-relaxed">{p.tekst}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schoolteam -->
+  <section class="py-16 px-4">
+    <div class="max-w-5xl mx-auto">
       <div id="team">
         <h2 class="text-2xl font-extrabold text-[#07153b] mb-2">Schoolteam</h2>
         <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
