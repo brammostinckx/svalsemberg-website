@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const berichten = [
-  { datum: "12 mei 2026", titel: "Inschrijvingen schooljaar 2026-2027", tekst: "De inschrijvingen voor het nieuwe schooljaar zijn van start gegaan. Ontdek ons volledig studieaanbod en boek een persoonlijke rondleiding op onze school.", kleur: "border-[#003580]" },
+  { datum: "12 mei 2026", titel: "Inschrijvingen schooljaar 2026-2027", tekst: "De inschrijvingen voor het nieuwe schooljaar zijn van start gegaan. Ontdek ons volledig studieaanbod en boek een persoonlijke rondleiding op onze school.", kleur: "border-[#00024c]" },
   { datum: "3 mei 2026", titel: "Opendeurdagen mei 2026", tekst: "Kom onze school ontdekken tijdens onze opendeurdag op zaterdag 24 mei van 9u tot 12u. Alle richtingen worden voorgesteld en je kan kennismaken met leerkrachten en leerlingen.", kleur: "border-[#f5a623]" },
-  { datum: "20 april 2026", titel: "Sportdag groot succes!", tekst: "Meer dan 400 leerlingen namen deel aan onze jaarlijkse sportdag. Met activiteiten zoals voetbal, atletiek en teamspelen was het een onvergetelijke dag.", kleur: "border-[#003580]" },
+  { datum: "20 april 2026", titel: "Sportdag groot succes!", tekst: "Meer dan 400 leerlingen namen deel aan onze jaarlijkse sportdag. Met activiteiten zoals voetbal, atletiek en teamspelen was het een onvergetelijke dag.", kleur: "border-[#00024c]" },
   { datum: "5 april 2026", titel: "Paasontbijt voor het goede doel", tekst: "Leerlingen en leerkrachten organiseerden samen een paasontbijt ten voordele van een goed doel. Er werd maar liefst €1.200 ingezameld.", kleur: "border-[#f5a623]" },
-  { datum: "15 maart 2026", titel: "Nieuwe computerlokalen in gebruik", tekst: "Dankzij een investering in moderne infrastructuur beschikken we nu over drie volledig vernieuwde computerlokalen met de nieuwste apparatuur.", kleur: "border-[#003580]" },
+  { datum: "15 maart 2026", titel: "Nieuwe computerlokalen in gebruik", tekst: "Dankzij een investering in moderne infrastructuur beschikken we nu over drie volledig vernieuwde computerlokalen met de nieuwste apparatuur.", kleur: "border-[#00024c]" },
 ];
 ---
 <Layout title="Nieuws" description="Laatste nieuws en evenementen van Sint-Victor Alsemberg.">
 
-  <section class="bg-[#003580] text-white py-16 px-4">
+  <section class="bg-[#00024c] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold mb-4">Nieuws & Evenementen</h1>
       <p class="text-blue-200 text-lg">Blijf op de hoogte van alles wat er leeft op onze school.</p>
@@ -22,7 +22,7 @@ const berichten = [
       {berichten.map(b => (
         <article class={`bg-white rounded-2xl shadow-sm border-l-4 ${b.kleur} p-6 hover:shadow-md transition`}>
           <div class="text-xs text-gray-400 mb-2">{b.datum}</div>
-          <h2 class="text-xl font-bold text-[#003580] mb-3">{b.titel}</h2>
+          <h2 class="text-xl font-bold text-[#00024c] mb-3">{b.titel}</h2>
           <p class="text-gray-600">{b.tekst}</p>
         </article>
       ))}

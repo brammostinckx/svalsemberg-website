@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
   <!-- Hero -->
   <section class="relative overflow-hidden">
     <!-- Achtergrond: gradient met school-sfeer -->
-    <div class="bg-gradient-to-br from-[#003580] via-[#004aad] to-[#0062cc] min-h-[520px] flex items-center">
+    <div class="bg-gradient-to-br from-[#00024c] via-[#004aad] to-[#0062cc] min-h-[520px] flex items-center">
       <!-- Decoratief patroon -->
       <div class="absolute inset-0 opacity-10">
         <div class="absolute top-10 right-10 w-64 h-64 rounded-full bg-white"></div>
@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div class="relative max-w-6xl mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div class="text-white">
-          <div class="inline-block bg-[#f5a623] text-[#003580] text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
+          <div class="inline-block bg-[#f5a623] text-[#00024c] text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
             Secundair onderwijs
           </div>
           <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
@@ -27,7 +27,7 @@ import Layout from '../layouts/Layout.astro';
             Bij Sint-Victor staat elke leerling centraal. In een warme en uitdagende omgeving groeien jongeren uit tot zelfzekere mensen.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="/contact" class="bg-[#f5a623] text-[#003580] font-bold px-6 py-3 rounded-xl hover:bg-yellow-400 transition shadow-lg">
+            <a href="/contact" class="bg-[#f5a623] text-[#00024c] font-bold px-6 py-3 rounded-xl hover:bg-yellow-400 transition shadow-lg">
               Inschrijvingen →
             </a>
             <a href="/over-ons" class="bg-white/10 backdrop-blur text-white border border-white/30 font-semibold px-6 py-3 rounded-xl hover:bg-white/20 transition">
@@ -58,7 +58,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-[#003580]">Waarom Sint-Victor?</h2>
+        <h2 class="text-3xl font-extrabold text-[#00024c]">Waarom Sint-Victor?</h2>
         <div class="w-16 h-1 bg-[#f5a623] mx-auto mt-3 rounded-full"></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -67,9 +67,9 @@ import Layout from '../layouts/Layout.astro';
           { icon: "📖", titel: "Leren met stevige basis", tekst: "Kwalitatief onderwijs dat uitdaagt en inspireert. Met aandacht voor elk leerpad en elk tempo." },
           { icon: "👨‍👩‍👧", titel: "Ouders dichtbij", tekst: "Een open school waar ouders welkom zijn en nauw betrokken bij de schoolgemeenschap." },
         ].map(p => (
-          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#003580] group">
+          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#00024c] group">
             <div class="text-5xl mb-5">{p.icon}</div>
-            <h3 class="text-xl font-bold text-[#003580] mb-3 group-hover:text-[#0050c0] transition">{p.titel}</h3>
+            <h3 class="text-xl font-bold text-[#00024c] mb-3 group-hover:text-[#0050c0] transition">{p.titel}</h3>
             <p class="text-gray-600 leading-relaxed">{p.tekst}</p>
           </div>
         ))}
@@ -81,7 +81,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-[#003580]">Snel naar</h2>
+        <h2 class="text-3xl font-extrabold text-[#00024c]">Snel naar</h2>
         <div class="w-16 h-1 bg-[#f5a623] mx-auto mt-3 rounded-full"></div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -92,9 +92,9 @@ import Layout from '../layouts/Layout.astro';
           { href: "/contact", icon: "📋", label: "Inschrijven" },
         ].map(k => (
           <a href={k.href}
-            class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md border border-gray-100 hover:border-[#003580] transition group">
+            class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md border border-gray-100 hover:border-[#00024c] transition group">
             <div class="text-4xl mb-3">{k.icon}</div>
-            <div class="font-bold text-[#003580] text-sm group-hover:text-[#0050c0] transition">{k.label}</div>
+            <div class="font-bold text-[#00024c] text-sm group-hover:text-[#0050c0] transition">{k.label}</div>
           </a>
         ))}
       </div>
@@ -106,10 +106,10 @@ import Layout from '../layouts/Layout.astro';
     <div class="max-w-6xl mx-auto">
       <div class="flex items-end justify-between mb-10">
         <div>
-          <h2 class="text-3xl font-extrabold text-[#003580]">Nieuws</h2>
+          <h2 class="text-3xl font-extrabold text-[#00024c]">Nieuws</h2>
           <div class="w-16 h-1 bg-[#f5a623] mt-3 rounded-full"></div>
         </div>
-        <a href="/nieuws" class="text-[#003580] font-semibold text-sm hover:underline">Alle berichten →</a>
+        <a href="/nieuws" class="text-[#00024c] font-semibold text-sm hover:underline">Alle berichten →</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
@@ -118,15 +118,15 @@ import Layout from '../layouts/Layout.astro';
           { datum: "20 april 2026", tag: "Schoolleven", titel: "Sportdag: een onvergetelijke dag!", tekst: "Meer dan 400 leerlingen namen deel aan de jaarlijkse sportdag vol teamactiviteiten en sportieve uitdagingen." },
         ].map(b => (
           <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition group">
-            <div class="h-2 bg-[#003580] group-hover:bg-[#f5a623] transition-colors"></div>
+            <div class="h-2 bg-[#00024c] group-hover:bg-[#f5a623] transition-colors"></div>
             <div class="p-6">
               <div class="flex items-center gap-2 mb-3">
-                <span class="bg-blue-50 text-[#003580] text-xs font-bold px-2 py-1 rounded-full">{b.tag}</span>
+                <span class="bg-blue-50 text-[#00024c] text-xs font-bold px-2 py-1 rounded-full">{b.tag}</span>
                 <span class="text-gray-400 text-xs">{b.datum}</span>
               </div>
-              <h3 class="font-bold text-[#003580] text-lg mb-2 leading-tight">{b.titel}</h3>
+              <h3 class="font-bold text-[#00024c] text-lg mb-2 leading-tight">{b.titel}</h3>
               <p class="text-gray-600 text-sm leading-relaxed">{b.tekst}</p>
-              <a href="/nieuws" class="mt-4 inline-block text-[#003580] text-sm font-semibold hover:underline">Lees meer →</a>
+              <a href="/nieuws" class="mt-4 inline-block text-[#00024c] text-sm font-semibold hover:underline">Lees meer →</a>
             </div>
           </article>
         ))}
@@ -135,15 +135,15 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- CTA banner -->
-  <section class="py-16 px-4 bg-[#003580]">
+  <section class="py-16 px-4 bg-[#00024c]">
     <div class="max-w-4xl mx-auto text-center text-white">
       <h2 class="text-3xl font-extrabold mb-3">Klaar om deel uit te maken van Sint-Victor?</h2>
       <p class="text-blue-200 text-lg mb-8">Schrijf je in of kom ons ontmoeten tijdens een rondleiding.</p>
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/contact" class="bg-[#f5a623] text-[#003580] font-bold px-8 py-3 rounded-xl hover:bg-yellow-400 transition">
+        <a href="/contact" class="bg-[#f5a623] text-[#00024c] font-bold px-8 py-3 rounded-xl hover:bg-yellow-400 transition">
           Inschrijven
         </a>
-        <a href="/contact" class="border-2 border-white text-white font-bold px-8 py-3 rounded-xl hover:bg-white hover:text-[#003580] transition">
+        <a href="/contact" class="border-2 border-white text-white font-bold px-8 py-3 rounded-xl hover:bg-white hover:text-[#00024c] transition">
           Rondleiding aanvragen
         </a>
       </div>
