@@ -4,96 +4,149 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Home">
 
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-[#003580] to-[#0050c0] text-white py-24 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-        Welkom bij<br/><span class="text-[#f5a623]">Sint-Victor Alsemberg</span>
-      </h1>
-      <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-        Een warme katholieke school in het Zennevallei waar elke leerling telt en kan groeien.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/aanbod" class="bg-[#f5a623] text-[#003580] font-bold px-8 py-3 rounded-full hover:bg-yellow-400 transition text-lg">
-          Ons studieaanbod
-        </a>
-        <a href="/contact" class="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-[#003580] transition text-lg">
-          Neem contact op
-        </a>
+  <section class="relative overflow-hidden">
+    <!-- Achtergrond: gradient met school-sfeer -->
+    <div class="bg-gradient-to-br from-[#003580] via-[#004aad] to-[#0062cc] min-h-[520px] flex items-center">
+      <!-- Decoratief patroon -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-10 right-10 w-64 h-64 rounded-full bg-white"></div>
+        <div class="absolute bottom-0 left-20 w-96 h-96 rounded-full bg-white"></div>
+        <div class="absolute top-1/2 right-1/4 w-32 h-32 rounded-full bg-[#f5a623]"></div>
+      </div>
+      <div class="relative max-w-6xl mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="text-white">
+          <div class="inline-block bg-[#f5a623] text-[#003580] text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wide">
+            Secundair onderwijs
+          </div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+            Groeien, leren en<br/>
+            <span class="text-[#f5a623]">thuiskomen</span><br/>
+            in Alsemberg
+          </h1>
+          <p class="text-blue-100 text-lg mb-8 leading-relaxed">
+            Bij Sint-Victor staat elke leerling centraal. In een warme en uitdagende omgeving groeien jongeren uit tot zelfzekere mensen.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/contact" class="bg-[#f5a623] text-[#003580] font-bold px-6 py-3 rounded-xl hover:bg-yellow-400 transition shadow-lg">
+              Inschrijvingen →
+            </a>
+            <a href="/over-ons" class="bg-white/10 backdrop-blur text-white border border-white/30 font-semibold px-6 py-3 rounded-xl hover:bg-white/20 transition">
+              Ontdek onze school
+            </a>
+          </div>
+        </div>
+        <!-- Infoblokjes rechts -->
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { getal: "600+", label: "Leerlingen", icon: "👨‍🎓" },
+            { getal: "80+", label: "Medewerkers", icon: "👩‍🏫" },
+            { getal: "15+", label: "Richtingen", icon: "📚" },
+            { getal: "50+", label: "Jaar ervaring", icon: "🏫" },
+          ].map(s => (
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-6 text-white text-center border border-white/20 hover:bg-white/20 transition">
+              <div class="text-3xl mb-2">{s.icon}</div>
+              <div class="text-2xl font-extrabold text-[#f5a623]">{s.getal}</div>
+              <div class="text-sm text-blue-200">{s.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Troeven -->
+  <!-- Drie pijlers -->
   <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-center text-[#003580] mb-12">Waarom Sint-Victor?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-2xl p-8 shadow-sm text-center hover:shadow-md transition">
-          <div class="text-5xl mb-4">🎓</div>
-          <h3 class="text-xl font-bold text-[#003580] mb-3">Breed studieaanbod</h3>
-          <p class="text-gray-600">Van ASO tot TSO en BSO — bij ons vindt elke leerling zijn richting.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm text-center hover:shadow-md transition">
-          <div class="text-5xl mb-4">❤️</div>
-          <h3 class="text-xl font-bold text-[#003580] mb-3">Warme sfeer</h3>
-          <p class="text-gray-600">Kleine klassen, betrokken leerkrachten en een hecht schoolteam.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 shadow-sm text-center hover:shadow-md transition">
-          <div class="text-5xl mb-4">🌱</div>
-          <h3 class="text-xl font-bold text-[#003580] mb-3">Persoonlijke groei</h3>
-          <p class="text-gray-600">Aandacht voor elk kind, op zijn eigen tempo en met zijn eigen talenten.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Nieuws preview -->
-  <section class="py-16 px-4">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex items-center justify-between mb-10">
-        <h2 class="text-3xl font-bold text-[#003580]">Laatste nieuws</h2>
-        <a href="/nieuws" class="text-[#003580] font-semibold hover:underline">Alle berichten →</a>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-[#003580]">Waarom Sint-Victor?</h2>
+        <div class="w-16 h-1 bg-[#f5a623] mx-auto mt-3 rounded-full"></div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="bg-[#003580] h-3 w-full"></div>
-          <div class="p-6">
-            <div class="text-xs text-gray-400 mb-2">12 mei 2026</div>
-            <h3 class="font-bold text-lg text-[#003580] mb-2">Inschrijvingen schooljaar 2026-2027</h3>
-            <p class="text-gray-600 text-sm">De inschrijvingen voor het nieuwe schooljaar zijn gestart. Ontdek ons aanbod en boek een rondleiding.</p>
-            <a href="/nieuws" class="mt-4 inline-block text-[#003580] font-semibold text-sm hover:underline">Lees meer →</a>
+        {[
+          { icon: "🤝", titel: "Iedereen hoort erbij", tekst: "Een inclusieve school waar elke leerling zich welkom en gewaardeerd voelt. We bouwen aan echte gemeenschap." },
+          { icon: "📖", titel: "Leren met stevige basis", tekst: "Kwalitatief onderwijs dat uitdaagt en inspireert. Met aandacht voor elk leerpad en elk tempo." },
+          { icon: "👨‍👩‍👧", titel: "Ouders dichtbij", tekst: "Een open school waar ouders welkom zijn en nauw betrokken bij de schoolgemeenschap." },
+        ].map(p => (
+          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#003580] group">
+            <div class="text-5xl mb-5">{p.icon}</div>
+            <h3 class="text-xl font-bold text-[#003580] mb-3 group-hover:text-[#0050c0] transition">{p.titel}</h3>
+            <p class="text-gray-600 leading-relaxed">{p.tekst}</p>
           </div>
-        </article>
-        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="bg-[#f5a623] h-3 w-full"></div>
-          <div class="p-6">
-            <div class="text-xs text-gray-400 mb-2">3 mei 2026</div>
-            <h3 class="font-bold text-lg text-[#003580] mb-2">Opendeurdagen mei 2026</h3>
-            <p class="text-gray-600 text-sm">Kom onze school ontdekken tijdens onze opendeurdag op zaterdag 24 mei van 9u tot 12u.</p>
-            <a href="/nieuws" class="mt-4 inline-block text-[#003580] font-semibold text-sm hover:underline">Lees meer →</a>
-          </div>
-        </article>
-        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="bg-[#003580] h-3 w-full"></div>
-          <div class="p-6">
-            <div class="text-xs text-gray-400 mb-2">20 april 2026</div>
-            <h3 class="font-bold text-lg text-[#003580] mb-2">Sportdag groot succes!</h3>
-            <p class="text-gray-600 text-sm">Meer dan 400 leerlingen namen deel aan onze jaarlijkse sportdag. Een onvergetelijke dag!</p>
-            <a href="/nieuws" class="mt-4 inline-block text-[#003580] font-semibold text-sm hover:underline">Lees meer →</a>
-          </div>
-        </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-[#f5a623] py-16 px-4">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-[#003580] mb-4">Kom ons ontmoeten!</h2>
-      <p class="text-[#003580] text-lg mb-8">Plan een rondleiding of kom naar onze volgende opendeurdag. We verwelkomen je graag.</p>
-      <a href="/contact" class="bg-[#003580] text-white font-bold px-10 py-4 rounded-full hover:bg-blue-900 transition text-lg inline-block">
-        Contacteer ons
-      </a>
+  <!-- Snelle navigatiekaarten -->
+  <section class="py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-[#003580]">Snel naar</h2>
+        <div class="w-16 h-1 bg-[#f5a623] mx-auto mt-3 rounded-full"></div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { href: "/over-ons#team", icon: "👩‍🏫", label: "Schoolteam" },
+          { href: "/over-ons", icon: "🎯", label: "Onze visie" },
+          { href: "/aanbod", icon: "📚", label: "Studieaanbod" },
+          { href: "/contact", icon: "📋", label: "Inschrijven" },
+        ].map(k => (
+          <a href={k.href}
+            class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md border border-gray-100 hover:border-[#003580] transition group">
+            <div class="text-4xl mb-3">{k.icon}</div>
+            <div class="font-bold text-[#003580] text-sm group-hover:text-[#0050c0] transition">{k.label}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Nieuws -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <h2 class="text-3xl font-extrabold text-[#003580]">Nieuws</h2>
+          <div class="w-16 h-1 bg-[#f5a623] mt-3 rounded-full"></div>
+        </div>
+        <a href="/nieuws" class="text-[#003580] font-semibold text-sm hover:underline">Alle berichten →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { datum: "12 mei 2026", tag: "Inschrijvingen", titel: "Inschrijvingen 2026-2027 gestart", tekst: "De inschrijvingen voor het nieuwe schooljaar zijn van start gegaan. Boek een rondleiding en ontdek ons aanbod." },
+          { datum: "3 mei 2026", tag: "Evenement", titel: "Opendeurdag zaterdag 24 mei", tekst: "Kom onze school ontdekken van 9u tot 12u. Alle richtingen worden voorgesteld met demo's en rondleidingen." },
+          { datum: "20 april 2026", tag: "Schoolleven", titel: "Sportdag: een onvergetelijke dag!", tekst: "Meer dan 400 leerlingen namen deel aan de jaarlijkse sportdag vol teamactiviteiten en sportieve uitdagingen." },
+        ].map(b => (
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition group">
+            <div class="h-2 bg-[#003580] group-hover:bg-[#f5a623] transition-colors"></div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="bg-blue-50 text-[#003580] text-xs font-bold px-2 py-1 rounded-full">{b.tag}</span>
+                <span class="text-gray-400 text-xs">{b.datum}</span>
+              </div>
+              <h3 class="font-bold text-[#003580] text-lg mb-2 leading-tight">{b.titel}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{b.tekst}</p>
+              <a href="/nieuws" class="mt-4 inline-block text-[#003580] text-sm font-semibold hover:underline">Lees meer →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA banner -->
+  <section class="py-16 px-4 bg-[#003580]">
+    <div class="max-w-4xl mx-auto text-center text-white">
+      <h2 class="text-3xl font-extrabold mb-3">Klaar om deel uit te maken van Sint-Victor?</h2>
+      <p class="text-blue-200 text-lg mb-8">Schrijf je in of kom ons ontmoeten tijdens een rondleiding.</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/contact" class="bg-[#f5a623] text-[#003580] font-bold px-8 py-3 rounded-xl hover:bg-yellow-400 transition">
+          Inschrijven
+        </a>
+        <a href="/contact" class="border-2 border-white text-white font-bold px-8 py-3 rounded-xl hover:bg-white hover:text-[#003580] transition">
+          Rondleiding aanvragen
+        </a>
+      </div>
     </div>
   </section>
 

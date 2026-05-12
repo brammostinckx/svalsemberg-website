@@ -4,7 +4,20 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = "Sint-Victor Alsemberg — een warme school voor iedereen" } = Astro.props;
+const { title, description = "Sint-Victor Alsemberg — groeien, leren en thuiskomen" } = Astro.props;
+const nav = [
+  { label: "Onze school", href: "/over-ons", sub: [
+    { label: "Wie zijn we?", href: "/over-ons" },
+    { label: "Studieaanbod", href: "/aanbod" },
+    { label: "Schoolteam", href: "/over-ons#team" },
+  ]},
+  { label: "Praktisch", href: "/praktisch", sub: [
+    { label: "Kalender", href: "/praktisch#kalender" },
+    { label: "Schoolreglement", href: "/praktisch#reglement" },
+  ]},
+  { label: "Nieuws", href: "/nieuws", sub: [] },
+  { label: "Contact", href: "/contact", sub: [] },
+];
 ---
 <!doctype html>
 <html lang="nl">
@@ -13,57 +26,98 @@ const { title, description = "Sint-Victor Alsemberg — een warme school voor ie
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{title} | Sint-Victor Alsemberg</title>
   </head>
-  <body class="bg-white text-gray-800 font-sans">
+  <body class="bg-white text-gray-800" style="font-family: 'Inter', sans-serif;">
 
-    <header class="bg-[#003580] text-white shadow-lg sticky top-0 z-50">
+    <!-- Top bar -->
+    <div class="bg-[#003580] text-white text-xs py-2 px-4 hidden md:block">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <span>Alsembergsteenweg 613, 1653 Dworp</span>
+        <div class="flex gap-6">
+          <a href="mailto:info@svalsemberg.be" class="hover:text-[#f5a623] transition">info@svalsemberg.be</a>
+          <a href="/contact" class="bg-[#f5a623] text-[#003580] font-bold px-3 py-1 rounded hover:bg-yellow-400 transition">Inschrijvingen</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 border-b-4 border-[#003580]">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-3 hover:opacity-90 transition">
-          <div class="bg-[#f5a623] rounded-full w-10 h-10 flex items-center justify-center font-bold text-[#003580] text-lg">SV</div>
+        <a href="/" class="flex items-center gap-3 hover:opacity-80 transition">
+          <div class="bg-[#003580] rounded-lg w-12 h-12 flex items-center justify-center">
+            <span class="text-[#f5a623] font-extrabold text-xl">SV</span>
+          </div>
           <div>
-            <div class="font-bold text-lg leading-tight">Sint-Victor</div>
-            <div class="text-xs text-blue-200">Alsemberg</div>
+            <div class="font-extrabold text-[#003580] text-lg leading-tight">Sint-Victor</div>
+            <div class="text-xs text-gray-500 font-medium">Alsemberg</div>
           </div>
         </a>
 
-        <button id="menu-toggle" class="md:hidden p-2 rounded hover:bg-blue-800 transition">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-1">
+          {nav.map(item => (
+            <div class="relative group">
+              <a href={item.href}
+                class="px-4 py-2 rounded-lg font-semibold text-sm text-gray-700 hover:text-[#003580] hover:bg-blue-50 transition flex items-center gap-1">
+                {item.label}
+                {item.sub.length > 0 && (
+                  <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </a>
+              {item.sub.length > 0 && (
+                <div class="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                  {item.sub.map(s => (
+                    <a href={s.href} class="block px-4 py-2 text-sm text-gray-600 hover:text-[#003580] hover:bg-blue-50 transition">{s.label}</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+
+        <!-- Mobiel -->
+        <button id="menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition">
+          <svg class="w-6 h-6 text-[#003580]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="/" class="hover:text-[#f5a623] transition">Home</a>
-          <a href="/over-ons" class="hover:text-[#f5a623] transition">Over ons</a>
-          <a href="/aanbod" class="hover:text-[#f5a623] transition">Studieaanbod</a>
-          <a href="/nieuws" class="hover:text-[#f5a623] transition">Nieuws</a>
-          <a href="/contact" class="hover:text-[#f5a623] transition px-4 py-2 bg-[#f5a623] text-[#003580] rounded-full font-bold">Contact</a>
-        </nav>
       </div>
 
-      <nav id="mobile-menu" class="hidden md:hidden px-4 pb-4 flex flex-col gap-3 text-sm font-medium border-t border-blue-700 pt-3">
-        <a href="/" class="hover:text-[#f5a623] transition">Home</a>
-        <a href="/over-ons" class="hover:text-[#f5a623] transition">Over ons</a>
-        <a href="/aanbod" class="hover:text-[#f5a623] transition">Studieaanbod</a>
-        <a href="/nieuws" class="hover:text-[#f5a623] transition">Nieuws</a>
-        <a href="/contact" class="hover:text-[#f5a623] transition">Contact</a>
-      </nav>
+      <!-- Mobiel menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 px-4 py-3 space-y-1">
+        {nav.map(item => (
+          <a href={item.href} class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:text-[#003580] hover:bg-blue-50 transition">{item.label}</a>
+        ))}
+      </div>
     </header>
 
     <main>
       <slot />
     </main>
 
-    <footer class="bg-[#003580] text-white mt-16">
-      <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <div class="font-bold text-lg mb-2">Sint-Victor Alsemberg</div>
-          <p class="text-blue-200 text-sm">Een warme school in het Zennevallei waar leerlingen groeien in kennis, karakter en gemeenschap.</p>
+    <!-- Footer -->
+    <footer class="bg-[#003580] text-white">
+      <div class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="bg-[#f5a623] rounded-lg w-10 h-10 flex items-center justify-center">
+              <span class="text-[#003580] font-extrabold">SV</span>
+            </div>
+            <div>
+              <div class="font-extrabold text-lg">Sint-Victor Alsemberg</div>
+              <div class="text-blue-300 text-xs">Secundair onderwijs</div>
+            </div>
+          </div>
+          <p class="text-blue-200 text-sm leading-relaxed max-w-xs">Groeien, leren en thuiskomen in Alsemberg. Een warme school voor elke leerling.</p>
         </div>
         <div>
-          <div class="font-bold mb-2">Snelle links</div>
-          <ul class="text-blue-200 text-sm space-y-1">
+          <div class="font-bold mb-3 text-[#f5a623]">School</div>
+          <ul class="space-y-2 text-sm text-blue-200">
             <li><a href="/over-ons" class="hover:text-white transition">Over ons</a></li>
             <li><a href="/aanbod" class="hover:text-white transition">Studieaanbod</a></li>
             <li><a href="/nieuws" class="hover:text-white transition">Nieuws</a></li>
@@ -71,23 +125,23 @@ const { title, description = "Sint-Victor Alsemberg — een warme school voor ie
           </ul>
         </div>
         <div>
-          <div class="font-bold mb-2">Contact</div>
-          <ul class="text-blue-200 text-sm space-y-1">
+          <div class="font-bold mb-3 text-[#f5a623]">Contact</div>
+          <ul class="space-y-2 text-sm text-blue-200">
             <li>Alsembergsteenweg 613</li>
-            <li>1653 Dworp (Alsemberg)</li>
+            <li>1653 Dworp</li>
             <li><a href="mailto:info@svalsemberg.be" class="hover:text-white transition">info@svalsemberg.be</a></li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-blue-800 text-center text-blue-300 text-xs py-4">
+      <div class="border-t border-blue-800 text-center text-blue-400 text-xs py-4">
         © {new Date().getFullYear()} Sint-Victor Alsemberg
       </div>
     </footer>
 
     <script>
-      const toggle = document.getElementById('menu-toggle');
-      const menu = document.getElementById('mobile-menu');
-      toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+      document.getElementById('menu-toggle')?.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
+      });
     </script>
   </body>
 </html>
