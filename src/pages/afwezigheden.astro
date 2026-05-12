@@ -1,130 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfg0OdMuB52grEs_nc4jrjmQCPSGsx7n71c6VVxCm1YWAfLVQ/viewform";
+const siteUrl = "https://sites.google.com/sintvictor.be/afwezigheden/";
 ---
 <Layout title="Afwezigheid melden" description="Meld de afwezigheid van uw kind bij Sint-Victor Alsemberg.">
 
   <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Praktisch</div>
-      <h1 class="text-4xl font-extrabold mb-4">Melding van een afwezige leerling</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Is uw kind ziek of kan het om een andere reden niet naar school? Meld dit zo snel mogelijk via onderstaand formulier.</p>
+      <h1 class="text-4xl font-extrabold mb-4">Afwezigheid melden</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Is uw kind ziek of kan het om een andere reden niet naar school? Meld dit via onderstaande link.</p>
     </div>
   </section>
 
-  <section class="py-16 px-4">
-    <div class="max-w-3xl mx-auto">
-
-      <!-- QR + knop sectie -->
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-10 flex flex-col md:flex-row items-center gap-8">
-        <div class="shrink-0 flex flex-col items-center">
-          <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(formUrl)}`}
-            alt="QR code afwezigheidsformulier"
-            class="w-40 h-40 rounded-xl border border-gray-200"
-          />
-          <p class="text-xs text-gray-400 mt-2 text-center">Scan met je smartphone</p>
+  <section class="py-20 px-4">
+    <div class="max-w-xl mx-auto text-center">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-10">
+        <div class="bg-[#07153b] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
         </div>
-        <div class="flex-1 text-center md:text-left">
-          <h2 class="text-xl font-extrabold text-[#07153b] mb-3">Afwezigheid melden</h2>
-          <p class="text-gray-600 text-sm leading-relaxed mb-5">
-            Vul het digitale formulier in om de afwezigheid van uw kind door te geven. Dit kan via de knop hieronder of door de QR-code te scannen.
-          </p>
-          <a href={formUrl} target="_blank" rel="noopener"
-            class="inline-block bg-[#07153b] text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-900 transition text-sm">
-            Afwezigheid melden &rarr;
-          </a>
-        </div>
-      </div>
-
-      <!-- Stappenplan -->
-      <h2 class="text-2xl font-extrabold text-[#07153b] mb-6">Stappenplan bij afwezigheid van een leerling</h2>
-
-      <div class="space-y-4 mb-10">
-
-        <div class="bg-gray-50 rounded-2xl border border-gray-100 p-6">
-          <h3 class="font-extrabold text-[#07153b] mb-4">De leerling is...</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-            <div class="bg-white rounded-xl border border-gray-200 p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="bg-[#07153b] rounded-full w-8 h-8 flex items-center justify-center shrink-0">
-                  <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <span class="font-bold text-[#07153b] text-sm">Ziek</span>
-              </div>
-              <ul class="text-sm text-gray-600 space-y-2">
-                <li class="flex gap-2">
-                  <span class="text-yellow-500 font-bold shrink-0">1.</span>
-                  Verwittigt de school <strong>voor 8u30</strong> op <a href="tel:+3223801589" class="text-[#07153b] font-semibold hover:underline">02 380 15 89</a> of via <a href={formUrl} target="_blank" rel="noopener" class="text-[#07153b] font-semibold hover:underline">dit formulier</a>.
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-yellow-500 font-bold shrink-0">2.</span>
-                  Tot en met 3 dagen: een briefje van de ouders volstaat.
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-yellow-500 font-bold shrink-0">3.</span>
-                  Meer dan 3 dagen: een doktersattest is verplicht.
-                </li>
-              </ul>
-            </div>
-
-            <div class="bg-white rounded-xl border border-gray-200 p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="bg-[#07153b] rounded-full w-8 h-8 flex items-center justify-center shrink-0">
-                  <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <span class="font-bold text-[#07153b] text-sm">Andere omstandigheden</span>
-              </div>
-              <ul class="text-sm text-gray-600 space-y-2">
-                <li class="flex gap-2">
-                  <span class="text-yellow-500 font-bold shrink-0">1.</span>
-                  Geplande afwezigheid (dokter, tandarts, ...) tijdig aanvragen via het secretariaat.
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-yellow-500 font-bold shrink-0">2.</span>
-                  Verwittigt de school <strong>voor 8u30</strong> op <a href="tel:+3223801589" class="text-[#07153b] font-semibold hover:underline">02 380 15 89</a> of via <a href={formUrl} target="_blank" rel="noopener" class="text-[#07153b] font-semibold hover:underline">dit formulier</a>.
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-yellow-500 font-bold shrink-0">3.</span>
-                  Bewijs van de reden meebrengen bij terugkomst.
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-5">
-          <p class="text-sm text-gray-700 font-semibold">
-            Verwittigt de school voor 8u30 op <a href="tel:+3223801589" class="text-[#07153b] hover:underline">02 380 15 89</a> of via <a href={formUrl} target="_blank" rel="noopener" class="text-[#07153b] hover:underline font-bold">dit formulier</a>.
-          </p>
-          <p class="text-xs text-gray-500 mt-2">Ongewettigde afwezigheid kan gevolgen hebben voor de deliberatie.</p>
-        </div>
-
-      </div>
-
-      <!-- Contact secretariaat -->
-      <div class="bg-[#07153b] text-white rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <div class="flex-1">
-          <div class="font-bold text-yellow-400 text-sm mb-1">Secretariaat</div>
-          <div class="text-blue-100 text-sm">Maandag &ndash; vrijdag: 8u00 &ndash; 16u30</div>
-          <div class="text-blue-100 text-sm mt-1">
-            <a href="tel:+3223801589" class="text-white hover:text-yellow-300 transition font-semibold">02 380 15 89</a>
-            &nbsp;&middot;&nbsp;
-            <a href="mailto:info@sintvictor.be" class="text-white hover:text-yellow-300 transition">info@sintvictor.be</a>
-          </div>
-        </div>
-        <a href={formUrl} target="_blank" rel="noopener"
-          class="bg-yellow-400 text-[#07153b] font-bold px-5 py-2 rounded-xl hover:bg-yellow-300 transition text-sm shrink-0">
-          Formulier openen &rarr;
+        <h2 class="text-xl font-extrabold text-[#07153b] mb-3">Afwezigheid doorgeven</h2>
+        <p class="text-gray-500 text-sm leading-relaxed mb-8">
+          Via onderstaande knop vind je alle informatie en het formulier om een afwezigheid te melden.
+        </p>
+        <a href={siteUrl} target="_blank" rel="noopener"
+          class="inline-block bg-[#07153b] text-white font-bold px-8 py-4 rounded-xl hover:bg-blue-900 transition text-sm">
+          Afwezigheid melden &rarr;
         </a>
+        <p class="text-xs text-gray-400 mt-4">Opent in een nieuw tabblad</p>
       </div>
-
     </div>
   </section>
 
