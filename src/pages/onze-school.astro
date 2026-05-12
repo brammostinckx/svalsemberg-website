@@ -36,10 +36,13 @@ const waarden = [
           <p class="text-gray-600 mb-6 leading-relaxed">
             Alle jongeren moeten zich goed voelen bij ons. Daarom investeren we in een positief schoolklimaat, continue professionalisering van ons team en een moderne infrastructuur die 21ste-eeuws onderwijs mogelijk maakt.
           </p>
-          <div class="bg-[#07153b] text-white rounded-2xl p-5 mt-2">
-            <div class="text-yellow-400 font-bold mb-1 text-sm">Ons motto</div>
-            <div class="italic text-blue-100 text-lg">"Honor Deo, Labor mihi, Utilitas proximo"</div>
-            <div class="text-blue-300 text-xs mt-2">Eer aan God &mdash; Arbeid is mijn deel &mdash; Nut voor de naaste</div>
+          <div class="bg-[#07153b] text-white rounded-2xl p-5 mt-2 flex items-center gap-4">
+            <img src="/stempel.jpg" alt="Stempel Sint-Victor" class="w-16 h-16 rounded-xl object-contain shrink-0 opacity-90" />
+            <div>
+              <div class="text-yellow-400 font-bold mb-1 text-sm">Ons motto</div>
+              <div class="italic text-blue-100 text-lg">"Honor Deo, Labor mihi, Utilitas proximo"</div>
+              <div class="text-blue-300 text-xs mt-2">Eer aan God &mdash; Arbeid is mijn deel &mdash; Nut voor de naaste</div>
+            </div>
           </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
@@ -122,7 +125,9 @@ const waarden = [
             </a>
           </div>
         </div>
-        <div class="grid grid-cols-1 gap-4">
+        <div class="flex flex-col items-center gap-6">
+          <img src="/victorscheppers.jpg" alt="Victor Scheppers" class="rounded-2xl w-full max-w-xs shadow-2xl object-cover" />
+          <div class="grid grid-cols-1 gap-4 w-full">
           {[
             { titel: "Evangelische inspiratie", tekst: "Met een hoopvol humanisme als fundament voor ons onderwijs." },
             { titel: "Empathische betrokkenheid", tekst: "Toegewijde aanwezigheid bij elke jongere, met aandacht voor wie ze echt zijn." },
@@ -133,6 +138,7 @@ const waarden = [
               <div class="text-blue-100 text-sm leading-relaxed">{p.tekst}</div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </div>

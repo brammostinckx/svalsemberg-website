@@ -1,125 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const berichten = [
-  { datum: "12 mei 2026", tag: "Inschrijvingen", titel: "Inschrijvingen 2026-2027 gestart", tekst: "Vanaf nu kan je je inschrijven voor het nieuwe schooljaar. Nieuwe leerlingen voor het 1ste jaar en zij-instromers zijn welkom. Meer info op de inschrijvingenpagina." },
-  { datum: "29 april 2026", tag: "Evenement", titel: "Opendeurdag zaterdag 16 mei", tekst: "Kom onze school ontdekken! Van 9u tot 12u stellen we alle studierichtingen voor. Leerlingen en leerkrachten tonen je rond en beantwoorden al je vragen." },
-  { datum: "18 april 2026", tag: "SV-Tamtam", titel: "13de editie SV-Tamtam beschikbaar", tekst: "De nieuwste editie van ons schoolmagazine staat klaar. Boordevol reportages, interviews en foto's van het schoolleven. Vraag een exemplaar aan het secretariaat." },
-  { datum: "5 april 2026", tag: "Schoolleven", titel: "Paasactie voor het goede doel", tekst: "Onze leerlingen organiseerden een paasmarkt ten voordele van een goed doel. Er werd meer dan 1.500 euro ingezameld. Een geweldig resultaat!" },
-  { datum: "20 maart 2026", tag: "Project", titel: "AED-project: leerlingen leren reanimeren", tekst: "In het kader van ons AED-project leerden meer dan 200 leerlingen hoe ze moeten reanimeren. Een levensreddende vaardigheid voor iedereen." },
-  { datum: "10 maart 2026", tag: "Infrastructuur", titel: "Nieuwe Chromebooks voor alle leerlingen", tekst: "In het kader van ons Chromebookproject beschikt elke leerling nu over een persoonlijk toestel. Dit maakt digitaal leren toegankelijker dan ooit." },
-];
+const FOLDER_ID = '1-XYeqjkuNCGUcYoMdHlPVifV-OTbczwq';
 ---
-<Layout title="SV-Tamtam" description="Nieuws en evenementen van Sint-Victor Alsemberg.">
+<Layout title="SV-Tamtam" description="Alle edities van het SV-Tamtam schoolmagazine van Sint-Victor Alsemberg.">
 
   <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Nieuws & Mededelingen</div>
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Schoolmagazine</div>
       <h1 class="text-4xl font-extrabold mb-4">SV-Tamtam</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Blijf op de hoogte van alles wat leeft op onze school.</p>
+      <p class="text-blue-200 text-lg max-w-2xl">Het schoolmagazine van Sint-Victor Alsemberg. Alle edities beschikbaar als PDF.</p>
     </div>
   </section>
 
-  <!-- Nieuwsberichten -->
   <section class="py-16 px-4">
-    <div class="max-w-4xl mx-auto space-y-5">
-      {berichten.map(b => (
-        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition group">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="bg-blue-50 text-[#07153b] text-xs font-bold px-3 py-1 rounded-full">{b.tag}</span>
-            <span class="text-gray-400 text-xs">{b.datum}</span>
-          </div>
-          <h2 class="text-xl font-bold text-[#07153b] mb-2 group-hover:text-blue-800 transition">{b.titel}</h2>
-          <p class="text-gray-600 leading-relaxed text-sm">{b.tekst}</p>
-        </article>
-      ))}
-    </div>
-  </section>
+    <div class="max-w-5xl mx-auto">
 
-  <!-- Archief sectie -->
-  <section class="bg-gray-50 py-16 px-4 border-t border-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <div class="flex items-center gap-4 mb-2">
-        <h2 class="text-2xl font-extrabold text-[#07153b]">Archief</h2>
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-2xl font-extrabold text-[#07153b]">Alle edities</h2>
+        <a href={`https://drive.google.com/drive/folders/${FOLDER_ID}`} target="_blank" rel="noopener"
+          class="text-sm text-[#07153b] font-bold hover:underline flex items-center gap-1">
+          Openen in Drive
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
       </div>
-      <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
-      <p class="text-gray-500 text-sm mb-8">Alle edities van het SV-Tamtam schoolmagazine, rechtstreeks beschikbaar via Google Drive.</p>
+      <div class="w-14 h-1 bg-yellow-400 mb-6 rounded-full"></div>
 
-      <!-- Loading skeleton -->
-      <div id="archief-loading" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {Array.from({length: 8}).map(() => (
-          <div class="bg-white rounded-xl border border-gray-100 p-5 animate-pulse">
-            <div class="bg-gray-200 rounded-lg w-10 h-10 mb-3"></div>
-            <div class="bg-gray-200 rounded h-3 w-3/4 mb-2"></div>
-            <div class="bg-gray-100 rounded h-2 w-1/2"></div>
-          </div>
-        ))}
+      <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+        <iframe
+          src={`https://drive.google.com/embeddedfolderview?id=${FOLDER_ID}#list`}
+          class="w-full"
+          style="height: 600px; border: none;"
+          title="SV-Tamtam archief"
+        ></iframe>
       </div>
 
-      <!-- Foutmelding -->
-      <div id="archief-error" class="hidden bg-red-50 border border-red-100 rounded-xl p-6 text-center">
-        <p class="text-red-600 text-sm font-semibold mb-1">Kon het archief niet laden.</p>
-        <p class="text-gray-500 text-xs">Controleer de API-sleutel of probeer later opnieuw.</p>
-      </div>
+      <p class="text-xs text-gray-400 mt-3 text-center">
+        Klik op een editie om ze te openen. Het archief wordt automatisch bijgewerkt wanneer er een nieuwe editie verschijnt.
+      </p>
 
-      <!-- Resultaten grid -->
-      <div id="archief-grid" class="hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
     </div>
   </section>
 
 </Layout>
-
-<script>
-  const FOLDER_ID = '1-XYeqjkuNCGUcYoMdHlPVifV-OTbczwq';
-  const API_KEY = 'AIzaSyDTBjnjVJW-uFLR25On4hCKkOEaYpH2SS8';
-
-  async function laadArchief() {
-    const loading = document.getElementById('archief-loading');
-    const grid = document.getElementById('archief-grid');
-    const error = document.getElementById('archief-error');
-
-    try {
-      const q = encodeURIComponent(`'${FOLDER_ID}' in parents and trashed=false`);
-      const url = `https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,modifiedTime)&orderBy=name&pageSize=100&key=${API_KEY}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (!res.ok) {
-        const msg = data?.error?.message || 'onbekende fout';
-        if (error) error.querySelector('p')!.textContent = `API-fout: ${msg}`;
-        throw new Error(msg);
-      }
-      const files: Array<{id: string, name: string, modifiedTime: string}> = (data.files || []).filter((f: {id: string, name: string, modifiedTime: string}) => f.name.toLowerCase().endsWith('.pdf'));
-
-      loading?.classList.add('hidden');
-
-      if (files.length === 0) {
-        error?.classList.remove('hidden');
-        return;
-      }
-
-      if (grid) {
-        grid.innerHTML = files.map((f: {id: string, name: string, modifiedTime: string}) => {
-          const datum = new Date(f.modifiedTime).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', year: 'numeric' });
-          const naam = f.name.replace(/\.pdf$/i, '');
-          return `
-            <a href="https://drive.google.com/file/d/${f.id}/view" target="_blank" rel="noopener"
-              class="group bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-[#07153b]/20 transition flex flex-col">
-              <div class="bg-red-50 rounded-lg w-11 h-11 flex items-center justify-center mb-3 shrink-0 group-hover:bg-red-100 transition">
-                <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/>
-                  <text x="6" y="17" font-size="4" font-weight="bold" fill="currentColor">PDF</text>
-                </svg>
-              </div>
-              <span class="font-bold text-[#07153b] text-sm leading-tight mb-1 group-hover:text-blue-800 transition">${naam}</span>
-              <span class="text-gray-400 text-xs mt-auto pt-2">${datum}</span>
-            </a>`;
-        }).join('');
-        grid.classList.remove('hidden');
-      }
-    } catch {
-      loading?.classList.add('hidden');
-      error?.classList.remove('hidden');
-    }
-  }
-
-  laadArchief();
-</script>
