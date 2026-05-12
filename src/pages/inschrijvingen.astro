@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Inschrijvingen" description="Inschrijven bij Sint-Victor Alsemberg voor schooljaar 2026-2027.">
+
+  <section class="bg-[#00024c] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Schooljaar 2026-2027</div>
+      <h1 class="text-4xl font-extrabold mb-4">Inschrijvingen</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Welkom bij Sint-Victor! Hier vind je alle info over inschrijven voor het nieuwe schooljaar.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
+          <div class="bg-[#00024c] px-6 py-4">
+            <div class="text-yellow-400 font-extrabold text-lg">Nieuwe leerlingen</div>
+            <div class="text-blue-300 text-sm">1ste jaar 2026-2027</div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Kom je voor het eerst naar Sint-Victor? Dan schrijf je je in als nieuwe leerling voor het 1ste jaar. Inschrijvingen verlopen via het aanmeldingssysteem.
+            </p>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-start gap-2"><span class="text-[#00024c] font-bold mt-0.5">✓</span> Aanmelding via het online formulier</li>
+              <li class="flex items-start gap-2"><span class="text-[#00024c] font-bold mt-0.5">✓</span> Breng het rapport en/of CLB-advies mee</li>
+              <li class="flex items-start gap-2"><span class="text-[#00024c] font-bold mt-0.5">✓</span> Infobrochure beschikbaar als download</li>
+            </ul>
+            <a href="/contact" class="block text-center bg-[#00024c] text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition text-sm">
+              Inschrijven voor 1ste jaar
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
+          <div class="bg-yellow-400 px-6 py-4">
+            <div class="text-[#00024c] font-extrabold text-lg">Zij-instromers</div>
+            <div class="text-yellow-700 text-sm">2de tot 6de jaar 2026-2027</div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Wil je overstappen van een andere school naar Sint-Victor? Neem dan eerst contact op met ons secretariaat om de mogelijkheden te bespreken.
+            </p>
+            <ul class="space-y-2 text-sm text-gray-600 mb-6">
+              <li class="flex items-start gap-2"><span class="text-yellow-500 font-bold mt-0.5">✓</span> Telefonisch of per mail contact opnemen</li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500 font-bold mt-0.5">✓</span> Attest vorig schooljaar meebrengen</li>
+              <li class="flex items-start gap-2"><span class="text-yellow-500 font-bold mt-0.5">✓</span> Persoonlijk gesprek mogelijk</li>
+            </ul>
+            <a href="/contact" class="block text-center bg-yellow-400 text-[#00024c] font-bold py-3 rounded-xl hover:bg-yellow-300 transition text-sm">
+              Contact opnemen
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {[
+          { icon: "📄", titel: "Infobrochure", tekst: "Download onze infobrochure voor schooljaar 2026-2027 met alle praktische info.", link: "#", linkTekst: "Download PDF" },
+          { icon: "🚪", titel: "Opendeurdag", tekst: "Bezoek onze school op zaterdag 16 mei 2026 van 9u tot 12u. Gratis en zonder afspraak.", link: "/contact", linkTekst: "Meer info" },
+          { icon: "📞", titel: "Vragen?", tekst: "Neem contact op met ons secretariaat via info@sintvictor.be of bel ons.", link: "/contact", linkTekst: "Contacteer ons" },
+        ].map(i => (
+          <div class="bg-gray-50 rounded-2xl p-6 text-center hover:bg-blue-50 transition">
+            <div class="text-4xl mb-4">{i.icon}</div>
+            <h3 class="font-bold text-[#00024c] mb-2">{i.titel}</h3>
+            <p class="text-gray-600 text-sm mb-4 leading-relaxed">{i.tekst}</p>
+            <a href={i.link} class="text-[#00024c] text-sm font-bold hover:underline">{i.linkTekst} →</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

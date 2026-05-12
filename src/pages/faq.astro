@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+const vragen = [
+  { v: "Hoe schrijf ik mijn kind in voor het 1ste jaar?", a: "Inschrijvingen voor het 1ste jaar verlopen via ons online formulier. Breng het rapport van het 6de leerjaar en eventueel CLB-advies mee. Meer info op de inschrijvingenpagina." },
+  { v: "Wat is Smartschool?", a: "Smartschool is ons digitaal leerplatform. Leerlingen en ouders vinden er taken, punten, mededelingen en het lesrooster. Inloggen via sv.smartschool.be." },
+  { v: "Hoe meld ik een afwezigheid?", a: "Afwezigheden meld je zo snel mogelijk via Smartschool of per telefoon aan het secretariaat. Bij ziekte langer dan 3 dagen is een doktersattest verplicht." },
+  { v: "Heeft de school een uniform?", a: "Nee, Sint-Victor werkt niet met een uniform. We vragen wel nette en respectvolle kledij. Details staan in het schoolreglement." },
+  { v: "Wanneer is de volgende opendeurdag?", a: "De volgende opendeurdag is op zaterdag 16 mei 2026 van 9u tot 12u. Alle studierichtingen worden voorgesteld. Gratis toegang, geen inschrijving nodig." },
+  { v: "Wat kost het Chromebookproject?", a: "Via ons Chromebookproject huren leerlingen een Chromebook aan een jaarlijkse bijdrage. Details en exacte bedragen zijn te vinden in de infobrochure." },
+  { v: "Hoe bereik ik het secretariaat?", a: "Het secretariaat is bereikbaar op maandag tot vrijdag van 8u tot 16u30 via info@sintvictor.be of persoonlijk aan de schoolbalie." },
+  { v: "Biedt de school leerlingenbegeleiding aan?", a: "Ja, we hebben een uitgebreid team voor leerlingenbegeleiding: CLB-medewerkers, zorgcoördinatoren en vertrouwensleerkrachten die leerlingen begeleiden bij studiekeuze, welzijn en leermoeilijkheden." },
+];
+---
+<Layout title="FAQ" description="Veelgestelde vragen over Sint-Victor Alsemberg.">
+
+  <section class="bg-[#00024c] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Veelgestelde vragen</div>
+      <h1 class="text-4xl font-extrabold mb-4">FAQ</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Antwoorden op de meest gestelde vragen. Staat jouw vraag er niet bij? Contacteer ons.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto space-y-4">
+      {vragen.map((faq, i) => (
+        <details class="bg-white rounded-2xl shadow-sm border border-gray-100 group overflow-hidden">
+          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-bold text-[#00024c] text-sm hover:bg-blue-50 transition list-none">
+            {faq.v}
+            <svg class="w-5 h-5 text-gray-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-10 bg-gray-50 rounded-2xl p-6 text-center">
+      <p class="text-gray-600 mb-4">Staat jouw vraag er niet bij?</p>
+      <a href="/contact" class="bg-[#00024c] text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-900 transition text-sm inline-block">
+        Neem contact op
+      </a>
+    </div>
+  </section>
+
+</Layout>

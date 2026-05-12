@@ -4,19 +4,23 @@ interface Props {
   title: string;
   description?: string;
 }
-const { title, description = "Sint-Victor Alsemberg — groeien, leren en thuiskomen" } = Astro.props;
+const { title, description = "Sint-Victor Alsemberg — secundair onderwijs met hart voor elke leerling" } = Astro.props;
+const currentPath = Astro.url.pathname;
 const nav = [
-  { label: "Onze school", href: "/over-ons", sub: [
-    { label: "Wie zijn we?", href: "/over-ons" },
-    { label: "Studieaanbod", href: "/aanbod" },
-    { label: "Schoolteam", href: "/over-ons#team" },
+  { label: "Start", href: "/" },
+  { label: "Onze school", href: "/onze-school", sub: [
+    { label: "Visie & missie", href: "/onze-school#visie" },
+    { label: "Schoolteam", href: "/onze-school#team" },
+    { label: "Schoolreglement", href: "/schoolreglement" },
   ]},
-  { label: "Praktisch", href: "/praktisch", sub: [
-    { label: "Kalender", href: "/praktisch#kalender" },
-    { label: "Schoolreglement", href: "/praktisch#reglement" },
+  { label: "Studieaanbod", href: "/studieaanbod", sub: [
+    { label: "1ste graad", href: "/studieaanbod#eerste-graad" },
+    { label: "2de graad", href: "/studieaanbod#tweede-graad" },
+    { label: "3de graad", href: "/studieaanbod#derde-graad" },
   ]},
-  { label: "Nieuws", href: "/nieuws", sub: [] },
-  { label: "Contact", href: "/contact", sub: [] },
+  { label: "Inschrijvingen", href: "/inschrijvingen" },
+  { label: "SV-Tamtam", href: "/sv-tamtam" },
+  { label: "Contact", href: "/contact" },
 ];
 ---
 <!doctype html>
@@ -32,13 +36,20 @@ const nav = [
   </head>
   <body class="bg-white text-gray-800" style="font-family: 'Inter', sans-serif;">
 
-    <!-- Top bar -->
-    <div class="bg-[#00024c] text-white text-xs py-2 px-4 hidden md:block">
-      <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <span>Alsembergsteenweg 613, 1653 Dworp</span>
-        <div class="flex gap-6">
-          <a href="mailto:info@svalsemberg.be" class="hover:text-[#f5a623] transition">info@svalsemberg.be</a>
-          <a href="/contact" class="bg-[#f5a623] text-[#00024c] font-bold px-3 py-1 rounded hover:bg-yellow-400 transition">Inschrijvingen</a>
+    <!-- Topbalk -->
+    <div class="bg-[#00024c] text-white text-xs py-2 px-4 hidden md:flex">
+      <div class="max-w-6xl mx-auto w-full flex justify-between items-center">
+        <div class="flex items-center gap-6">
+          <span>📍 Alsembergsteenweg 613, 1653 Dworp</span>
+          <a href="mailto:info@sintvictor.be" class="hover:text-yellow-300 transition">✉ info@sintvictor.be</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="https://sv.smartschool.be" target="_blank" rel="noopener" class="hover:text-yellow-300 transition">Smartschool</a>
+          <span class="text-blue-400">|</span>
+          <a href="/afwezigheden" class="hover:text-yellow-300 transition">Afwezigheid melden</a>
+          <span class="text-blue-400">|</span>
+          <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener" class="hover:text-yellow-300 transition">Instagram</a>
+          <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener" class="hover:text-yellow-300 transition">Facebook</a>
         </div>
       </div>
     </div>
@@ -47,30 +58,29 @@ const nav = [
     <header class="bg-white shadow-sm sticky top-0 z-50 border-b-4 border-[#00024c]">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="/" class="flex items-center gap-3 hover:opacity-80 transition">
-          <div class="bg-[#00024c] rounded-lg w-12 h-12 flex items-center justify-center">
-            <span class="text-[#f5a623] font-extrabold text-xl">SV</span>
+          <div class="bg-[#00024c] rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
+            <span class="text-yellow-400 font-extrabold text-xl">SV</span>
           </div>
           <div>
             <div class="font-extrabold text-[#00024c] text-lg leading-tight">Sint-Victor</div>
-            <div class="text-xs text-gray-500 font-medium">Alsemberg</div>
+            <div class="text-xs text-gray-500 font-medium tracking-wide">Alsemberg</div>
           </div>
         </a>
 
-        <!-- Desktop nav -->
-        <nav class="hidden md:flex items-center gap-1">
+        <nav class="hidden lg:flex items-center gap-1">
           {nav.map(item => (
             <div class="relative group">
               <a href={item.href}
-                class="px-4 py-2 rounded-lg font-semibold text-sm text-gray-700 hover:text-[#00024c] hover:bg-blue-50 transition flex items-center gap-1">
+                class={`px-3 py-2 rounded-lg font-semibold text-sm transition flex items-center gap-1 ${currentPath === item.href ? 'text-[#00024c] bg-blue-50' : 'text-gray-700 hover:text-[#00024c] hover:bg-blue-50'}`}>
                 {item.label}
-                {item.sub.length > 0 && (
-                  <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {item.sub && item.sub.length > 0 && (
+                  <svg class="w-3 h-3 text-gray-400 group-hover:text-[#00024c] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 )}
               </a>
-              {item.sub.length > 0 && (
-                <div class="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              {item.sub && item.sub.length > 0 && (
+                <div class="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                   {item.sub.map(s => (
                     <a href={s.href} class="block px-4 py-2 text-sm text-gray-600 hover:text-[#00024c] hover:bg-blue-50 transition">{s.label}</a>
                   ))}
@@ -78,21 +88,23 @@ const nav = [
               )}
             </div>
           ))}
+          <a href="/inschrijvingen" class="ml-2 bg-yellow-400 text-[#00024c] font-bold text-sm px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
+            Inschrijven →
+          </a>
         </nav>
 
-        <!-- Mobiel -->
-        <button id="menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition">
+        <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition">
           <svg class="w-6 h-6 text-[#00024c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
 
-      <!-- Mobiel menu -->
-      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 px-4 py-3 space-y-1">
+      <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 px-4 py-3 space-y-1 bg-white">
         {nav.map(item => (
           <a href={item.href} class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:text-[#00024c] hover:bg-blue-50 transition">{item.label}</a>
         ))}
+        <a href="/inschrijvingen" class="block mt-2 bg-yellow-400 text-[#00024c] font-bold text-sm px-4 py-2 rounded-lg text-center">Inschrijven →</a>
       </div>
     </header>
 
@@ -100,41 +112,61 @@ const nav = [
       <slot />
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-[#00024c] text-white">
+    <footer class="bg-[#00024c] text-white mt-0">
       <div class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="md:col-span-2">
           <div class="flex items-center gap-3 mb-4">
-            <div class="bg-[#f5a623] rounded-lg w-10 h-10 flex items-center justify-center">
-              <span class="text-[#00024c] font-extrabold">SV</span>
+            <div class="bg-yellow-400 rounded-lg w-10 h-10 flex items-center justify-center shrink-0">
+              <span class="text-[#00024c] font-extrabold text-sm">SV</span>
             </div>
             <div>
               <div class="font-extrabold text-lg">Sint-Victor Alsemberg</div>
               <div class="text-blue-300 text-xs">Secundair onderwijs</div>
             </div>
           </div>
-          <p class="text-blue-200 text-sm leading-relaxed max-w-xs">Groeien, leren en thuiskomen in Alsemberg. Een warme school voor elke leerling.</p>
+          <p class="text-blue-200 text-sm leading-relaxed max-w-xs mb-4">
+            "Honor Deo, Labor mihi, Utilitas proximo" — een katholieke school met meer dan 150 jaar traditie.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener"
+              class="bg-white/10 hover:bg-white/20 transition px-3 py-1 rounded-lg text-xs font-medium">Instagram</a>
+            <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener"
+              class="bg-white/10 hover:bg-white/20 transition px-3 py-1 rounded-lg text-xs font-medium">Facebook</a>
+            <a href="https://sv.smartschool.be" target="_blank" rel="noopener"
+              class="bg-white/10 hover:bg-white/20 transition px-3 py-1 rounded-lg text-xs font-medium">Smartschool</a>
+          </div>
         </div>
         <div>
-          <div class="font-bold mb-3 text-[#f5a623]">School</div>
+          <div class="font-bold mb-3 text-yellow-400 text-sm uppercase tracking-wide">Navigatie</div>
           <ul class="space-y-2 text-sm text-blue-200">
-            <li><a href="/over-ons" class="hover:text-white transition">Over ons</a></li>
-            <li><a href="/aanbod" class="hover:text-white transition">Studieaanbod</a></li>
-            <li><a href="/nieuws" class="hover:text-white transition">Nieuws</a></li>
+            <li><a href="/onze-school" class="hover:text-white transition">Onze school</a></li>
+            <li><a href="/studieaanbod" class="hover:text-white transition">Studieaanbod</a></li>
+            <li><a href="/inschrijvingen" class="hover:text-white transition">Inschrijvingen</a></li>
+            <li><a href="/sv-tamtam" class="hover:text-white transition">SV-Tamtam</a></li>
+            <li><a href="/schoolreglement" class="hover:text-white transition">Schoolreglement</a></li>
+            <li><a href="/faq" class="hover:text-white transition">FAQ</a></li>
             <li><a href="/contact" class="hover:text-white transition">Contact</a></li>
           </ul>
         </div>
         <div>
-          <div class="font-bold mb-3 text-[#f5a623]">Contact</div>
+          <div class="font-bold mb-3 text-yellow-400 text-sm uppercase tracking-wide">Contact</div>
           <ul class="space-y-2 text-sm text-blue-200">
             <li>Alsembergsteenweg 613</li>
-            <li>1653 Dworp</li>
-            <li><a href="mailto:info@svalsemberg.be" class="hover:text-white transition">info@svalsemberg.be</a></li>
+            <li>1653 Dworp (Alsemberg)</li>
+            <li class="pt-1"><a href="mailto:info@sintvictor.be" class="hover:text-white transition">info@sintvictor.be</a></li>
+            <li class="pt-1 text-xs">
+              <span class="block font-medium text-white">Directie 1ste graad:</span>
+              Nele Neyt
+            </li>
+            <li class="text-xs">
+              <span class="block font-medium text-white">Directie 2de &amp; 3de graad:</span>
+              Kevin Swaelens
+            </li>
           </ul>
         </div>
       </div>
-      <div class="border-t border-blue-800 text-center text-blue-400 text-xs py-4">
-        © {new Date().getFullYear()} Sint-Victor Alsemberg
+      <div class="border-t border-white/10 text-center text-blue-400 text-xs py-4">
+        © {new Date().getFullYear()} Sint-Victor Alsemberg · <a href="/schoolreglement" class="hover:text-white transition">Schoolreglement</a> · <a href="/privacy" class="hover:text-white transition">Privacy</a>
       </div>
     </footer>
 

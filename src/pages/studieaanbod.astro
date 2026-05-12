@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+const graden = [
+  {
+    id: "eerste-graad",
+    graad: "1ste graad",
+    subtitel: "1ste & 2de jaar",
+    kleur: "border-[#00024c]",
+    bg: "bg-blue-50",
+    beschrijving: "De eerste graad vormt de brug tussen het lager onderwijs en het secundair. We bieden een brede oriëntering waarbij leerlingen hun talenten en interesses kunnen ontdekken.",
+    opties: [
+      { naam: "A-stroom", beschrijving: "Voor leerlingen met voldoende theoretische capaciteiten. Brede algemene vorming als voorbereiding op de 2de graad." },
+      { naam: "B-stroom", beschrijving: "Voor leerlingen die baat hebben bij een meer praktijkgerichte aanpak. Leidt naar BUSO of 2de graad BSO/TSO." },
+    ],
+  },
+  {
+    id: "tweede-graad",
+    graad: "2de graad",
+    subtitel: "3de & 4de jaar",
+    kleur: "border-yellow-400",
+    bg: "bg-yellow-50",
+    beschrijving: "In de tweede graad kiezen leerlingen een studierichting die aansluit bij hun talenten en toekomstplannen. We bieden zowel ASO als TSO en BSO aan.",
+    opties: [
+      { naam: "ASO — Humane wetenschappen", beschrijving: "Mens en maatschappij centraal. Talenkennis, filosofie, sociale wetenschappen." },
+      { naam: "ASO — Wetenschappen", beschrijving: "Exacte wetenschappen: wiskunde, fysica, biologie en chemie." },
+      { naam: "ASO — Economie", beschrijving: "Economie, bedrijfswetenschappen en wiskunde." },
+      { naam: "ASO — Talen", beschrijving: "Sterke focus op moderne talen: Nederlands, Frans, Engels en Duits." },
+      { naam: "TSO — Handel", beschrijving: "Praktijkgericht economisch onderwijs met stages." },
+      { naam: "BSO — Verzorging", beschrijving: "Zorg en welzijn: praktische opleiding voor de zorgsector." },
+    ],
+  },
+  {
+    id: "derde-graad",
+    graad: "3de graad",
+    subtitel: "5de & 6de jaar",
+    kleur: "border-[#00024c]",
+    bg: "bg-blue-50",
+    beschrijving: "De derde graad bereidt leerlingen voor op hoger onderwijs, de arbeidsmarkt of een 7de specialisatiejaar. Het eindwerk en stages spelen een centrale rol.",
+    opties: [
+      { naam: "ASO — Humane wetenschappen", beschrijving: "Verdieping in mens, maatschappij en cultuur. Uitstekende voorbereiding op universitaire studies." },
+      { naam: "ASO — Wetenschappen-Wiskunde", beschrijving: "Intensieve wiskundige en wetenschappelijke vorming." },
+      { naam: "ASO — Economie-Wiskunde", beschrijving: "Combinatie economisch denken en wiskundige vaardigheden." },
+      { naam: "ASO — Latijn-Wiskunde", beschrijving: "Klassieke talen gecombineerd met exacte wetenschappen." },
+      { naam: "TSO — Boekhouden-Informatica", beschrijving: "Boekhoudkundige en informaticavaardigheden voor de praktijk." },
+      { naam: "BSO — Thuis- en Bejaardenzorg", beschrijving: "Zorg voor senioren en thuiszorg. Gecombineerd met praktijkervaring." },
+    ],
+  },
+];
+---
+<Layout title="Studieaanbod" description="Alle studierichtingen van Sint-Victor Alsemberg per graad.">
+
+  <section class="bg-[#00024c] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
+      <h1 class="text-4xl font-extrabold mb-4">Studieaanbod</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Van eerste graad tot zesde jaar — voor elk talent de juiste richting.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-5xl mx-auto space-y-16">
+      {graden.map(g => (
+        <div id={g.id}>
+          <div class="flex items-center gap-4 mb-6">
+            <div class={`w-1 h-12 rounded-full bg-[#00024c]`}></div>
+            <div>
+              <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide">{g.subtitel}</div>
+              <h2 class="text-2xl font-extrabold text-[#00024c]">{g.graad}</h2>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-6 leading-relaxed max-w-2xl">{g.beschrijving}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {g.opties.map((o: { naam: string; beschrijving: string }) => (
+              <div class={`rounded-xl border-l-4 ${g.kleur} ${g.bg} p-5 hover:shadow-sm transition`}>
+                <div class="font-bold text-[#00024c] mb-1 text-sm">{o.naam}</div>
+                <div class="text-gray-600 text-xs leading-relaxed">{o.beschrijving}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="bg-[#00024c] text-white rounded-2xl p-8 text-center">
+        <div class="text-4xl mb-4">🎓</div>
+        <h2 class="text-2xl font-bold mb-3">Twijfel je welke richting past bij jou?</h2>
+        <p class="text-blue-200 mb-6 max-w-xl mx-auto">Onze leerlingenbegeleiding helpt je graag bij de studiekeuze. Maak een afspraak of kom langs tijdens de opendeurdag.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="/contact" class="bg-yellow-400 text-[#00024c] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition">Afspraak maken</a>
+          <a href="/inschrijvingen" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition">Inschrijven</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Layout>
