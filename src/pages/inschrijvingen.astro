@@ -25,9 +25,18 @@ import Layout from '../layouts/Layout.astro';
               Kom je voor het eerst naar Sint-Victor? Dan schrijf je je in als nieuwe leerling voor het 1ste jaar. Inschrijvingen verlopen via het aanmeldingssysteem.
             </p>
             <ul class="space-y-2 text-sm text-gray-600 mb-6">
-              <li class="flex items-start gap-2"><span class="text-[#00024c] font-bold mt-0.5">✓</span> Aanmelding via het online formulier</li>
-              <li class="flex items-start gap-2"><span class="text-[#00024c] font-bold mt-0.5">✓</span> Breng het rapport en/of CLB-advies mee</li>
-              <li class="flex items-start gap-2"><span class="text-[#00024c] font-bold mt-0.5">✓</span> Infobrochure beschikbaar als download</li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-[#00024c] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Aanmelding via het online formulier
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-[#00024c] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Breng het rapport en/of CLB-advies mee
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-[#00024c] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Infobrochure beschikbaar als download
+              </li>
             </ul>
             <a href="/contact" class="block text-center bg-[#00024c] text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition text-sm">
               Inschrijven voor 1ste jaar
@@ -45,9 +54,18 @@ import Layout from '../layouts/Layout.astro';
               Wil je overstappen van een andere school naar Sint-Victor? Neem dan eerst contact op met ons secretariaat om de mogelijkheden te bespreken.
             </p>
             <ul class="space-y-2 text-sm text-gray-600 mb-6">
-              <li class="flex items-start gap-2"><span class="text-yellow-500 font-bold mt-0.5">✓</span> Telefonisch of per mail contact opnemen</li>
-              <li class="flex items-start gap-2"><span class="text-yellow-500 font-bold mt-0.5">✓</span> Attest vorig schooljaar meebrengen</li>
-              <li class="flex items-start gap-2"><span class="text-yellow-500 font-bold mt-0.5">✓</span> Persoonlijk gesprek mogelijk</li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Telefonisch of per mail contact opnemen
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Attest vorig schooljaar meebrengen
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Persoonlijk gesprek mogelijk
+              </li>
             </ul>
             <a href="/contact" class="block text-center bg-yellow-400 text-[#00024c] font-bold py-3 rounded-xl hover:bg-yellow-300 transition text-sm">
               Contact opnemen
@@ -56,18 +74,19 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- Info -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { icon: "📄", titel: "Infobrochure", tekst: "Download onze infobrochure voor schooljaar 2026-2027 met alle praktische info.", link: "#", linkTekst: "Download PDF" },
-          { icon: "🚪", titel: "Opendeurdag", tekst: "Bezoek onze school op zaterdag 16 mei 2026 van 9u tot 12u. Gratis en zonder afspraak.", link: "/contact", linkTekst: "Meer info" },
-          { icon: "📞", titel: "Vragen?", tekst: "Neem contact op met ons secretariaat via info@sintvictor.be of bel ons.", link: "/contact", linkTekst: "Contacteer ons" },
+          { titel: "Infobrochure", tekst: "Download onze infobrochure voor schooljaar 2026-2027 met alle praktische info.", link: "#", linkTekst: "Download PDF" },
+          { titel: "Opendeurdag", tekst: "Bezoek onze school op zaterdag 16 mei 2026 van 9u tot 12u. Gratis en zonder afspraak.", link: "/contact", linkTekst: "Meer info" },
+          { titel: "Vragen?", tekst: "Neem contact op met ons secretariaat via info@sintvictor.be of bel ons.", link: "/contact", linkTekst: "Contacteer ons" },
         ].map(i => (
-          <div class="bg-gray-50 rounded-2xl p-6 text-center hover:bg-blue-50 transition">
-            <div class="text-4xl mb-4">{i.icon}</div>
+          <div class="bg-gray-50 rounded-2xl p-6 text-center hover:bg-blue-50 transition border border-transparent hover:border-[#00024c]">
+            <div class="w-10 h-10 bg-[#00024c]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-5 h-5 text-[#00024c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
             <h3 class="font-bold text-[#00024c] mb-2">{i.titel}</h3>
             <p class="text-gray-600 text-sm mb-4 leading-relaxed">{i.tekst}</p>
-            <a href={i.link} class="text-[#00024c] text-sm font-bold hover:underline">{i.linkTekst} →</a>
+            <a href={i.link} class="text-[#00024c] text-sm font-bold hover:underline">{i.linkTekst} &rarr;</a>
           </div>
         ))}
       </div>

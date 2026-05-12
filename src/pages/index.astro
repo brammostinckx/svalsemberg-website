@@ -23,25 +23,22 @@ import Layout from '../layouts/Layout.astro';
           Sint-Victor is een katholieke school met meer dan 150 jaar traditie. Hier voelt elke leerling zich welkom en uitgedaagd om het beste van zichzelf te worden.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="/inschrijvingen"
-            class="bg-yellow-400 text-[#00024c] font-bold px-7 py-3 rounded-xl hover:bg-yellow-300 transition shadow-lg text-sm">
+          <a href="/inschrijvingen" class="bg-yellow-400 text-[#00024c] font-bold px-7 py-3 rounded-xl hover:bg-yellow-300 transition shadow-lg text-sm">
             Inschrijven 2026-2027
           </a>
-          <a href="/onze-school"
-            class="bg-white/10 border border-white/30 text-white font-semibold px-7 py-3 rounded-xl hover:bg-white/20 transition text-sm">
+          <a href="/onze-school" class="bg-white/10 border border-white/30 text-white font-semibold px-7 py-3 rounded-xl hover:bg-white/20 transition text-sm">
             Ontdek de school
           </a>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-4">
         {[
-          { n: "600+", label: "Leerlingen", icon: "👨‍🎓" },
-          { n: "150+", label: "Jaar traditie", icon: "🏫" },
-          { n: "15+", label: "Studierichtingen", icon: "📚" },
-          { n: "100+", label: "Personeelsleden", icon: "👩‍🏫" },
+          { n: "600+", label: "Leerlingen" },
+          { n: "150+", label: "Jaar traditie" },
+          { n: "15+", label: "Studierichtingen" },
+          { n: "100+", label: "Personeelsleden" },
         ].map(s => (
           <div class="bg-white/10 border border-white/20 rounded-2xl p-5 text-white text-center hover:bg-white/15 transition">
-            <div class="text-3xl mb-2">{s.icon}</div>
             <div class="text-2xl font-extrabold text-yellow-400">{s.n}</div>
             <div class="text-xs text-blue-200 mt-1">{s.label}</div>
           </div>
@@ -59,35 +56,36 @@ import Layout from '../layouts/Layout.astro';
         <p class="text-gray-500 mt-4 max-w-xl mx-auto">Drie woorden vatten samen waar Sint-Victor voor staat.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          {
-            tag: "Warm",
-            titel: "Iedereen hoort erbij",
-            tekst: "We bouwen aan een sterke schoolgemeenschap waar elke leerling zich gezien en gewaardeerd voelt. Geen leerling valt uit de boot.",
-            icon: "🤝",
-          },
-          {
-            tag: "Sterk",
-            titel: "Leren met stevige basis",
-            tekst: "Ambitieus onderwijs met aandacht voor elk leerpad. We bereiden leerlingen voor op hoger onderwijs én op het leven.",
-            icon: "📖",
-          },
-          {
-            tag: "Samen",
-            titel: "Ouders dichtbij",
-            tekst: "Ouders zijn welkome partners in het schoolgebeuren. Open communicatie via Smartschool en regelmatige contactmomenten.",
-            icon: "👨‍👩‍👧",
-          },
-        ].map(p => (
-          <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#00024c] group">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-4xl">{p.icon}</span>
-              <span class="bg-[#00024c] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{p.tag}</span>
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#00024c]">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="bg-[#00024c]/10 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-[#00024c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             </div>
-            <h3 class="text-xl font-bold text-[#00024c] mb-3">{p.titel}</h3>
-            <p class="text-gray-600 leading-relaxed text-sm">{p.tekst}</p>
+            <span class="bg-[#00024c] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Warm</span>
           </div>
-        ))}
+          <h3 class="text-xl font-bold text-[#00024c] mb-3">Iedereen hoort erbij</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">We bouwen aan een sterke schoolgemeenschap waar elke leerling zich gezien en gewaardeerd voelt. Geen leerling valt uit de boot.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#00024c]">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="bg-[#00024c]/10 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-[#00024c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+            <span class="bg-[#00024c] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Sterk</span>
+          </div>
+          <h3 class="text-xl font-bold text-[#00024c] mb-3">Leren met stevige basis</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">Ambitieus onderwijs met aandacht voor elk leerpad. We bereiden leerlingen voor op hoger onderwijs én op het leven.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition border-t-4 border-[#00024c]">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="bg-[#00024c]/10 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-[#00024c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <span class="bg-[#00024c] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Samen</span>
+          </div>
+          <h3 class="text-xl font-bold text-[#00024c] mb-3">Ouders dichtbij</h3>
+          <p class="text-gray-600 leading-relaxed text-sm">Ouders zijn welkome partners in het schoolgebeuren. Open communicatie via Smartschool en regelmatige contactmomenten.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -100,20 +98,42 @@ import Layout from '../layouts/Layout.astro';
         <div class="w-14 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { href: "/onze-school#team", icon: "👩‍🏫", label: "Schoolteam", beschrijving: "Wie werkt er bij ons?" },
-          { href: "/onze-school#visie", icon: "🎯", label: "Onze visie", beschrijving: "Waar staan we voor?" },
-          { href: "/studieaanbod", icon: "📚", label: "Studieaanbod", beschrijving: "Alle richtingen" },
-          { href: "/schoolreglement", icon: "📋", label: "Schoolreglement", beschrijving: "Regels & afspraken" },
-        ].map(k => (
-          <a href={k.href}
-            class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-gray-100 hover:border-[#00024c] transition group text-center">
-            <div class="text-4xl mb-3">{k.icon}</div>
-            <div class="font-bold text-[#00024c] text-sm mb-1">{k.label}</div>
-            <div class="text-gray-400 text-xs">{k.beschrijving}</div>
-            <div class="mt-3 text-xs text-[#00024c] font-semibold opacity-0 group-hover:opacity-100 transition">Bekijk →</div>
-          </a>
-        ))}
+        <a href="/onze-school#team" class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-gray-100 hover:border-[#00024c] transition group text-center">
+          <div class="flex justify-center mb-3">
+            <div class="bg-[#00024c]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#00024c] transition">
+              <svg class="w-6 h-6 text-[#00024c] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+          </div>
+          <div class="font-bold text-[#00024c] text-sm mb-1">Schoolteam</div>
+          <div class="text-gray-400 text-xs">Wie werkt er bij ons?</div>
+        </a>
+        <a href="/onze-school#visie" class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-gray-100 hover:border-[#00024c] transition group text-center">
+          <div class="flex justify-center mb-3">
+            <div class="bg-[#00024c]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#00024c] transition">
+              <svg class="w-6 h-6 text-[#00024c] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+            </div>
+          </div>
+          <div class="font-bold text-[#00024c] text-sm mb-1">Onze visie</div>
+          <div class="text-gray-400 text-xs">Waar staan we voor?</div>
+        </a>
+        <a href="/studieaanbod" class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-gray-100 hover:border-[#00024c] transition group text-center">
+          <div class="flex justify-center mb-3">
+            <div class="bg-[#00024c]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#00024c] transition">
+              <svg class="w-6 h-6 text-[#00024c] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            </div>
+          </div>
+          <div class="font-bold text-[#00024c] text-sm mb-1">Studieaanbod</div>
+          <div class="text-gray-400 text-xs">Alle richtingen</div>
+        </a>
+        <a href="/schoolreglement" class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md border border-gray-100 hover:border-[#00024c] transition group text-center">
+          <div class="flex justify-center mb-3">
+            <div class="bg-[#00024c]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#00024c] transition">
+              <svg class="w-6 h-6 text-[#00024c] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            </div>
+          </div>
+          <div class="font-bold text-[#00024c] text-sm mb-1">Schoolreglement</div>
+          <div class="text-gray-400 text-xs">Regels & afspraken</div>
+        </a>
       </div>
     </div>
   </section>
@@ -131,10 +151,9 @@ import Layout from '../layouts/Layout.astro';
             { label: "Afwezigheid melden", href: "/afwezigheden" },
             { label: "Infobrochure 2026-2027 (PDF)", href: "#" },
             { label: "Chromebookproject", href: "#" },
-            { label: "FAQ — veelgestelde vragen", href: "/faq" },
+            { label: "FAQ � veelgestelde vragen", href: "/faq" },
           ].map(l => (
-            <a href={l.href}
-              class="flex items-center justify-between bg-white rounded-xl px-5 py-4 shadow-sm hover:shadow-md border border-transparent hover:border-[#00024c] transition group">
+            <a href={l.href} class="flex items-center justify-between bg-white rounded-xl px-5 py-4 shadow-sm hover:shadow-md border border-transparent hover:border-[#00024c] transition group">
               <span class="font-medium text-gray-700 group-hover:text-[#00024c] text-sm transition">{l.label}</span>
               <svg class="w-4 h-4 text-gray-300 group-hover:text-[#00024c] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -163,7 +182,7 @@ import Layout from '../layouts/Layout.astro';
           <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener"
             class="flex items-center gap-4 bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-transparent hover:border-pink-400 transition group">
             <div class="bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl w-12 h-12 flex items-center justify-center shrink-0">
-              <span class="text-white font-bold text-sm">IG</span>
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </div>
             <div>
               <div class="font-bold text-gray-800 text-sm">Instagram</div>
@@ -176,7 +195,7 @@ import Layout from '../layouts/Layout.astro';
           <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener"
             class="flex items-center gap-4 bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-transparent hover:border-blue-500 transition group">
             <div class="bg-blue-600 rounded-xl w-12 h-12 flex items-center justify-center shrink-0">
-              <span class="text-white font-bold text-sm">FB</span>
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </div>
             <div>
               <div class="font-bold text-gray-800 text-sm">Facebook</div>
@@ -200,28 +219,13 @@ import Layout from '../layouts/Layout.astro';
           <div class="w-14 h-1 bg-yellow-400 mt-3 rounded-full"></div>
           <p class="text-gray-500 text-sm mt-3">Het laatste nieuws uit onze school</p>
         </div>
-        <a href="/sv-tamtam" class="text-[#00024c] font-semibold text-sm hover:underline">Alle berichten →</a>
+        <a href="/sv-tamtam" class="text-[#00024c] font-semibold text-sm hover:underline">Alle berichten �</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          {
-            datum: "12 mei 2026",
-            tag: "Inschrijvingen",
-            titel: "Inschrijvingen 2026-2027 gestart",
-            tekst: "Vanaf nu kan je je inschrijven voor het nieuwe schooljaar. Nieuwe leerlingen voor het 1ste jaar en zij-instromers zijn welkom.",
-          },
-          {
-            datum: "29 april 2026",
-            tag: "Evenement",
-            titel: "Opendeurdag zaterdag 16 mei",
-            tekst: "Kom onze school ontdekken! Van 9u tot 12u stellen we alle studierichtingen voor. Leerlingen en leerkrachten tonen je rond.",
-          },
-          {
-            datum: "18 april 2026",
-            tag: "SV-Tamtam",
-            titel: "13de editie SV-Tamtam beschikbaar",
-            tekst: "De nieuwste editie van ons schoolmagazine staat klaar. Boordevol reportages, interviews en foto's van het schoolleven.",
-          },
+          { datum: "12 mei 2026", tag: "Inschrijvingen", titel: "Inschrijvingen 2026-2027 gestart", tekst: "Vanaf nu kan je je inschrijven voor het nieuwe schooljaar. Nieuwe leerlingen voor het 1ste jaar en zij-instromers zijn welkom." },
+          { datum: "29 april 2026", tag: "Evenement", titel: "Opendeurdag zaterdag 16 mei", tekst: "Kom onze school ontdekken! Van 9u tot 12u stellen we alle studierichtingen voor. Leerlingen en leerkrachten tonen je rond." },
+          { datum: "18 april 2026", tag: "SV-Tamtam", titel: "13de editie SV-Tamtam beschikbaar", tekst: "De nieuwste editie van ons schoolmagazine staat klaar. Boordevol reportages, interviews en foto's van het schoolleven." },
         ].map(b => (
           <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition group border border-gray-100">
             <div class="h-1.5 bg-[#00024c] group-hover:bg-yellow-400 transition-colors"></div>
@@ -250,12 +254,8 @@ import Layout from '../layouts/Layout.astro';
         Schrijf je in voor schooljaar 2026-2027 of kom langs tijdens onze opendeurdag op 16 mei.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/inschrijvingen" class="bg-yellow-400 text-[#00024c] font-bold px-8 py-3 rounded-xl hover:bg-yellow-300 transition">
-          Inschrijven
-        </a>
-        <a href="/contact" class="border-2 border-white/50 text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 transition">
-          Rondleiding aanvragen
-        </a>
+        <a href="/inschrijvingen" class="bg-yellow-400 text-[#00024c] font-bold px-8 py-3 rounded-xl hover:bg-yellow-300 transition">Inschrijven</a>
+        <a href="/contact" class="border-2 border-white/50 text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 transition">Rondleiding aanvragen</a>
       </div>
     </div>
   </section>

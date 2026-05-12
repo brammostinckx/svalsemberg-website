@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const waarden = [
+  { titel: "Rijke ontplooiingskansen", tekst: "We bieden elke leerling individuele ondersteuning en stimuleren positief gedrag, met extra aandacht voor leerlingen met specifieke noden." },
+  { titel: "Stevige cognitieve basis", tekst: "Door ambitieus lesgeven bouwen we een stevige kennisbasis. We daag leerlingen uit en ondersteunen hen waar nodig." },
+  { titel: "Welbevinden centraal", tekst: "Een positief klimaat waar leerlingen zichzelf kunnen zijn, hun eigenheid ontdekken en met plezier naar school komen." },
+  { titel: "Actieve betrokkenheid", tekst: "Leerlingen, ouders en leerkrachten werken samen. Open communicatie en gezamenlijk eigenaarschap staan centraal." },
+  { titel: "Duurzaamheid & gezondheid", tekst: "Oog voor energie-efficiëntie, een gezonde leefomgeving en bewust samenleven. Vandaag bouwen aan de wereld van morgen." },
+  { titel: "Katholieke traditie", tekst: "Verbonden met de erfenis van Broeder Victor Scheppers: mildheid, nabijheid en aandacht voor de meest kwetsbare leerlingen." },
+];
 ---
 <Layout title="Onze school" description="Meer over Sint-Victor Alsemberg: visie, missie en schoolteam.">
 
@@ -11,7 +19,6 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Visie & missie -->
   <section id="visie" class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
@@ -32,13 +39,12 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="grid grid-cols-2 gap-4">
           {[
-            { n: "600+", label: "Leerlingen", icon: "👨‍🎓" },
-            { n: "150+", label: "Jaar traditie", icon: "🏫" },
-            { n: "15+", label: "Richtingen", icon: "📚" },
-            { n: "100+", label: "Personeelsleden", icon: "👩‍🏫" },
+            { n: "600+", label: "Leerlingen" },
+            { n: "150+", label: "Jaar traditie" },
+            { n: "15+", label: "Richtingen" },
+            { n: "100+", label: "Personeelsleden" },
           ].map(s => (
             <div class="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100">
-              <div class="text-4xl mb-2">{s.icon}</div>
               <div class="text-2xl font-extrabold text-[#00024c]">{s.n}</div>
               <div class="text-xs text-gray-500 mt-1">{s.label}</div>
             </div>
@@ -46,19 +52,11 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- Waarden -->
       <h2 class="text-2xl font-extrabold text-[#00024c] mb-8">Onze waarden</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16">
-        {[
-          { icon: "🌱", titel: "Rijke ontplooiingskansen", tekst: "We bieden elke leerling individuele ondersteuning en stimuleren positief gedrag, met extra aandacht voor leerlingen met specifieke noden." },
-          { icon: "🧠", titel: "Stevige cognitieve basis", tekst: "Door ambitieus lesgeven bouwen we een stevige kennisbasis. We daag leerlingen uit én ondersteunen hen waar nodig." },
-          { icon: "😊", titel: "Welbevinden centraal", tekst: "Een positief klimaat waar leerlingen zichzelf kunnen zijn, hun eigenheid ontdekken en met plezier naar school komen." },
-          { icon: "🤝", titel: "Actieve betrokkenheid", tekst: "Leerlingen, ouders en leerkrachten werken samen. Open communicatie en gezamenlijk eigenaarschap staan centraal." },
-          { icon: "🌍", titel: "Duurzaamheid & gezondheid", tekst: "Oog voor energie-efficiëntie, een gezonde leefomgeving en bewust samenleven. Vandaag bouwen aan de wereld van morgen." },
-          { icon: "✝️", titel: "Katholieke traditie", tekst: "Verbonden met de erfenis van Broeder Victor Scheppers: mildheid, nabijheid en aandacht voor de meest kwetsbare leerlingen." },
-        ].map(w => (
-          <div class="flex gap-4 bg-gray-50 rounded-xl p-5 hover:bg-blue-50 transition group">
-            <div class="text-3xl shrink-0">{w.icon}</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+        {waarden.map(w => (
+          <div class="flex gap-4 bg-gray-50 rounded-xl p-5 hover:bg-blue-50 transition">
+            <div class="w-1 bg-yellow-400 rounded-full shrink-0"></div>
             <div>
               <h3 class="font-bold text-[#00024c] mb-1 text-sm">{w.titel}</h3>
               <p class="text-gray-600 text-sm leading-relaxed">{w.tekst}</p>
@@ -67,7 +65,6 @@ import Layout from '../layouts/Layout.astro';
         ))}
       </div>
 
-      <!-- Schoolteam -->
       <div id="team">
         <h2 class="text-2xl font-extrabold text-[#00024c] mb-2">Schoolteam</h2>
         <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
