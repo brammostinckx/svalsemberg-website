@@ -9,7 +9,7 @@ const gegevens = [
 ---
 <Layout title="Contact" description="Contactgegevens van Sint-Victor Alsemberg.">
 
-  <section class="bg-[#00024c] text-white py-16 px-4">
+  <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
       <h1 class="text-4xl font-extrabold mb-4">Contact</h1>
@@ -21,7 +21,7 @@ const gegevens = [
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
 
       <div>
-        <h2 class="text-2xl font-extrabold text-[#00024c] mb-6">Gegevens</h2>
+        <h2 class="text-2xl font-extrabold text-[#07153b] mb-6">Gegevens</h2>
         <div class="space-y-3 mb-8">
           {gegevens.map(c => (
             <div class="flex gap-4 items-start bg-gray-50 rounded-xl p-4">
@@ -34,25 +34,25 @@ const gegevens = [
           ))}
         </div>
 
-        <h3 class="font-extrabold text-[#00024c] mb-4">Directie</h3>
+        <h3 class="font-extrabold text-[#07153b] mb-4">Directie</h3>
         <div class="space-y-3">
           {[
             { naam: "Nele Neyt", rol: "Directeur 1ste graad" },
             { naam: "Kevin Swaelens", rol: "Directeur 2de & 3de graad" },
           ].map(d => (
             <div class="flex items-center gap-4 bg-gray-50 rounded-xl p-4">
-              <div class="bg-[#00024c] rounded-full w-10 h-10 flex items-center justify-center shrink-0">
+              <div class="bg-[#07153b] rounded-full w-10 h-10 flex items-center justify-center shrink-0">
                 <span class="text-yellow-400 font-bold text-xs">{d.naam.split(' ').map((n: string) => n[0]).join('')}</span>
               </div>
               <div>
-                <div class="font-bold text-[#00024c] text-sm">{d.naam}</div>
+                <div class="font-bold text-[#07153b] text-sm">{d.naam}</div>
                 <div class="text-gray-500 text-xs">{d.rol}</div>
               </div>
             </div>
           ))}
         </div>
 
-        <div class="mt-8 bg-[#00024c] text-white rounded-2xl p-5">
+        <div class="mt-8 bg-[#07153b] text-white rounded-2xl p-5">
           <div class="font-bold text-yellow-400 mb-2 text-sm">Digitale platforms</div>
           <div class="space-y-2 text-sm text-blue-200">
             <div>Smartschool: <a href="https://sv.smartschool.be" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition">sv.smartschool.be</a></div>
@@ -63,22 +63,22 @@ const gegevens = [
       </div>
 
       <div>
-        <h2 class="text-2xl font-extrabold text-[#00024c] mb-6">Stuur ons een bericht</h2>
+        <h2 class="text-2xl font-extrabold text-[#07153b] mb-6">Stuur ons een bericht</h2>
         <form class="space-y-4" name="contact" method="POST">
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="naam">Naam</label>
             <input id="naam" name="naam" type="text" required placeholder="Voornaam en naam"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#00024c] transition bg-gray-50" />
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="email">E-mail</label>
             <input id="email" name="email" type="email" required placeholder="jouw@email.be"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#00024c] transition bg-gray-50" />
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="onderwerp">Onderwerp</label>
             <select id="onderwerp" name="onderwerp"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#00024c] transition bg-gray-50">
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50">
               <option value="">Kies een onderwerp...</option>
               <option>Inschrijvingen</option>
               <option>Studieaanbod</option>
@@ -90,9 +90,9 @@ const gegevens = [
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="bericht">Bericht</label>
             <textarea id="bericht" name="bericht" rows="5" required placeholder="Jouw bericht..."
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#00024c] transition bg-gray-50 resize-none"></textarea>
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50 resize-none"></textarea>
           </div>
-          <button type="submit" class="w-full bg-[#00024c] text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition text-sm">
+          <button type="submit" class="w-full bg-[#07153b] text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition text-sm">
             Verstuur bericht
           </button>
         </form>

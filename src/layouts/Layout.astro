@@ -37,7 +37,7 @@ const nav = [
   <body class="bg-white text-gray-800" style="font-family: 'Inter', sans-serif;">
 
     <!-- Topbalk -->
-    <div class="bg-[#00024c] text-white text-xs py-2 px-4 hidden md:flex">
+    <div class="bg-[#07153b] text-white text-xs py-2 px-4 hidden md:flex">
       <div class="max-w-6xl mx-auto w-full flex justify-between items-center">
         <div class="flex items-center gap-6">
           <span>📍 Alsembergsteenweg 613, 1653 Dworp</span>
@@ -55,14 +55,14 @@ const nav = [
     </div>
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b-4 border-[#00024c]">
+    <header class="bg-white shadow-sm sticky top-0 z-50 border-b-4 border-[#07153b]">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="/" class="flex items-center gap-3 hover:opacity-80 transition">
-          <div class="bg-[#00024c] rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
+          <div class="bg-[#07153b] rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
             <span class="text-yellow-400 font-extrabold text-xl">SV</span>
           </div>
           <div>
-            <div class="font-extrabold text-[#00024c] text-lg leading-tight">Sint-Victor</div>
+            <div class="font-extrabold text-[#07153b] text-lg leading-tight">Sint-Victor</div>
             <div class="text-xs text-gray-500 font-medium tracking-wide">Alsemberg</div>
           </div>
         </a>
@@ -71,10 +71,10 @@ const nav = [
           {nav.map(item => (
             <div class="relative group">
               <a href={item.href}
-                class={`px-3 py-2 rounded-lg font-semibold text-sm transition flex items-center gap-1 ${currentPath === item.href ? 'text-[#00024c] bg-blue-50' : 'text-gray-700 hover:text-[#00024c] hover:bg-blue-50'}`}>
+                class={`px-3 py-2 rounded-lg font-semibold text-sm transition flex items-center gap-1 ${currentPath === item.href ? 'text-[#07153b] bg-blue-50' : 'text-gray-700 hover:text-[#07153b] hover:bg-blue-50'}`}>
                 {item.label}
                 {item.sub && item.sub.length > 0 && (
-                  <svg class="w-3 h-3 text-gray-400 group-hover:text-[#00024c] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-3 h-3 text-gray-400 group-hover:text-[#07153b] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 )}
@@ -82,19 +82,19 @@ const nav = [
               {item.sub && item.sub.length > 0 && (
                 <div class="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                   {item.sub.map(s => (
-                    <a href={s.href} class="block px-4 py-2 text-sm text-gray-600 hover:text-[#00024c] hover:bg-blue-50 transition">{s.label}</a>
+                    <a href={s.href} class="block px-4 py-2 text-sm text-gray-600 hover:text-[#07153b] hover:bg-blue-50 transition">{s.label}</a>
                   ))}
                 </div>
               )}
             </div>
           ))}
-          <a href="/inschrijvingen" class="ml-2 bg-yellow-400 text-[#00024c] font-bold text-sm px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
+          <a href="/inschrijvingen" class="ml-2 bg-yellow-400 text-[#07153b] font-bold text-sm px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
             Inschrijven →
           </a>
         </nav>
 
         <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition">
-          <svg class="w-6 h-6 text-[#00024c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
@@ -102,9 +102,9 @@ const nav = [
 
       <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100 px-4 py-3 space-y-1 bg-white">
         {nav.map(item => (
-          <a href={item.href} class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:text-[#00024c] hover:bg-blue-50 transition">{item.label}</a>
+          <a href={item.href} class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:text-[#07153b] hover:bg-blue-50 transition">{item.label}</a>
         ))}
-        <a href="/inschrijvingen" class="block mt-2 bg-yellow-400 text-[#00024c] font-bold text-sm px-4 py-2 rounded-lg text-center">Inschrijven →</a>
+        <a href="/inschrijvingen" class="block mt-2 bg-yellow-400 text-[#07153b] font-bold text-sm px-4 py-2 rounded-lg text-center">Inschrijven →</a>
       </div>
     </header>
 
@@ -112,12 +112,12 @@ const nav = [
       <slot />
     </main>
 
-    <footer class="bg-[#00024c] text-white mt-0">
+    <footer class="bg-[#07153b] text-white mt-0">
       <div class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="md:col-span-2">
           <div class="flex items-center gap-3 mb-4">
             <div class="bg-yellow-400 rounded-lg w-10 h-10 flex items-center justify-center shrink-0">
-              <span class="text-[#00024c] font-extrabold text-sm">SV</span>
+              <span class="text-[#07153b] font-extrabold text-sm">SV</span>
             </div>
             <div>
               <div class="font-extrabold text-lg">Sint-Victor Alsemberg</div>

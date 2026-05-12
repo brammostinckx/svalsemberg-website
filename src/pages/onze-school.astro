@@ -11,7 +11,7 @@ const waarden = [
 ---
 <Layout title="Onze school" description="Meer over Sint-Victor Alsemberg: visie, missie en schoolteam.">
 
-  <section class="bg-[#00024c] text-white py-16 px-4">
+  <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
       <h1 class="text-4xl font-extrabold mb-4">Onze school</h1>
@@ -24,14 +24,14 @@ const waarden = [
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
         <div>
           <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide mb-2">Visie & missie</div>
-          <h2 class="text-3xl font-extrabold text-[#00024c] mb-5">Wie zijn wij?</h2>
+          <h2 class="text-3xl font-extrabold text-[#07153b] mb-5">Wie zijn wij?</h2>
           <p class="text-gray-600 mb-4 leading-relaxed">
             Sint-Victor Alsemberg is een katholieke Nederlandstalige school die een brede algemene vorming biedt. We bereiden leerlingen voor op het hoger onderwijs, maar hebben ook oog voor hun persoonlijke groei en welzijn.
           </p>
           <p class="text-gray-600 mb-4 leading-relaxed">
             We willen een leeromgeving creëren waar leerlingen kritisch leren denken, verantwoordelijk leren handelen en actief bijdragen aan de samenleving.
           </p>
-          <div class="bg-[#00024c] text-white rounded-2xl p-5 mt-6">
+          <div class="bg-[#07153b] text-white rounded-2xl p-5 mt-6">
             <div class="text-yellow-400 font-bold mb-1 text-sm">Ons motto</div>
             <div class="italic text-blue-100">"Honor Deo, Labor mihi, Utilitas proximo"</div>
             <div class="text-blue-300 text-xs mt-2">Eer aan God, Arbeid is mijn deel, Nut voor de naaste</div>
@@ -45,20 +45,20 @@ const waarden = [
             { n: "100+", label: "Personeelsleden" },
           ].map(s => (
             <div class="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100">
-              <div class="text-2xl font-extrabold text-[#00024c]">{s.n}</div>
+              <div class="text-2xl font-extrabold text-[#07153b]">{s.n}</div>
               <div class="text-xs text-gray-500 mt-1">{s.label}</div>
             </div>
           ))}
         </div>
       </div>
 
-      <h2 class="text-2xl font-extrabold text-[#00024c] mb-8">Onze waarden</h2>
+      <h2 class="text-2xl font-extrabold text-[#07153b] mb-8">Onze waarden</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
         {waarden.map(w => (
           <div class="flex gap-4 bg-gray-50 rounded-xl p-5 hover:bg-blue-50 transition">
             <div class="w-1 bg-yellow-400 rounded-full shrink-0"></div>
             <div>
-              <h3 class="font-bold text-[#00024c] mb-1 text-sm">{w.titel}</h3>
+              <h3 class="font-bold text-[#07153b] mb-1 text-sm">{w.titel}</h3>
               <p class="text-gray-600 text-sm leading-relaxed">{w.tekst}</p>
             </div>
           </div>
@@ -66,7 +66,7 @@ const waarden = [
       </div>
 
       <div id="team">
-        <h2 class="text-2xl font-extrabold text-[#00024c] mb-2">Schoolteam</h2>
+        <h2 class="text-2xl font-extrabold text-[#07153b] mb-2">Schoolteam</h2>
         <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           {[
@@ -74,19 +74,19 @@ const waarden = [
             { naam: "Kevin Swaelens", rol: "Directeur 2de & 3de graad", email: "directie@sintvictor.be" },
           ].map(p => (
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5">
-              <div class="bg-[#00024c] rounded-full w-14 h-14 flex items-center justify-center shrink-0">
+              <div class="bg-[#07153b] rounded-full w-14 h-14 flex items-center justify-center shrink-0">
                 <span class="text-yellow-400 font-extrabold text-lg">{p.naam.split(' ').map((n: string) => n[0]).join('')}</span>
               </div>
               <div>
-                <div class="font-bold text-[#00024c]">{p.naam}</div>
+                <div class="font-bold text-[#07153b]">{p.naam}</div>
                 <div class="text-gray-500 text-sm">{p.rol}</div>
-                <a href={`mailto:${p.email}`} class="text-xs text-[#00024c] hover:underline">{p.email}</a>
+                <a href={`mailto:${p.email}`} class="text-xs text-[#07153b] hover:underline">{p.email}</a>
               </div>
             </div>
           ))}
         </div>
         <p class="text-gray-500 text-sm mt-6 bg-gray-50 rounded-xl p-4">
-          Voor een volledig overzicht van ons lerarenkorps en ondersteunend personeel: neem contact op via <a href="mailto:info@sintvictor.be" class="text-[#00024c] font-semibold hover:underline">info@sintvictor.be</a>.
+          Voor een volledig overzicht van ons lerarenkorps en ondersteunend personeel: neem contact op via <a href="mailto:info@sintvictor.be" class="text-[#07153b] font-semibold hover:underline">info@sintvictor.be</a>.
         </p>
       </div>
     </div>

@@ -11,7 +11,7 @@ const berichten = [
 ---
 <Layout title="SV-Tamtam" description="Nieuws en evenementen van Sint-Victor Alsemberg.">
 
-  <section class="bg-[#00024c] text-white py-16 px-4">
+  <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Nieuws & Mededelingen</div>
       <h1 class="text-4xl font-extrabold mb-4">SV-Tamtam</h1>
@@ -24,10 +24,10 @@ const berichten = [
       {berichten.map(b => (
         <article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition group">
           <div class="flex items-center gap-3 mb-3">
-            <span class="bg-blue-50 text-[#00024c] text-xs font-bold px-3 py-1 rounded-full">{b.tag}</span>
+            <span class="bg-blue-50 text-[#07153b] text-xs font-bold px-3 py-1 rounded-full">{b.tag}</span>
             <span class="text-gray-400 text-xs">{b.datum}</span>
           </div>
-          <h2 class="text-xl font-bold text-[#00024c] mb-2 group-hover:text-blue-800 transition">{b.titel}</h2>
+          <h2 class="text-xl font-bold text-[#07153b] mb-2 group-hover:text-blue-800 transition">{b.titel}</h2>
           <p class="text-gray-600 leading-relaxed text-sm">{b.tekst}</p>
         </article>
       ))}
