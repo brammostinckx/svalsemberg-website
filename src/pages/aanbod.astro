@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro';
+const richtingen = [
+  {
+    graad: "1ste graad",
+    kleur: "bg-blue-50 border-[#003580]",
+    items: ["A-stroom", "B-stroom"]
+  },
+  {
+    graad: "2de graad ASO",
+    kleur: "bg-yellow-50 border-[#f5a623]",
+    items: ["Economie-Wiskunde", "Humane Wetenschappen", "Wetenschappen", "Talen"]
+  },
+  {
+    graad: "2de graad TSO/BSO",
+    kleur: "bg-blue-50 border-[#003580]",
+    items: ["Handel", "Informaticabeheer", "Verzorging"]
+  },
+  {
+    graad: "3de graad ASO",
+    kleur: "bg-yellow-50 border-[#f5a623]",
+    items: ["Economie-Wiskunde", "Humane Wetenschappen", "Wetenschappen-Wiskunde", "Latijn-Wiskunde"]
+  },
+  {
+    graad: "3de graad TSO/BSO",
+    kleur: "bg-blue-50 border-[#003580]",
+    items: ["Boekhouden-Informatica", "Informaticabeheer", "Thuis- en Bejaardenzorg"]
+  },
+];
+---
+<Layout title="Studieaanbod" description="Ontdek het volledige studieaanbod van Sint-Victor Alsemberg.">
+
+  <section class="bg-[#003580] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4">Studieaanbod</h1>
+      <p class="text-blue-200 text-lg">Van eerste graad tot zesde jaar — voor elk talent een richting.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="space-y-8">
+        {richtingen.map(r => (
+          <div class={`rounded-2xl border-l-4 p-6 ${r.kleur}`}>
+            <h2 class="text-xl font-bold text-[#003580] mb-4">{r.graad}</h2>
+            <div class="flex flex-wrap gap-2">
+              {r.items.map(item => (
+                <span class="bg-white text-[#003580] px-4 py-2 rounded-full text-sm font-medium shadow-sm">{item}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 bg-[#003580] text-white rounded-2xl p-8 text-center">
+        <h2 class="text-2xl font-bold mb-3">Meer weten over een richting?</h2>
+        <p class="text-blue-200 mb-6">Plan een bezoek of neem contact op met onze leerlingenbegeleiding.</p>
+        <a href="/contact" class="bg-[#f5a623] text-[#003580] font-bold px-8 py-3 rounded-full hover:bg-yellow-400 transition inline-block">
+          Contacteer ons
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Home">
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-[#003580] to-[#0050c0] text-white py-24 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        Welkom bij<br/><span class="text-[#f5a623]">Sint-Victor Alsemberg</span>
+      </h1>
+      <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+        Een warme katholieke school in het Zennevallei waar elke leerling telt en kan groeien.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/aanbod" class="bg-[#f5a623] text-[#003580] font-bold px-8 py-3 rounded-full hover:bg-yellow-400 transition text-lg">
+          Ons studieaanbod
+        </a>
+        <a href="/contact" class="border-2 border-white text-white font-bold px-8 py-3 rounded-full hover:bg-white hover:text-[#003580] transition text-lg">
+          Neem contact op
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Troeven -->
+  <section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-[#003580] mb-12">Waarom Sint-Victor?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-sm text-center hover:shadow-md transition">
+          <div class="text-5xl mb-4">🎓</div>
+          <h3 class="text-xl font-bold text-[#003580] mb-3">Breed studieaanbod</h3>
+          <p class="text-gray-600">Van ASO tot TSO en BSO — bij ons vindt elke leerling zijn richting.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm text-center hover:shadow-md transition">
+          <div class="text-5xl mb-4">❤️</div>
+          <h3 class="text-xl font-bold text-[#003580] mb-3">Warme sfeer</h3>
+          <p class="text-gray-600">Kleine klassen, betrokken leerkrachten en een hecht schoolteam.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm text-center hover:shadow-md transition">
+          <div class="text-5xl mb-4">🌱</div>
+          <h3 class="text-xl font-bold text-[#003580] mb-3">Persoonlijke groei</h3>
+          <p class="text-gray-600">Aandacht voor elk kind, op zijn eigen tempo en met zijn eigen talenten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nieuws preview -->
+  <section class="py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-3xl font-bold text-[#003580]">Laatste nieuws</h2>
+        <a href="/nieuws" class="text-[#003580] font-semibold hover:underline">Alle berichten →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-[#003580] h-3 w-full"></div>
+          <div class="p-6">
+            <div class="text-xs text-gray-400 mb-2">12 mei 2026</div>
+            <h3 class="font-bold text-lg text-[#003580] mb-2">Inschrijvingen schooljaar 2026-2027</h3>
+            <p class="text-gray-600 text-sm">De inschrijvingen voor het nieuwe schooljaar zijn gestart. Ontdek ons aanbod en boek een rondleiding.</p>
+            <a href="/nieuws" class="mt-4 inline-block text-[#003580] font-semibold text-sm hover:underline">Lees meer →</a>
+          </div>
+        </article>
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-[#f5a623] h-3 w-full"></div>
+          <div class="p-6">
+            <div class="text-xs text-gray-400 mb-2">3 mei 2026</div>
+            <h3 class="font-bold text-lg text-[#003580] mb-2">Opendeurdagen mei 2026</h3>
+            <p class="text-gray-600 text-sm">Kom onze school ontdekken tijdens onze opendeurdag op zaterdag 24 mei van 9u tot 12u.</p>
+            <a href="/nieuws" class="mt-4 inline-block text-[#003580] font-semibold text-sm hover:underline">Lees meer →</a>
+          </div>
+        </article>
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="bg-[#003580] h-3 w-full"></div>
+          <div class="p-6">
+            <div class="text-xs text-gray-400 mb-2">20 april 2026</div>
+            <h3 class="font-bold text-lg text-[#003580] mb-2">Sportdag groot succes!</h3>
+            <p class="text-gray-600 text-sm">Meer dan 400 leerlingen namen deel aan onze jaarlijkse sportdag. Een onvergetelijke dag!</p>
+            <a href="/nieuws" class="mt-4 inline-block text-[#003580] font-semibold text-sm hover:underline">Lees meer →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#f5a623] py-16 px-4">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-[#003580] mb-4">Kom ons ontmoeten!</h2>
+      <p class="text-[#003580] text-lg mb-8">Plan een rondleiding of kom naar onze volgende opendeurdag. We verwelkomen je graag.</p>
+      <a href="/contact" class="bg-[#003580] text-white font-bold px-10 py-4 rounded-full hover:bg-blue-900 transition text-lg inline-block">
+        Contacteer ons
+      </a>
+    </div>
+  </section>
+
+</Layout>

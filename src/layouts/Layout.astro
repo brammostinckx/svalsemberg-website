@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Sint-Victor Alsemberg — een warme school voor iedereen" } = Astro.props;
+---
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | Sint-Victor Alsemberg</title>
+  </head>
+  <body class="bg-white text-gray-800 font-sans">
+
+    <header class="bg-[#003580] text-white shadow-lg sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 hover:opacity-90 transition">
+          <div class="bg-[#f5a623] rounded-full w-10 h-10 flex items-center justify-center font-bold text-[#003580] text-lg">SV</div>
+          <div>
+            <div class="font-bold text-lg leading-tight">Sint-Victor</div>
+            <div class="text-xs text-blue-200">Alsemberg</div>
+          </div>
+        </a>
+
+        <button id="menu-toggle" class="md:hidden p-2 rounded hover:bg-blue-800 transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="/" class="hover:text-[#f5a623] transition">Home</a>
+          <a href="/over-ons" class="hover:text-[#f5a623] transition">Over ons</a>
+          <a href="/aanbod" class="hover:text-[#f5a623] transition">Studieaanbod</a>
+          <a href="/nieuws" class="hover:text-[#f5a623] transition">Nieuws</a>
+          <a href="/contact" class="hover:text-[#f5a623] transition px-4 py-2 bg-[#f5a623] text-[#003580] rounded-full font-bold">Contact</a>
+        </nav>
+      </div>
+
+      <nav id="mobile-menu" class="hidden md:hidden px-4 pb-4 flex flex-col gap-3 text-sm font-medium border-t border-blue-700 pt-3">
+        <a href="/" class="hover:text-[#f5a623] transition">Home</a>
+        <a href="/over-ons" class="hover:text-[#f5a623] transition">Over ons</a>
+        <a href="/aanbod" class="hover:text-[#f5a623] transition">Studieaanbod</a>
+        <a href="/nieuws" class="hover:text-[#f5a623] transition">Nieuws</a>
+        <a href="/contact" class="hover:text-[#f5a623] transition">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="bg-[#003580] text-white mt-16">
+      <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="font-bold text-lg mb-2">Sint-Victor Alsemberg</div>
+          <p class="text-blue-200 text-sm">Een warme school in het Zennevallei waar leerlingen groeien in kennis, karakter en gemeenschap.</p>
+        </div>
+        <div>
+          <div class="font-bold mb-2">Snelle links</div>
+          <ul class="text-blue-200 text-sm space-y-1">
+            <li><a href="/over-ons" class="hover:text-white transition">Over ons</a></li>
+            <li><a href="/aanbod" class="hover:text-white transition">Studieaanbod</a></li>
+            <li><a href="/nieuws" class="hover:text-white transition">Nieuws</a></li>
+            <li><a href="/contact" class="hover:text-white transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="font-bold mb-2">Contact</div>
+          <ul class="text-blue-200 text-sm space-y-1">
+            <li>Alsembergsteenweg 613</li>
+            <li>1653 Dworp (Alsemberg)</li>
+            <li><a href="mailto:info@svalsemberg.be" class="hover:text-white transition">info@svalsemberg.be</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-blue-800 text-center text-blue-300 text-xs py-4">
+        © {new Date().getFullYear()} Sint-Victor Alsemberg
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+    </script>
+  </body>
+</html>

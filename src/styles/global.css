@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+:root {
+  --kleur-primair: #003580;
+  --kleur-accent: #f5a623;
+}

@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Over ons" description="Leer meer over Sint-Victor Alsemberg, onze missie en ons team.">
+
+  <section class="bg-[#003580] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4">Over Sint-Victor</h1>
+      <p class="text-blue-200 text-lg">Wie zijn wij en waar staan we voor?</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <h2 class="text-2xl font-bold text-[#003580] mb-4">Onze school</h2>
+          <p class="text-gray-600 mb-4">Sint-Victor Alsemberg is een katholieke secundaire school gelegen in het groene Zennevallei. Al generaties lang bieden we kwaliteitsonderwijs aan in een warme en veilige omgeving.</p>
+          <p class="text-gray-600">We geloven dat elke leerling uniek is en de kans verdient om zijn of haar talenten maximaal te ontplooien — op academisch, sociaal en persoonlijk vlak.</p>
+        </div>
+        <div class="bg-gradient-to-br from-[#003580] to-[#0050c0] rounded-2xl p-8 text-white text-center">
+          <div class="text-6xl font-bold text-[#f5a623] mb-2">50+</div>
+          <div class="text-lg">jaar kwaliteitsonderwijs</div>
+          <div class="mt-6 text-6xl font-bold text-[#f5a623] mb-2">600+</div>
+          <div class="text-lg">leerlingen</div>
+          <div class="mt-6 text-6xl font-bold text-[#f5a623] mb-2">80+</div>
+          <div class="text-lg">medewerkers</div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-[#003580] mb-8">Onze waarden</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {[
+          { icon: "🤝", titel: "Gemeenschap", tekst: "We vormen één grote familie waar iedereen welkom is en erbij hoort." },
+          { icon: "📚", titel: "Kwaliteit", tekst: "We streven naar uitmuntend onderwijs dat leerlingen voorbereidt op de toekomst." },
+          { icon: "🌍", titel: "Engagement", tekst: "We engageren ons voor een duurzame en rechtvaardige samenleving." },
+          { icon: "✨", titel: "Respect", tekst: "Respect voor elkaar, voor de omgeving en voor ieders eigenheid staat centraal." },
+        ].map(w => (
+          <div class="flex gap-4 bg-gray-50 rounded-xl p-6">
+            <div class="text-3xl">{w.icon}</div>
+            <div>
+              <h3 class="font-bold text-[#003580] mb-1">{w.titel}</h3>
+              <p class="text-gray-600 text-sm">{w.tekst}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
