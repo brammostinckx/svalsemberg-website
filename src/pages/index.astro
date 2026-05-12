@@ -31,18 +31,12 @@ import Layout from '../layouts/Layout.astro';
           </a>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
-        {[
-          { n: "600+", label: "Leerlingen" },
-          { n: "150+", label: "Jaar traditie" },
-          { n: "15+", label: "Studierichtingen" },
-          { n: "100+", label: "Personeelsleden" },
-        ].map(s => (
-          <div class="bg-white/10 border border-white/20 rounded-2xl p-5 text-white text-center hover:bg-white/15 transition">
-            <div class="text-2xl font-extrabold text-yellow-400">{s.n}</div>
-            <div class="text-xs text-blue-200 mt-1">{s.label}</div>
-          </div>
-        ))}
+      <div class="flex items-end justify-center">
+        <img
+          src="/school-schets.png"
+          alt="Schets van de schoolgebouwen van Sint-Victor Alsemberg"
+          class="w-full max-w-lg opacity-90 mix-blend-lighten"
+        />
       </div>
     </div>
   </section>
@@ -151,7 +145,7 @@ import Layout from '../layouts/Layout.astro';
             { label: "Afwezigheid melden", href: "/afwezigheden" },
             { label: "Infobrochure 2026-2027 (PDF)", href: "#" },
             { label: "Chromebookproject", href: "#" },
-            { label: "FAQ â veelgestelde vragen", href: "/faq" },
+            { label: "FAQ ï¿½ veelgestelde vragen", href: "/faq" },
           ].map(l => (
             <a href={l.href} class="flex items-center justify-between bg-white rounded-xl px-5 py-4 shadow-sm hover:shadow-md border border-transparent hover:border-[#07153b] transition group">
               <span class="font-medium text-gray-700 group-hover:text-[#07153b] text-sm transition">{l.label}</span>
@@ -219,7 +213,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="w-14 h-1 bg-yellow-400 mt-3 rounded-full"></div>
           <p class="text-gray-500 text-sm mt-3">Het laatste nieuws uit onze school</p>
         </div>
-        <a href="/sv-tamtam" class="text-[#07153b] font-semibold text-sm hover:underline">Alle berichten â</a>
+        <a href="/sv-tamtam" class="text-[#07153b] font-semibold text-sm hover:underline">Alle berichten ï¿½</a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
