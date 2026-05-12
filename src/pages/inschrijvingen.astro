@@ -13,83 +13,176 @@ import Layout from '../layouts/Layout.astro';
 
   <section class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
-          <div class="bg-[#07153b] px-6 py-4">
-            <div class="text-yellow-400 font-extrabold text-lg">Nieuwe leerlingen</div>
-            <div class="text-blue-300 text-sm">1ste jaar 2026-2027</div>
+      <!-- 1ste jaar -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
+          <h2 class="text-2xl font-extrabold text-[#07153b]">1ste jaar 2026-2027</h2>
+        </div>
+        <p class="text-gray-500 text-sm mb-8 pl-4">Inschrijvingen voor het eerste jaar verlopen via het centraal aanmeldingssysteem <strong class="text-gray-700">aanmelden.school</strong>, in samenwerking met andere regionale scholen.</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+
+          <!-- Stap 1 -->
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-[#07153b] text-yellow-400 font-extrabold rounded-full w-9 h-9 flex items-center justify-center text-sm shrink-0">1</div>
+              <h3 class="font-extrabold text-[#07153b]">Informeer je</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">Lees de brochure en bezoek onze opendeurdag om het aanbod te ontdekken.</p>
+            <div class="space-y-2">
+              <a href="/Brochure Aanmelden 2627.pdf" target="_blank" rel="noopener"
+                class="flex items-center gap-2 text-sm font-bold text-[#07153b] bg-yellow-50 hover:bg-yellow-100 transition px-3 py-2 rounded-lg">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Brochure aanmelden 2026-2027
+              </a>
+              <a href="https://www.info-avonden.be" target="_blank" rel="noopener"
+                class="flex items-center gap-2 text-sm font-bold text-[#07153b] bg-gray-50 hover:bg-blue-50 transition px-3 py-2 rounded-lg">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Op stap naar het secundair onderwijs
+              </a>
+            </div>
           </div>
-          <div class="p-6">
-            <p class="text-gray-600 text-sm leading-relaxed mb-5">
-              Kom je voor het eerst naar Sint-Victor? Dan schrijf je je in als nieuwe leerling voor het 1ste jaar. Inschrijvingen verlopen via het aanmeldingssysteem.
-            </p>
-            <ul class="space-y-2 text-sm text-gray-600 mb-6">
-              <li class="flex items-start gap-2">
+
+          <!-- Stap 2 -->
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-[#07153b] text-yellow-400 font-extrabold rounded-full w-9 h-9 flex items-center justify-center text-sm shrink-0">2</div>
+              <h3 class="font-extrabold text-[#07153b]">Meld je aan</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">Aanmelden gebeurt via het centrale platform <strong>aanmelden.school</strong>. Daar geef je je schoolkeuzes in volgorde van voorkeur in.</p>
+            <a href="https://www.aanmelden.school" target="_blank" rel="noopener"
+              class="flex items-center gap-2 text-sm font-bold text-white bg-[#07153b] hover:bg-blue-900 transition px-3 py-2 rounded-lg">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Naar aanmelden.school
+            </a>
+          </div>
+
+          <!-- Stap 3 -->
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-[#07153b] text-yellow-400 font-extrabold rounded-full w-9 h-9 flex items-center justify-center text-sm shrink-0">3</div>
+              <h3 class="font-extrabold text-[#07153b]">Schrijf je in</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">Na de aanmeldingsperiode ontvang je bericht. Daarna kom je je kind effectief inschrijven op school. Breng mee:</p>
+            <ul class="space-y-1 text-sm text-gray-600">
+              <li class="flex gap-2 items-start">
                 <svg class="w-4 h-4 text-[#07153b] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Aanmelding via het online formulier
+                Rapport 6de leerjaar
               </li>
-              <li class="flex items-start gap-2">
+              <li class="flex gap-2 items-start">
                 <svg class="w-4 h-4 text-[#07153b] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Breng het rapport en/of CLB-advies mee
+                CLB-advies (indien van toepassing)
               </li>
-              <li class="flex items-start gap-2">
+              <li class="flex gap-2 items-start">
                 <svg class="w-4 h-4 text-[#07153b] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Infobrochure beschikbaar als download
+                Identiteitsdocument kind
               </li>
             </ul>
-            <a href="/contact" class="block text-center bg-[#07153b] text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition text-sm">
-              Inschrijven voor 1ste jaar
-            </a>
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
-          <div class="bg-yellow-400 px-6 py-4">
-            <div class="text-[#07153b] font-extrabold text-lg">Zij-instromers</div>
-            <div class="text-yellow-700 text-sm">2de tot 6de jaar 2026-2027</div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-600 text-sm leading-relaxed mb-5">
-              Wil je overstappen van een andere school naar Sint-Victor? Neem dan eerst contact op met ons secretariaat om de mogelijkheden te bespreken.
-            </p>
-            <ul class="space-y-2 text-sm text-gray-600 mb-6">
-              <li class="flex items-start gap-2">
+        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5 flex gap-4 items-start">
+          <svg class="w-5 h-5 text-[#07153b] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-sm text-gray-600">
+            Sint-Victor Alsemberg werkt samen met andere regionale scholen via het gecentraliseerde aanmeldingssysteem. Meer info over de aanmeldingsprocedure en -periodes vind je op <a href="https://www.aanmelden.school" target="_blank" rel="noopener" class="text-[#07153b] font-bold hover:underline">aanmelden.school</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Zij-instromers -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
+          <h2 class="text-2xl font-extrabold text-[#07153b]">Zij-instromers (2de&ndash;6de jaar)</h2>
+        </div>
+        <p class="text-gray-500 text-sm mb-8 pl-4">Wil je overstappen van een andere school naar Sint-Victor? Neem dan eerst contact op met ons secretariaat om de mogelijkheden te bespreken.</p>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col md:flex-row gap-8 items-start">
+          <div class="flex-1">
+            <h3 class="font-extrabold text-[#07153b] mb-3">Hoe verloopt dit?</h3>
+            <ul class="space-y-3 text-sm text-gray-600">
+              <li class="flex gap-3 items-start">
                 <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Telefonisch of per mail contact opnemen
+                Neem telefonisch of per mail contact op met het secretariaat
               </li>
-              <li class="flex items-start gap-2">
+              <li class="flex gap-3 items-start">
                 <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Attest vorig schooljaar meebrengen
+                We bespreken samen of er een geschikte richting beschikbaar is
               </li>
-              <li class="flex items-start gap-2">
+              <li class="flex gap-3 items-start">
                 <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                Persoonlijk gesprek mogelijk
+                Breng het attest van het vorige schooljaar mee bij de inschrijving
+              </li>
+              <li class="flex gap-3 items-start">
+                <svg class="w-4 h-4 text-yellow-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Een persoonlijk gesprek is steeds mogelijk
               </li>
             </ul>
-            <a href="/contact" class="block text-center bg-yellow-400 text-[#07153b] font-bold py-3 rounded-xl hover:bg-yellow-300 transition text-sm">
-              Contact opnemen
+          </div>
+          <div class="flex flex-col gap-3 shrink-0">
+            <a href="tel:+3223801589" class="flex items-center gap-2 bg-[#07153b] text-white font-bold px-5 py-3 rounded-xl hover:bg-blue-900 transition text-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              02 380 15 89
+            </a>
+            <a href="mailto:info@sintvictor.be" class="flex items-center gap-2 bg-gray-50 text-[#07153b] font-bold px-5 py-3 rounded-xl hover:bg-blue-50 transition text-sm border border-gray-200">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              info@sintvictor.be
             </a>
           </div>
         </div>
       </div>
 
+      <!-- Onderste 3 blokjes -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
-          { titel: "Infobrochure", tekst: "Download onze infobrochure voor schooljaar 2026-2027 met alle praktische info.", link: "#", linkTekst: "Download PDF" },
-          { titel: "Opendeurdag", tekst: "Bezoek onze school op zaterdag 16 mei 2026 van 9u tot 12u. Gratis en zonder afspraak.", link: "/contact", linkTekst: "Meer info" },
-          { titel: "Vragen?", tekst: "Neem contact op met ons secretariaat via info@sintvictor.be of bel ons.", link: "/contact", linkTekst: "Contacteer ons" },
+          {
+            titel: "Infobrochure",
+            tekst: "Download onze brochure voor schooljaar 2026-2027 met alle praktische info over aanmelden.",
+            link: "/Brochure Aanmelden 2627.pdf",
+            linkTekst: "Download PDF",
+            extern: true,
+          },
+          {
+            titel: "Opendeurdag",
+            tekst: "Bezoek onze school op zaterdag 16 mei 2026 van 9u tot 12u. Gratis en zonder afspraak.",
+            link: "/contact",
+            linkTekst: "Meer info",
+            extern: false,
+          },
+          {
+            titel: "Vragen?",
+            tekst: "Neem contact op met ons secretariaat via info@sintvictor.be of bel ons op 02 380 15 89.",
+            link: "/contact",
+            linkTekst: "Contacteer ons",
+            extern: false,
+          },
         ].map(i => (
-          <div class="bg-gray-50 rounded-2xl p-6 text-center hover:bg-blue-50 transition border border-transparent hover:border-[#07153b]">
+          <div class="bg-gray-50 rounded-2xl p-6 text-center hover:bg-blue-50 transition border border-transparent hover:border-[#07153b]/20">
             <div class="w-10 h-10 bg-[#07153b]/10 rounded-xl flex items-center justify-center mx-auto mb-4">
               <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <h3 class="font-bold text-[#07153b] mb-2">{i.titel}</h3>
             <p class="text-gray-600 text-sm mb-4 leading-relaxed">{i.tekst}</p>
-            <a href={i.link} class="text-[#07153b] text-sm font-bold hover:underline">{i.linkTekst} &rarr;</a>
+            <a href={i.link} target={i.extern ? "_blank" : undefined} rel={i.extern ? "noopener" : undefined}
+              class="text-[#07153b] text-sm font-bold hover:underline">{i.linkTekst} &rarr;</a>
           </div>
         ))}
       </div>
+
     </div>
   </section>
 
