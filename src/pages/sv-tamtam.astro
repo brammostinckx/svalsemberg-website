@@ -19,6 +19,7 @@ const berichten = [
     </div>
   </section>
 
+  <!-- Nieuwsberichten -->
   <section class="py-16 px-4">
     <div class="max-w-4xl mx-auto space-y-5">
       {berichten.map(b => (
@@ -34,4 +35,86 @@ const berichten = [
     </div>
   </section>
 
+  <!-- Archief sectie -->
+  <section class="bg-gray-50 py-16 px-4 border-t border-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-4 mb-2">
+        <h2 class="text-2xl font-extrabold text-[#07153b]">Archief</h2>
+      </div>
+      <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
+      <p class="text-gray-500 text-sm mb-8">Alle edities van het SV-Tamtam schoolmagazine, rechtstreeks beschikbaar via Google Drive.</p>
+
+      <!-- Loading skeleton -->
+      <div id="archief-loading" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {Array.from({length: 8}).map(() => (
+          <div class="bg-white rounded-xl border border-gray-100 p-5 animate-pulse">
+            <div class="bg-gray-200 rounded-lg w-10 h-10 mb-3"></div>
+            <div class="bg-gray-200 rounded h-3 w-3/4 mb-2"></div>
+            <div class="bg-gray-100 rounded h-2 w-1/2"></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Foutmelding -->
+      <div id="archief-error" class="hidden bg-red-50 border border-red-100 rounded-xl p-6 text-center">
+        <p class="text-red-600 text-sm font-semibold mb-1">Kon het archief niet laden.</p>
+        <p class="text-gray-500 text-xs">Controleer de API-sleutel of probeer later opnieuw.</p>
+      </div>
+
+      <!-- Resultaten grid -->
+      <div id="archief-grid" class="hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
 </Layout>
+
+<script>
+  const FOLDER_ID = '1-XYeqjkuNCGUcYoMdHlPVifV-OTbczwq';
+  const API_KEY = 'VERVANG_MET_JE_API_SLEUTEL';
+
+  async function laadArchief() {
+    const loading = document.getElementById('archief-loading');
+    const grid = document.getElementById('archief-grid');
+    const error = document.getElementById('archief-error');
+
+    try {
+      const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+trashed=false&fields=files(id,name,modifiedTime)&orderBy=name&pageSize=100&key=${API_KEY}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('API fout');
+      const data = await res.json();
+      const files: Array<{id: string, name: string, modifiedTime: string}> = (data.files || []).filter((f: {id: string, name: string, modifiedTime: string}) => f.name.toLowerCase().endsWith('.pdf'));
+
+      loading?.classList.add('hidden');
+
+      if (files.length === 0) {
+        error?.classList.remove('hidden');
+        return;
+      }
+
+      if (grid) {
+        grid.innerHTML = files.map((f: {id: string, name: string, modifiedTime: string}) => {
+          const datum = new Date(f.modifiedTime).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+          const naam = f.name.replace(/\.pdf$/i, '');
+          return `
+            <a href="https://drive.google.com/file/d/${f.id}/view" target="_blank" rel="noopener"
+              class="group bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md hover:border-[#07153b]/20 transition flex flex-col">
+              <div class="bg-red-50 rounded-lg w-11 h-11 flex items-center justify-center mb-3 shrink-0 group-hover:bg-red-100 transition">
+                <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/>
+                  <text x="6" y="17" font-size="4" font-weight="bold" fill="currentColor">PDF</text>
+                </svg>
+              </div>
+              <span class="font-bold text-[#07153b] text-sm leading-tight mb-1 group-hover:text-blue-800 transition">${naam}</span>
+              <span class="text-gray-400 text-xs mt-auto pt-2">${datum}</span>
+            </a>`;
+        }).join('');
+        grid.classList.remove('hidden');
+      }
+    } catch {
+      loading?.classList.add('hidden');
+      error?.classList.remove('hidden');
+    }
+  }
+
+  laadArchief();
+</script>
