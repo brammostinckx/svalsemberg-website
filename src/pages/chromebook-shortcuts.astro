@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const categorieen = [
+  {
+    naam: "Schermafbeeldingen",
+    icoon: "M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M15 13a3 3 0 11-6 0 3 3 0 016 0z",
+    shortcuts: [
+      { keys: ["Ctrl", "Alt", "Vensters tonen"], beschrijving: "Volledig scherm fotograferen" },
+      { keys: ["Ctrl", "Shift", "Vensters tonen"], beschrijving: "Gedeeltelijke schermafbeelding (selecteer een gebied)" },
+    ],
+  },
+  {
+    naam: "Tekst & documenten",
+    icoon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    shortcuts: [
+      { keys: ["Ctrl", "C"], beschrijving: "Kopiëren" },
+      { keys: ["Ctrl", "X"], beschrijving: "Knippen" },
+      { keys: ["Ctrl", "V"], beschrijving: "Plakken" },
+      { keys: ["Ctrl", "Z"], beschrijving: "Ongedaan maken" },
+    ],
+  },
+  {
+    naam: "Systeemfuncties",
+    icoon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+    shortcuts: [
+      { keys: ["Alt", "Zoekknop"], beschrijving: "Caps Lock aan/uit" },
+      { keys: ["Alt", "Backspace"], beschrijving: "Delete (karakter rechts verwijderen)" },
+      { keys: ["Alt", "Tab"], beschrijving: "Wisselen tussen vensters" },
+    ],
+  },
+  {
+    naam: "Vensterbeheer",
+    icoon: "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z",
+    shortcuts: [
+      { keys: ["Alt", "["], beschrijving: "Venster naar links vastzetten" },
+      { keys: ["Alt", "]"], beschrijving: "Venster naar rechts vastzetten" },
+    ],
+  },
+  {
+    naam: "Bestandsbeheer",
+    icoon: "M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z",
+    shortcuts: [
+      { keys: ["Alt", "Shift", "M"], beschrijving: "Bestandsverkenner openen" },
+    ],
+  },
+  {
+    naam: "Klembordgeschiedenis",
+    icoon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2",
+    shortcuts: [
+      { keys: ["Ctrl", "Alt", "V"], beschrijving: "Klembordgeschiedenis — kies uit de 5 meest recent gekopieerde items" },
+    ],
+  },
+];
+---
+<Layout title="Essentiële shortcuts" description="Handige sneltoetsen voor je Chromebook op Sint-Victor Alsemberg.">
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Chromebookproject</div>
+      <h1 class="text-4xl font-extrabold mb-4">Essentiële shortcuts</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">De handigste sneltoetsen voor je Chromebook, gegroepeerd per categorie.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Tip: alle shortcuts -->
+      <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-5 mb-10 flex items-start gap-4">
+        <div class="bg-yellow-400 rounded-xl w-10 h-10 flex items-center justify-center shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-[#07153b] mb-1">Alle shortcuts bekijken</div>
+          <p class="text-sm text-yellow-800 leading-relaxed">Druk op <kbd class="bg-white border border-yellow-300 rounded px-1.5 py-0.5 text-xs font-mono">Ctrl</kbd> + <kbd class="bg-white border border-yellow-300 rounded px-1.5 py-0.5 text-xs font-mono">Alt</kbd> + <kbd class="bg-white border border-yellow-300 rounded px-1.5 py-0.5 text-xs font-mono">=</kbd> om een doorzoekbare lijst van alle beschikbare shortcuts te openen.</p>
+        </div>
+      </div>
+
+      <!-- Categorieën -->
+      <div class="space-y-6">
+        {categorieen.map(cat => (
+          <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="bg-[#07153b]/5 border-b border-gray-100 px-6 py-3 flex items-center gap-3">
+              <div class="bg-[#07153b] rounded-lg w-8 h-8 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={cat.icoon}/>
+                </svg>
+              </div>
+              <h2 class="font-extrabold text-[#07153b] text-sm">{cat.naam}</h2>
+            </div>
+            <div class="divide-y divide-gray-50">
+              {cat.shortcuts.map(s => (
+                <div class="flex items-center justify-between px-6 py-4 gap-4">
+                  <span class="text-gray-600 text-sm">{s.beschrijving}</span>
+                  <div class="flex items-center gap-1 shrink-0">
+                    {s.keys.map((k, i) => (
+                      <>
+                        <kbd class="bg-gray-100 border border-gray-200 rounded-lg px-2.5 py-1 text-xs font-mono font-bold text-[#07153b] whitespace-nowrap">{k}</kbd>
+                        {i < s.keys.length - 1 && <span class="text-gray-300 text-xs font-bold">+</span>}
+                      </>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Terug -->
+      <div class="mt-10 text-center">
+        <a href="/chromebookproject" class="inline-flex items-center gap-2 text-[#07153b] font-semibold text-sm hover:underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Terug naar Chromebookproject
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
