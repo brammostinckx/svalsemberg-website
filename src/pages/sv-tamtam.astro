@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const FOLDER_ID = '1-XYeqjkuNCGUcYoMdHlPVifV-OTbczwq';
-const API_KEY = 'AIzaSyDTBjnjVJW-uFLR25On4hCKkOEaYpH2SS8';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydmbI4Xt1T6lLjDjmmNka7B9xhxKYtqbg-vrQPlkOfSE4yVQzHsCu0KTNGmPxMH210yg/exec';
 ---
 <Layout title="SV-Tamtam" description="Alle edities van het SV-Tamtam schoolmagazine van Sint-Victor Alsemberg.">
 
@@ -65,18 +65,15 @@ const API_KEY = 'AIzaSyDTBjnjVJW-uFLR25On4hCKkOEaYpH2SS8';
 
 </Layout>
 
-<script define:vars={{ FOLDER_ID, API_KEY }}>
+<script define:vars={{ APPS_SCRIPT_URL }}>
   async function laadLaatsteEditie() {
     try {
-      const q = encodeURIComponent(`'${FOLDER_ID}' in parents and trashed=false`);
-      const url = `https://www.googleapis.com/drive/v3/files?q=${q}&orderBy=name+desc&pageSize=1&fields=files(id,name)&key=${API_KEY}`;
-      const res = await fetch(url);
+      const res = await fetch(APPS_SCRIPT_URL);
       const data = await res.json();
-      if (!res.ok || !data.files?.length) return;
+      if (!res.ok || !data.id) return;
 
-      const bestand = data.files[0];
-      const naam = bestand.name.replace(/\.pdf$/i, '');
-      const link = `https://drive.google.com/file/d/${bestand.id}/view`;
+      const naam = data.name;
+      const link = `https://drive.google.com/file/d/${data.id}/view`;
 
       document.getElementById('laatste-editie-naam').textContent = naam;
       document.getElementById('laatste-editie-link').href = link;
