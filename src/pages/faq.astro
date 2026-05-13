@@ -16,7 +16,31 @@ const vragen = [
   {
     categorie: "Schooldag",
     v: "Hoe ziet een schooldag eruit?",
-    a: "Lessen lopen van 8u30 tot 15u40, met een speeltijd van 10u10 tot 10u25 en een middagpauze van 12u05 tot 13u10. Voor de 3de graad eindigen de voormiddaglessen om 12u55 en duurt de middagpauze tot 14u00.",
+    a: "",
+    rooster: {
+      graad1en2: [
+        { label: "1ste lesuur", tijd: "8.30 – 9.20 uur" },
+        { label: "2de lesuur", tijd: "9.20 – 10.10 uur" },
+        { label: "Speeltijd", tijd: "10.10 – 10.25 uur", pauze: true },
+        { label: "3de lesuur", tijd: "10.25 – 11.15 uur" },
+        { label: "4de lesuur", tijd: "11.15 – 12.05 uur" },
+        { label: "5de lesuur — middagpauze", tijd: "12.05 – 13.10 uur", pauze: true },
+        { label: "6de lesuur", tijd: "13.10 – 14.00 uur" },
+        { label: "7de lesuur", tijd: "14.00 – 14.50 uur" },
+        { label: "8ste lesuur", tijd: "14.50 – 15.40 uur" },
+      ],
+      graad3: [
+        { label: "1ste lesuur", tijd: "8.30 – 9.20 uur" },
+        { label: "2de lesuur", tijd: "9.20 – 10.10 uur" },
+        { label: "Speeltijd", tijd: "10.10 – 10.25 uur", pauze: true },
+        { label: "3de lesuur", tijd: "10.25 – 11.15 uur" },
+        { label: "4de lesuur", tijd: "11.15 – 12.05 uur" },
+        { label: "5de lesuur — les", tijd: "12.05 – 12.55 uur" },
+        { label: "6de lesuur — middagpauze", tijd: "12.55 – 14.00 uur", pauze: true },
+        { label: "7de lesuur", tijd: "14.00 – 14.50 uur" },
+        { label: "8ste lesuur", tijd: "14.50 – 15.40 uur" },
+      ],
+    },
   },
   {
     categorie: "Schooldag",
@@ -96,7 +120,33 @@ const categorieen = [...new Set(vragen.map(v => v.categorie))];
                   </svg>
                 </summary>
                 <div class="px-6 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
-                  {faq.a}
+                  {faq.a && <p>{faq.a}</p>}
+                  {faq.rooster && (
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+                      <div>
+                        <div class="text-xs font-extrabold text-[#07153b] uppercase tracking-wide mb-3">1ste & 2de graad</div>
+                        <div class="space-y-1">
+                          {faq.rooster.graad1en2.map((r: {label: string, tijd: string, pauze?: boolean}) => (
+                            <div class={`flex justify-between items-center rounded-lg px-3 py-2 text-xs ${r.pauze ? 'bg-yellow-50 text-yellow-800 font-semibold' : 'bg-gray-50 text-gray-700'}`}>
+                              <span>{r.label}</span>
+                              <span class="font-mono font-bold">{r.tijd}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <div class="text-xs font-extrabold text-[#07153b] uppercase tracking-wide mb-3">3de graad</div>
+                        <div class="space-y-1">
+                          {faq.rooster.graad3.map((r: {label: string, tijd: string, pauze?: boolean}) => (
+                            <div class={`flex justify-between items-center rounded-lg px-3 py-2 text-xs ${r.pauze ? 'bg-yellow-50 text-yellow-800 font-semibold' : 'bg-gray-50 text-gray-700'}`}>
+                              <span>{r.label}</span>
+                              <span class="font-mono font-bold">{r.tijd}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {faq.link && (
                     <a href={faq.link.href} class="inline-flex items-center gap-1 mt-3 text-[#07153b] font-bold hover:underline text-xs">
                       {faq.link.tekst}
