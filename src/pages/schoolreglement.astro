@@ -32,21 +32,69 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="space-y-8">
-        {[
-          { titel: "Aanwezigheid & afwezigheid", inhoud: "Leerlingen zijn verplicht aanwezig op alle lessen en activiteiten. Afwezigheid wordt telefonisch gemeld vóór 8u30. Bij ziekte langer dan 3 opeenvolgende dagen is een doktersattest verplicht." },
-          { titel: "Kledij", inhoud: "We vragen nette en respectvolle kledij. Provocerende of aanstootgevende kledij is niet toegestaan." },
-          { titel: "Elektronische toestellen", inhoud: "Gsm's zijn verboden tijdens de schooluren. 's Morgens wordt de gsm in een daarvoor voorzien magnetisch gesloten gsm-zakje gestopt. Op het einde van de schooldag kunnen de zakjes geopend worden bij het naarbuitengaan via de daarvoor voorziene magnetische sloten. Chromebooks worden gebruikt als digitaal werkinstrument in de klas." },
-          { titel: "Gedrag & respect", inhoud: "We verwachten respectvol gedrag tegenover medeleerlingen, leerkrachten en personeel. Pesten, discriminatie of geweld worden niet getolereerd en leiden tot sancties." },
-          { titel: "Punten & evaluatie", inhoud: "Resultaten worden gecommuniceerd via Smartschool. Ouders worden tijdig geïnformeerd bij zorgsignalen. Er zijn drie oudercontacten per schooljaar." },
-        ].map(s => (
-          <div>
-            <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
-              <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
-              {s.titel}
-            </h2>
-            <p class="text-gray-600 leading-relaxed text-sm pl-4">{s.inhoud}</p>
+
+        <div>
+          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
+            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+            Aanwezigheid & afwezigheid
+          </h2>
+          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+            <p>Leerlingen zijn verplicht aanwezig op alle lessen en activiteiten, inclusief buitenschoolse activiteiten en bezinningsdagen.</p>
+            <p>Bij ziekte melden ouders de afwezigheid <strong>telefonisch vóór 8u30</strong> via <strong>02 380 15 89</strong> of via het meldingsformulier op <a href="https://afwezigheden.svalsemberg.be" target="_blank" rel="noopener" class="text-[#07153b] font-semibold hover:underline">afwezigheden.svalsemberg.be</a>.</p>
+            <p>Voor afwezigheid tot en met <strong>3 opeenvolgende kalenderdagen</strong> volstaat een briefje van de ouders (leerlingen ontvangen bij het begin van het schooljaar een document met 4 strookjes). Vanaf de <strong>4de opeenvolgende kalenderdag</strong> is een doktersattest verplicht. Dixit-attesten zijn niet rechtsgeldig.</p>
+            <p>Wie later dan 09.20u op school aankomt, heeft een schriftelijke motivering nodig van de ouders of de arts. Zoniet wordt die halve dag als onwettig afwezig beschouwd.</p>
           </div>
-        ))}
+        </div>
+
+        <div>
+          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
+            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+            Kledij
+          </h2>
+          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+            <p>Kledij en kapsels mogen niet provocerend zijn. Kleding die de goede zeden schendt of waarbij ondergoed zichtbaar is, is niet toegestaan.</p>
+            <p><strong>Hoofddeksels zijn verboden</strong> in de gebouwen, tijdens lessen (ook LO), tijdens studies en op de bus van en naar activiteiten. Op de speelplaats en tijdens buitenactiviteiten zijn ze wel toegelaten.</p>
+            <p>Wie zich niet aan de kledijregels houdt, krijgt een gepaste outfit van de school die de volledige schooldag gedragen moet worden.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
+            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+            Elektronische toestellen
+          </h2>
+          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+            <p>Voor alle leerlingen geldt een <strong>verbod op het gebruik van slimme apparaten</strong> (smartphones, tablets, smartwatches, gsm's …) tijdens de volledige periode van aanwezigheid op school — van het eerste belsignaal om 8u25 tot het verlaten van de schoolpoort na de laatste les.</p>
+            <p>'s Morgens wordt de gsm in een daarvoor voorzien <strong>magnetisch gesloten gsm-zakje</strong> gestopt. Op het einde van de schooldag kunnen de zakjes geopend worden bij het naarbuitengaan via de magnetische sloten.</p>
+            <p>Bij inbeslagname krijg je het toestel terug om <strong>15.45u</strong> (op woensdag om 12.25u). De school is niet verantwoordelijk bij schade, verlies of diefstal.</p>
+            <p><strong>Chromebooks</strong> worden als digitaal werkinstrument gebruikt tijdens de lessen, mits toestemming van de leerkracht.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
+            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+            Gedrag & respect
+          </h2>
+          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+            <p>Elke leerling gedraagt zich correct en respectvol tegenover directie, leerkrachten, medeleerlingen en alle andere campusbewoners. De voertaal op school is het <strong>Nederlands</strong>.</p>
+            <p><strong>Pesten wordt niet getolereerd.</strong> De school zorgt voor preventieopdrachten, begeleiding via gesprekken en sancties bij aanhoudende pesterijen. Als je getuige bent van pesterijen, is het je plicht dit te melden — via Smartschool of aan een personeelslid.</p>
+            <p>Roken, alcohol en drugs zijn <strong>strikt verboden</strong> op het volledige schooldomein (inclusief een zone van 10 meter buiten de schoolpoort) en tijdens alle schoolactiviteiten.</p>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
+            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+            Punten & evaluatie
+          </h2>
+          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+            <p>Er zijn twee soorten vakken: <strong>examenvakken</strong> en <strong>vakken met gespreide evaluatie</strong>. Resultaten zijn permanent te volgen via <strong>Skore</strong> (in Smartschool). Tijdens de examenperiode worden de resultaten tijdelijk afgesloten voor leerlingen en ouders.</p>
+            <p>Toetsen en taken staan <strong>elke vrijdag om 18u</strong> voor de volgende week ingepland in de planner. Herhalingstoetsen worden minstens een week op voorhand aangekondigd.</p>
+            <p>Er zijn meerdere oudercontacten per schooljaar. Ouders kunnen ook op eigen initiatief een afspraak maken via <strong>02 380 15 89</strong>. Bij zorgen wordt tussentijds contact opgenomen.</p>
+          </div>
+        </div>
+
       </div>
 
       <div class="mt-8 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex items-start gap-3">
