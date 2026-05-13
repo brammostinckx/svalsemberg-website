@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const FOLDER_ID = '1-XYeqjkuNCGUcYoMdHlPVifV-OTbczwq';
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydmbI4Xt1T6lLjDjmmNka7B9xhxKYtqbg-vrQPlkOfSE4yVQzHsCu0KTNGmPxMH210yg/exec';
+const LAATSTE_NAAM = 'SV TAMTAM #13';
+const LAATSTE_LINK = 'https://drive.google.com/file/d/1QkeC-kXLe2S6URr0MgmY-ACH_3Hcevyu/view';
 ---
 <Layout title="SV-Tamtam" description="Alle edities van het SV-Tamtam schoolmagazine van Sint-Victor Alsemberg.">
 
@@ -16,8 +17,8 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydmbI4Xt1T6lLj
   <section class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
 
-      <!-- Laatste editie knop (gevuld via JS) -->
-      <div id="laatste-editie-blok" class="hidden mb-10">
+      <!-- Laatste editie knop (hardcoded) -->
+      <div class="mb-10">
         <div class="bg-[#07153b] rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-5">
           <div class="bg-yellow-400 rounded-xl w-14 h-14 flex items-center justify-center shrink-0">
             <svg class="w-7 h-7 text-[#07153b]" fill="currentColor" viewBox="0 0 24 24">
@@ -26,9 +27,9 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydmbI4Xt1T6lLj
           </div>
           <div class="flex-1 text-center sm:text-left">
             <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-1">Nieuwste editie</div>
-            <div id="laatste-editie-naam" class="text-white font-extrabold text-lg"></div>
+            <div class="text-white font-extrabold text-lg">{LAATSTE_NAAM}</div>
           </div>
-          <a id="laatste-editie-link" href="#" target="_blank" rel="noopener"
+          <a href={LAATSTE_LINK} target="_blank" rel="noopener"
             class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm shrink-0 whitespace-nowrap">
             Lees de laatste editie &rarr;
           </a>
@@ -64,24 +65,3 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbydmbI4Xt1T6lLj
   </section>
 
 </Layout>
-
-<script define:vars={{ APPS_SCRIPT_URL }}>
-  async function laadLaatsteEditie() {
-    try {
-      const res = await fetch(APPS_SCRIPT_URL);
-      const data = await res.json();
-      if (!res.ok || !data.id) return;
-
-      const naam = data.name;
-      const link = `https://drive.google.com/file/d/${data.id}/view`;
-
-      document.getElementById('laatste-editie-naam').textContent = naam;
-      document.getElementById('laatste-editie-link').href = link;
-      document.getElementById('laatste-editie-blok').classList.remove('hidden');
-    } catch {
-      // stil falen — blok blijft verborgen
-    }
-  }
-
-  laadLaatsteEditie();
-</script>
