@@ -1,15 +1,70 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
 const vragen = [
-  { v: "Hoe schrijf ik mijn kind in voor het 1ste jaar?", a: "Inschrijvingen voor het 1ste jaar verlopen via ons online formulier. Breng het rapport van het 6de leerjaar en eventueel CLB-advies mee. Meer info op de inschrijvingenpagina." },
-  { v: "Wat is Smartschool?", a: "Smartschool is ons digitaal leerplatform. Leerlingen en ouders vinden er taken, punten, mededelingen en het lesrooster. Inloggen via sv.smartschool.be." },
-  { v: "Hoe meld ik een afwezigheid?", a: "Afwezigheden meld je zo snel mogelijk via Smartschool of per telefoon aan het secretariaat. Bij ziekte langer dan 3 dagen is een doktersattest verplicht." },
-  { v: "Heeft de school een uniform?", a: "Nee, Sint-Victor werkt niet met een uniform. We vragen wel nette en respectvolle kledij. Details staan in het schoolreglement." },
-  { v: "Wanneer is de volgende opendeurdag?", a: "De volgende opendeurdag is op zaterdag 16 mei 2026 van 9u tot 12u. Alle studierichtingen worden voorgesteld. Gratis toegang, geen inschrijving nodig." },
-  { v: "Wat kost het Chromebookproject?", a: "Via ons Chromebookproject huren leerlingen een Chromebook aan een jaarlijkse bijdrage. Details en exacte bedragen zijn te vinden in de infobrochure." },
-  { v: "Hoe bereik ik het secretariaat?", a: "Het secretariaat is bereikbaar op maandag tot vrijdag van 8u tot 16u30 via info@sintvictor.be of persoonlijk aan de schoolbalie." },
-  { v: "Biedt de school leerlingenbegeleiding aan?", a: "Ja, we hebben een uitgebreid team voor leerlingenbegeleiding: CLB-medewerkers, zorgcoördinatoren en vertrouwensleerkrachten die leerlingen begeleiden bij studiekeuze, welzijn en leermoeilijkheden." },
+  {
+    categorie: "Studieaanbod",
+    v: "Welke richtingen bieden jullie aan?",
+    a: "Sint-Victor is een pure ASO-school. We bieden richtingen aan in de 1ste graad (A-stroom met FLEX, WIJS en TALENT), de 2de graad (Humane Wetenschappen, Economische Wetenschappen, Latijn en Natuurwetenschappen) en de 3de graad (Economie-Moderne Talen, Economie-Wiskunde, Humane Wetenschappen, Latijn-Moderne Talen, Latijn-Wetenschappen, Moderne Talen-Wetenschappen en Wetenschappen-Wiskunde in 6u of 8u). Bekijk alle details op de studieaanbod pagina.",
+  },
+  {
+    categorie: "Studieaanbod",
+    v: "Kan een leerling van richting veranderen?",
+    a: "Dit kan enkel indien er nog plaats is in de richting waar men naartoe wenst over te stappen. Neem contact op met het secretariaat om de mogelijkheden te bespreken.",
+  },
+  {
+    categorie: "Schooldag",
+    v: "Hoe ziet een schooldag eruit?",
+    a: "Lessen lopen van 8u30 tot 15u40, met een speeltijd van 10u10 tot 10u25 en een middagpauze van 12u05 tot 13u10. Voor de 3de graad eindigen de voormiddaglessen om 12u55 en duurt de middagpauze tot 14u00.",
+  },
+  {
+    categorie: "Schooldag",
+    v: "Is er toezicht op de speelplaats voor en na school?",
+    a: "Ja, de school is open vanaf 8u00 en er is gratis toezicht voorzien van 8u00 tot 16u00.",
+  },
+  {
+    categorie: "Schooldag",
+    v: "Voorzien jullie avondstudie na de schooluren?",
+    a: "Ja, op maandag, dinsdag en donderdag kunnen leerlingen tussen 16u00 en 17u00 terecht in de avondstudie.",
+  },
+  {
+    categorie: "Communicatie",
+    v: "Welk platform gebruikt de school voor communicatie?",
+    a: "Alle officiële communicatie verloopt via Smartschool. Ouders en leerlingen vinden er taken, punten, mededelingen en het lesrooster. Inloggen via sv.smartschool.be.",
+  },
+  {
+    categorie: "Communicatie",
+    v: "Hoe krijgen ouders informatie over toetsen en taken?",
+    a: "Via Smartschool hebben ouders toegang tot het puntenboek en de digitale schoolagenda waar taken en toetsen worden opgegeven.",
+  },
+  {
+    categorie: "Communicatie",
+    v: "Hoe worden ouders geïnformeerd bij leermoeilijkheden?",
+    a: "Er zijn drie oudercontacten per schooljaar waar rapporten besproken worden. De school neemt ook tussentijds contact op indien nodig.",
+  },
+  {
+    categorie: "Begeleiding",
+    v: "Is er een leerlingbegeleider?",
+    a: "Ja, de leerlingbegeleider staat in voor ondersteuning bij vragen en/of problemen en werkt nauw samen met de directie en het CLB.",
+  },
+  {
+    categorie: "Regels",
+    v: "Wat is het beleid omtrent gsm-gebruik?",
+    a: "Gsm's moeten tijdens de lessen uitgeschakeld zijn. De gsm mag enkel gebruikt worden op de speelplaats tijdens de pauzes.",
+  },
+  {
+    categorie: "Regels",
+    v: "Wat zijn de richtlijnen voor afwezigheid?",
+    a: "Ouders melden afwezigheid telefonisch vóór 8u30. Een briefje of doktersattest wordt de volgende dag ingediend. Bij ziekte langer dan 3 dagen is een doktersattest verplicht. Meer info op de afwezighedenpagina.",
+  },
+  {
+    categorie: "Regels",
+    v: "Wat is het beleid omtrent pesten?",
+    a: "De school biedt preventie en begeleiding via gesprekken. Bij aanhoudende pesterijen worden sancties opgelegd. We streven naar een veilig en respectvol klimaat voor elke leerling.",
+  },
 ];
+
+const categorieen = [...new Set(vragen.map(v => v.categorie))];
 ---
 <Layout title="FAQ" description="Veelgestelde vragen over Sint-Victor Alsemberg.">
 
@@ -22,27 +77,39 @@ const vragen = [
   </section>
 
   <section class="py-16 px-4">
-    <div class="max-w-3xl mx-auto space-y-4">
-      {vragen.map((faq, i) => (
-        <details class="bg-white rounded-2xl shadow-sm border border-gray-100 group overflow-hidden">
-          <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-bold text-[#07153b] text-sm hover:bg-blue-50 transition list-none">
-            {faq.v}
-            <svg class="w-5 h-5 text-gray-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <div class="px-6 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </div>
+    <div class="max-w-3xl mx-auto">
 
-    <div class="max-w-3xl mx-auto mt-10 bg-gray-50 rounded-2xl p-6 text-center">
-      <p class="text-gray-600 mb-4">Staat jouw vraag er niet bij?</p>
-      <a href="/contact" class="bg-[#07153b] text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-900 transition text-sm inline-block">
-        Neem contact op
-      </a>
+      {categorieen.map(cat => (
+        <div class="mb-10">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="bg-[#07153b] text-yellow-400 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">{cat}</span>
+            <div class="flex-1 h-px bg-gray-100"></div>
+          </div>
+          <div class="space-y-3">
+            {vragen.filter(f => f.categorie === cat).map(faq => (
+              <details class="bg-white rounded-2xl shadow-sm border border-gray-100 group overflow-hidden">
+                <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-bold text-[#07153b] text-sm hover:bg-blue-50 transition list-none">
+                  {faq.v}
+                  <svg class="w-5 h-5 text-gray-400 shrink-0 group-open:rotate-180 transition-transform ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div class="px-6 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="mt-6 bg-gray-50 rounded-2xl p-6 text-center">
+        <p class="text-gray-600 mb-4">Staat jouw vraag er niet bij?</p>
+        <a href="/contact" class="bg-[#07153b] text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-900 transition text-sm inline-block">
+          Neem contact op
+        </a>
+      </div>
+
     </div>
   </section>
 
