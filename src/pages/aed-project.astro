@@ -1,19 +1,84 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="AED-project" description="Het AED-project van Sint-Victor Alsemberg.">
+<Layout title="AED-project" description="Sint-Victor Alsemberg is HARTveilig dankzij het AED-project van vzw Heartsaver.">
 
   <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Extra</div>
       <h1 class="text-4xl font-extrabold mb-4">AED-project</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Informatie over het AED-project van Sint-Victor Alsemberg.</p>
+      <p class="text-blue-200 text-lg max-w-2xl">Sint-Victor Alsemberg is HARTveilig — 24/7 toegankelijk voor iedereen.</p>
     </div>
   </section>
 
   <section class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
-      <p class="text-gray-500 text-center">Inhoud volgt binnenkort.</p>
+
+      <!-- Logo + intro -->
+      <div class="flex flex-col md:flex-row items-center gap-8 mb-14">
+        <img src="/AED-logo.png" alt="vzw Heartsaver logo" class="w-40 h-auto shrink-0" />
+        <div>
+          <h2 class="text-2xl font-extrabold text-[#07153b] mb-3">Wat is het Heartsaver-project?</h2>
+          <div class="w-14 h-1 bg-yellow-400 mb-5 rounded-full"></div>
+          <div class="space-y-4 text-gray-600 leading-relaxed">
+            <p>De vzw <strong class="text-[#07153b]">Heartsaver</strong> wil meer dan 10.000 extra HARTstarters (AED's) installeren die 24 uur per dag toegankelijk zijn voor het publiek. Een AED is een draagbaar toestel dat een elektrische schok aan het hart toedient bij levensbedreigende hartritmestoornissen. <strong>Iedereen mag een AED gebruiken.</strong></p>
+            <p>De vzw wil samenwerken met gemeenten, scholen, sportfederaties, apotheken en bedrijven om de openbaar toegankelijke defibrillatoren te installeren.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AED op school -->
+      <div class="bg-red-50 border border-red-100 rounded-2xl p-8 mb-10">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="bg-red-600 rounded-xl w-12 h-12 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="text-xl font-extrabold text-[#07153b] mb-2">AED aan onze school</h2>
+            <p class="text-gray-600 leading-relaxed">vzw Heartsaver heeft in samenwerking met verschillende sponsors uit de buurt een <strong class="text-[#07153b]">HARTstarter BUITEN aan de hoofdpoort</strong> van de school geplaatst zodat deze in geval van nood <strong>24/7 beschikbaar</strong> is voor iedereen. Dankzij dit fundraising initiatief wordt ook onze schoolomgeving HARTveilig.</p>
+          </div>
+        </div>
+
+        <!-- Foto's -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <img src="/AED1.jpg" alt="AED aan de hoofdpoort van Sint-Victor Alsemberg" class="rounded-xl w-full h-64 object-cover shadow-sm" />
+          <img src="/AED2.jpg" alt="AED-toestel Sint-Victor Alsemberg" class="rounded-xl w-full h-64 object-cover shadow-sm" />
+        </div>
+      </div>
+
+      <!-- Wat is een AED -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <div class="bg-red-100 rounded-xl w-10 h-10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="font-extrabold text-[#07153b] text-sm mb-2">Wat is een AED?</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Een Automatische Externe Defibrillator dient een elektrische schok toe bij levensbedreigende hartritmestoornissen.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <div class="bg-green-100 rounded-xl w-10 h-10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <h3 class="font-extrabold text-[#07153b] text-sm mb-2">Wie mag het gebruiken?</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Iedereen mag een AED gebruiken — geen medische opleiding vereist. Het toestel begeleidt je stap voor stap.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <div class="bg-blue-100 rounded-xl w-10 h-10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-extrabold text-[#07153b] text-sm mb-2">24/7 beschikbaar</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">De AED aan onze hoofdpoort is dag en nacht toegankelijk voor iedereen — ook buiten de schooluren.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
