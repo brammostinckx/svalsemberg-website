@@ -9,9 +9,9 @@ const graden = [
     bg: "bg-blue-50",
     beschrijving: "De eerste graad vormt de brug tussen het lager onderwijs en het secundair. We bieden een brede oriëntering waarbij leerlingen hun talenten en interesses kunnen ontdekken via drie unieke pijlers: FLEX, WIJS en TALENT.",
     link: "/studieaanbod/eerste-graad",
+    linkTekst: "Volledig aanbod 1ste graad",
     opties: [
-      { naam: "A-stroom", beschrijving: "Voor leerlingen met voldoende theoretische capaciteiten. Brede algemene vorming als voorbereiding op de 2de graad." },
-      { naam: "B-stroom", beschrijving: "Voor leerlingen die baat hebben bij een meer praktijkgerichte aanpak. Leidt naar BUSO of 2de graad BSO/TSO." },
+      { naam: "A-stroom", beschrijving: "Brede algemene vorming als voorbereiding op de ASO-richtingen van de 2de graad." },
     ],
   },
   {
@@ -20,15 +20,14 @@ const graden = [
     subtitel: "3de & 4de jaar",
     kleur: "border-yellow-400",
     bg: "bg-yellow-50",
-    beschrijving: "In de tweede graad kiezen leerlingen een studierichting die aansluit bij hun talenten en toekomstplannen. We bieden zowel ASO als TSO en BSO aan.",
+    beschrijving: "In de tweede graad kiezen leerlingen een ASO-studierichting die aansluit bij hun talenten en toekomstplannen. Alle richtingen bereiden voor op het hoger onderwijs.",
     link: "/studieaanbod/tweede-graad",
+    linkTekst: "Volledig aanbod 2de graad",
     opties: [
-      { naam: "ASO � Humane wetenschappen", beschrijving: "Mens en maatschappij centraal. Talenkennis, filosofie, sociale wetenschappen." },
-      { naam: "ASO � Wetenschappen", beschrijving: "Exacte wetenschappen: wiskunde, fysica, biologie en chemie." },
-      { naam: "ASO � Economie", beschrijving: "Economie, bedrijfswetenschappen en wiskunde." },
-      { naam: "ASO � Talen", beschrijving: "Sterke focus op moderne talen: Nederlands, Frans, Engels en Duits." },
-      { naam: "TSO � Handel", beschrijving: "Praktijkgericht economisch onderwijs met stages." },
-      { naam: "BSO � Verzorging", beschrijving: "Zorg en welzijn: praktische opleiding voor de zorgsector." },
+      { naam: "Humane wetenschappen", beschrijving: "Mens en maatschappij centraal. Talenkennis, filosofie en sociale wetenschappen." },
+      { naam: "Wetenschappen", beschrijving: "Exacte wetenschappen: wiskunde, fysica, biologie en chemie." },
+      { naam: "Economie", beschrijving: "Economie, bedrijfswetenschappen en wiskunde." },
+      { naam: "Talen", beschrijving: "Sterke focus op moderne talen: Nederlands, Frans, Engels en Duits." },
     ],
   },
   {
@@ -37,14 +36,12 @@ const graden = [
     subtitel: "5de & 6de jaar",
     kleur: "border-[#07153b]",
     bg: "bg-blue-50",
-    beschrijving: "De derde graad bereidt leerlingen voor op hoger onderwijs, de arbeidsmarkt of een 7de specialisatiejaar. Het eindwerk en stages spelen een centrale rol.",
+    beschrijving: "De derde graad bereidt leerlingen voor op het hoger onderwijs. Alle richtingen zijn ASO met een sterke doorstroomfinaliteit.",
     opties: [
-      { naam: "ASO � Humane wetenschappen", beschrijving: "Verdieping in mens, maatschappij en cultuur. Uitstekende voorbereiding op universitaire studies." },
-      { naam: "ASO � Wetenschappen-Wiskunde", beschrijving: "Intensieve wiskundige en wetenschappelijke vorming." },
-      { naam: "ASO � Economie-Wiskunde", beschrijving: "Combinatie economisch denken en wiskundige vaardigheden." },
-      { naam: "ASO � Latijn-Wiskunde", beschrijving: "Klassieke talen gecombineerd met exacte wetenschappen." },
-      { naam: "TSO � Boekhouden-Informatica", beschrijving: "Boekhoudkundige en informaticavaardigheden voor de praktijk." },
-      { naam: "BSO � Thuis- en Bejaardenzorg", beschrijving: "Zorg voor senioren en thuiszorg. Gecombineerd met praktijkervaring." },
+      { naam: "Humane wetenschappen", beschrijving: "Verdieping in mens, maatschappij en cultuur. Uitstekende voorbereiding op universitaire studies." },
+      { naam: "Wetenschappen-Wiskunde", beschrijving: "Intensieve wiskundige en wetenschappelijke vorming." },
+      { naam: "Economie-Wiskunde", beschrijving: "Combinatie economisch denken en wiskundige vaardigheden." },
+      { naam: "Latijn-Wiskunde", beschrijving: "Klassieke talen gecombineerd met exacte wetenschappen." },
     ],
   },
 ];
@@ -55,7 +52,7 @@ const graden = [
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
       <h1 class="text-4xl font-extrabold mb-4">Studieaanbod</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Van eerste graad tot zesde jaar � voor elk talent de juiste richting.</p>
+      <p class="text-blue-200 text-lg max-w-2xl">Van eerste graad tot zesde jaar &mdash; een volledig ASO-aanbod voor elk talent.</p>
     </div>
   </section>
 
@@ -64,7 +61,7 @@ const graden = [
       {graden.map(g => (
         <div id={g.id}>
           <div class="flex items-center gap-4 mb-6">
-            <div class={`w-1 h-12 rounded-full bg-[#07153b]`}></div>
+            <div class="w-1 h-12 rounded-full bg-[#07153b]"></div>
             <div>
               <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide">{g.subtitel}</div>
               <h2 class="text-2xl font-extrabold text-[#07153b]">{g.graad}</h2>
@@ -81,14 +78,13 @@ const graden = [
           </div>
           {'link' in g && g.link && (
             <a href={g.link} class="inline-flex items-center gap-2 bg-[#07153b] text-white font-bold px-5 py-2.5 rounded-xl hover:bg-blue-900 transition text-sm">
-              Volledig aanbod 1ste graad &rarr;
+              {(g as any).linkTekst} &rarr;
             </a>
           )}
         </div>
       ))}
 
       <div class="bg-[#07153b] text-white rounded-2xl p-8 text-center">
-        <div class="text-4xl mb-4">�</div>
         <h2 class="text-2xl font-bold mb-3">Twijfel je welke richting past bij jou?</h2>
         <p class="text-blue-200 mb-6 max-w-xl mx-auto">Onze leerlingenbegeleiding helpt je graag bij de studiekeuze. Maak een afspraak of kom langs tijdens de opendeurdag.</p>
         <div class="flex flex-wrap gap-4 justify-center">
