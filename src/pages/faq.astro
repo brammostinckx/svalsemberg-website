@@ -80,7 +80,8 @@ const vragen = [
   {
     categorie: "Regels",
     v: "Wat zijn de richtlijnen voor afwezigheid?",
-    a: "Ouders melden afwezigheid telefonisch vóór 8u30. Een briefje of doktersattest wordt de volgende dag ingediend. Bij ziekte langer dan 3 dagen is een doktersattest verplicht. Meer info op de afwezighedenpagina.",
+    a: "Ouders melden afwezigheid telefonisch vóór 8u30. Een briefje of doktersattest wordt de volgende dag ingediend. Bij ziekte langer dan 3 dagen is een doktersattest verplicht.",
+    link: { tekst: "Meer info op de afwezighedenpagina", href: "https://sites.google.com/sintvictor.be/afwezigheden/", extern: true },
   },
   {
     categorie: "Regels",
@@ -148,7 +149,7 @@ const categorieen = [...new Set(vragen.map(v => v.categorie))];
                     </div>
                   )}
                   {faq.link && (
-                    <a href={faq.link.href} class="inline-flex items-center gap-1 mt-3 text-[#07153b] font-bold hover:underline text-xs">
+                    <a href={faq.link.href} target={faq.link.extern ? "_blank" : undefined} rel={faq.link.extern ? "noopener" : undefined} class="inline-flex items-center gap-1 mt-3 text-[#07153b] font-bold hover:underline text-xs">
                       {faq.link.tekst}
                       <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
