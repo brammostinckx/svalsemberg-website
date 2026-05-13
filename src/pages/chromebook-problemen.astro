@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Problemen met de Chromebook" description="Oplossingen voor veelvoorkomende problemen met je Chromebook op Sint-Victor Alsemberg.">
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Chromebookproject</div>
+      <h1 class="text-4xl font-extrabold mb-4">Problemen met de Chromebook?</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Hieronder vind je de twee meest voorkomende oplossingen. In de meeste gevallen lost een van deze twee het probleem op.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto space-y-8">
+
+      <!-- Hardware reset -->
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="bg-[#07153b] px-6 py-4 flex items-center gap-3">
+          <div class="bg-yellow-400 rounded-lg w-9 h-9 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </div>
+          <h2 class="text-white font-extrabold text-lg">Hardware reset</h2>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-600 text-sm leading-relaxed mb-5">
+            Gebruik een hardware reset bij hardwareproblemen die blijven aanhouden: <strong>opstartproblemen, webcam werkt niet, speakers doen het niet</strong> of <strong>wifi-problemen</strong>.
+          </p>
+          <div class="bg-blue-50 rounded-xl p-5">
+            <div class="font-bold text-[#07153b] text-sm mb-3">Hoe doe je een hardware reset?</div>
+            <div class="flex items-center gap-4 flex-wrap">
+              <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 shadow-sm border border-gray-100">
+                <svg class="w-5 h-5 text-[#07153b] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span class="text-sm font-medium text-gray-700">Aan/uit-knop <span class="text-gray-400 text-xs">(linkerkant)</span></span>
+              </div>
+              <span class="text-gray-400 font-bold text-lg">+</span>
+              <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-3 shadow-sm border border-gray-100">
+                <svg class="w-5 h-5 text-[#07153b] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                <span class="text-sm font-medium text-gray-700">Vernieuwknop <span class="text-gray-400 text-xs">(4de knop bovenste rij)</span></span>
+              </div>
+            </div>
+            <p class="text-gray-500 text-xs mt-3">Druk beide toetsen tegelijk in. Het toestel herstart automatisch.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Powerwash -->
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+        <div class="bg-[#07153b] px-6 py-4 flex items-center gap-3">
+          <div class="bg-yellow-400 rounded-lg w-9 h-9 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+            </svg>
+          </div>
+          <h2 class="text-white font-extrabold text-lg">Powerwash</h2>
+        </div>
+        <div class="p-6">
+          <p class="text-gray-600 text-sm leading-relaxed mb-2">
+            Een powerwash zet het toestel terug naar de <strong>fabrieksinstellingen</strong> (softwareniveau). Dit is veilig, want al je bestanden staan in de cloud. Je verliest enkel de bestanden in de lokale map <strong>"Downloads"</strong>.
+          </p>
+          <p class="text-gray-500 text-xs mb-5">Duurt ongeveer 2 minuten.</p>
+
+          <div class="space-y-3">
+            {[
+              { stap: "1", tekst: "Log uit en ga naar het inlogscherm." },
+              { stap: "2", tekst: "Druk gelijktijdig op Ctrl + Alt + Shift + R." },
+              { stap: "3", tekst: "Kies \"Herstarten\"." },
+              { stap: "4", tekst: "Kies \"Powerwash\" en daarna \"Verdergaan\"." },
+              { stap: "5", tekst: "Selecteer de taal van je toestel." },
+              { stap: "6", tekst: "Meld je opnieuw aan met je schoolaccount." },
+            ].map(s => (
+              <div class="flex items-start gap-4">
+                <div class="bg-[#07153b] text-yellow-400 font-extrabold text-sm rounded-full w-7 h-7 flex items-center justify-center shrink-0 mt-0.5">{s.stap}</div>
+                <p class="text-gray-600 text-sm leading-relaxed pt-0.5">{s.tekst}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-5 bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-xs text-yellow-800">
+            <strong>Let op:</strong> Sla eventuele bestanden in je Downloads-map eerst op in Google Drive voor je een powerwash doet.
+          </div>
+        </div>
+      </div>
+
+      <!-- Nog steeds problemen -->
+      <div class="bg-[#07153b] text-white rounded-2xl p-8 text-center">
+        <h2 class="text-xl font-bold mb-2">Probleem nog niet opgelost?</h2>
+        <p class="text-blue-200 text-sm mb-5">Neem contact op met het secretariaat of meld het aan je leerkracht.</p>
+        <a href="/contact" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-2.5 rounded-xl hover:bg-yellow-300 transition text-sm inline-block">
+          Contact opnemen
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
