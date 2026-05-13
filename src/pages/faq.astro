@@ -5,7 +5,8 @@ const vragen = [
   {
     categorie: "Studieaanbod",
     v: "Welke richtingen bieden jullie aan?",
-    a: "Sint-Victor is een pure ASO-school. We bieden richtingen aan in de 1ste graad (A-stroom met FLEX, WIJS en TALENT), de 2de graad (Humane Wetenschappen, Economische Wetenschappen, Latijn en Natuurwetenschappen) en de 3de graad (Economie-Moderne Talen, Economie-Wiskunde, Humane Wetenschappen, Latijn-Moderne Talen, Latijn-Wetenschappen, Moderne Talen-Wetenschappen en Wetenschappen-Wiskunde in 6u of 8u). Bekijk alle details op de studieaanbod pagina.",
+    a: "Sint-Victor is een pure ASO-school met een volledig aanbod van de 1ste tot de 3de graad. Bekijk alle richtingen op onze studieaanbod pagina.",
+    link: { tekst: "Bekijk het studieaanbod", href: "/studieaanbod" },
   },
   {
     categorie: "Studieaanbod",
@@ -96,6 +97,14 @@ const categorieen = [...new Set(vragen.map(v => v.categorie))];
                 </summary>
                 <div class="px-6 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
                   {faq.a}
+                  {faq.link && (
+                    <a href={faq.link.href} class="inline-flex items-center gap-1 mt-3 text-[#07153b] font-bold hover:underline text-xs">
+                      {faq.link.tekst}
+                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  )}
                 </div>
               </details>
             ))}
