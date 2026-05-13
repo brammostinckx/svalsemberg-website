@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const items = [
+  {
+    label: "Chromebookproject",
+    href: "/chromebookproject",
+    beschrijving: "Alles over het Chromebookproject: bestellen, instellen en handleidingen.",
+    icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  {
+    label: "SV-Tamtam",
+    href: "/sv-tamtam",
+    beschrijving: "Het schoolblad van Sint-Victor Alsemberg.",
+    icon: "M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z",
+  },
+  {
+    label: "AED-project",
+    href: "/aed-project",
+    beschrijving: "Informatie over de AED-toestellen op onze school.",
+    icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+  },
+  {
+    label: "Vacatures",
+    href: "/vacatures",
+    beschrijving: "Bekijk openstaande vacatures bij Sint-Victor Alsemberg.",
+    icon: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  },
+  {
+    label: "Sint-Victor Strava",
+    href: "/strava",
+    beschrijving: "Volg onze sportieve activiteiten via de Strava-club.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+  },
+];
+---
+<Layout title="Extra" description="Extra pagina's van Sint-Victor Alsemberg.">
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Meer van Sint-Victor</div>
+      <h1 class="text-4xl font-extrabold mb-4">Extra</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Een overzicht van alle extra pagina's en projecten van onze school.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {items.map(item => (
+          <a href={item.href}
+            class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#07153b] transition p-6 flex items-start gap-4">
+            <div class="bg-[#07153b]/10 group-hover:bg-[#07153b] rounded-xl w-12 h-12 flex items-center justify-center shrink-0 transition">
+              <svg class="w-6 h-6 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon}/>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="font-extrabold text-[#07153b] mb-1 group-hover:underline">{item.label}</div>
+              <p class="text-gray-500 text-sm leading-relaxed">{item.beschrijving}</p>
+            </div>
+            <svg class="w-5 h-5 text-gray-300 group-hover:text-[#07153b] shrink-0 mt-0.5 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
