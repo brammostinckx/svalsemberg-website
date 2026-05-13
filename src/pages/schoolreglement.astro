@@ -33,11 +33,11 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="space-y-8">
         {[
-          { titel: "Aanwezigheid & afwezigheid", inhoud: "Leerlingen zijn verplicht aanwezig op alle lessen en activiteiten. Afwezigheid moet gemeld worden via Smartschool of telefonisch vóór 8u30. Bij ziekte langer dan 3 opeenvolgende dagen is een doktersattest verplicht." },
-          { titel: "Kledij", inhoud: "We vragen nette en respectvolle kledij. Provocerende of aanstootgevende kledij is niet toegestaan. Bij bepaalde lessen (sport, praktijkvakken) is specifieke kledij vereist." },
-          { titel: "Elektronische toestellen", inhoud: "Gsm's en andere elektronische toestellen worden bewaard in de locker tijdens de lessen. Gebruik tijdens de les is enkel toegestaan met uitdrukkelijke toestemming van de leerkracht. Het Chromebookproject voorziet een schoolchromebook voor digitale taken." },
+          { titel: "Aanwezigheid & afwezigheid", inhoud: "Leerlingen zijn verplicht aanwezig op alle lessen en activiteiten. Afwezigheid wordt telefonisch gemeld vóór 8u30. Bij ziekte langer dan 3 opeenvolgende dagen is een doktersattest verplicht." },
+          { titel: "Kledij", inhoud: "We vragen nette en respectvolle kledij. Provocerende of aanstootgevende kledij is niet toegestaan." },
+          { titel: "Elektronische toestellen", inhoud: "Gsm's zijn verboden tijdens de schooluren. 's Morgens wordt de gsm in een daarvoor voorzien magnetisch gesloten gsm-zakje gestopt. Op het einde van de schooldag kunnen de zakjes geopend worden bij het naarbuitengaan via de daarvoor voorziene magnetische sloten. Chromebooks worden gebruikt als digitaal werkinstrument in de klas." },
           { titel: "Gedrag & respect", inhoud: "We verwachten respectvol gedrag tegenover medeleerlingen, leerkrachten en personeel. Pesten, discriminatie of geweld worden niet getolereerd en leiden tot sancties." },
-          { titel: "Punten & evaluatie", inhoud: "Evaluaties verlopen via permanente evaluatie en periodetoetsen. Resultaten worden gecommuniceerd via Smartschool. Ouders worden tijdig geïnformeerd bij zorgsignalen." },
+          { titel: "Punten & evaluatie", inhoud: "Resultaten worden gecommuniceerd via Smartschool. Ouders worden tijdig geïnformeerd bij zorgsignalen. Er zijn drie oudercontacten per schooljaar." },
         ].map(s => (
           <div>
             <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
@@ -47,6 +47,13 @@ import Layout from '../layouts/Layout.astro';
             <p class="text-gray-600 leading-relaxed text-sm pl-4">{s.inhoud}</p>
           </div>
         ))}
+      </div>
+
+      <div class="mt-8 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex items-start gap-3">
+        <svg class="w-5 h-5 text-[#07153b] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <p class="text-sm text-gray-600">Dit is een samenvatting. Het volledige en bindende schoolreglement vind je in de PDF hierboven.</p>
       </div>
 
       <div class="mt-10 bg-[#07153b] text-white rounded-2xl p-6 text-center">
