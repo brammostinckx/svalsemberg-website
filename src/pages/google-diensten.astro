@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Google Classroom & Gmail" description="Aanmelden bij Google Classroom en Gmail van Sint-Victor Alsemberg.">
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Chromebookproject</div>
+      <h1 class="text-4xl font-extrabold mb-4">Google Classroom & Gmail</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Meld je aan met je schoolaccount om toegang te krijgen tot je lessen en berichten.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Google Classroom -->
+        <a href="https://classroom.google.com" target="_blank" rel="noopener"
+          class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#07153b] transition p-8 flex flex-col items-center text-center">
+          <div class="w-16 h-16 mb-5 flex items-center justify-center">
+            <svg viewBox="0 0 48 48" class="w-16 h-16">
+              <rect width="48" height="48" rx="8" fill="#0F9D58"/>
+              <rect x="10" y="14" width="28" height="20" rx="2" fill="white" opacity="0.9"/>
+              <rect x="14" y="18" width="20" height="2.5" rx="1" fill="#0F9D58"/>
+              <rect x="14" y="22.5" width="14" height="2" rx="1" fill="#0F9D58" opacity="0.6"/>
+              <rect x="14" y="26" width="16" height="2" rx="1" fill="#0F9D58" opacity="0.6"/>
+              <circle cx="38" cy="34" r="7" fill="#0F9D58"/>
+              <path d="M35 34l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <div class="font-extrabold text-[#07153b] text-lg mb-2">Google Classroom</div>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">Taken, opdrachten en lesmateriaal van je leerkrachten.</p>
+          <span class="mt-auto bg-[#07153b] group-hover:bg-blue-900 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm w-full text-center">
+            Aanmelden &rarr;
+          </span>
+        </a>
+
+        <!-- Gmail -->
+        <a href="https://www.gmail.com" target="_blank" rel="noopener"
+          class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#07153b] transition p-8 flex flex-col items-center text-center">
+          <div class="w-16 h-16 mb-5 flex items-center justify-center">
+            <svg viewBox="0 0 48 48" class="w-16 h-16">
+              <rect width="48" height="48" rx="8" fill="#EA4335"/>
+              <path d="M10 16h28v16a2 2 0 01-2 2H12a2 2 0 01-2-2V16z" fill="white" opacity="0.95"/>
+              <path d="M10 16l14 10 14-10" stroke="#EA4335" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="font-extrabold text-[#07153b] text-lg mb-2">Gmail</div>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5">Je schoolmailbox voor berichten van leerkrachten en de school.</p>
+          <span class="mt-auto bg-[#07153b] group-hover:bg-blue-900 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm w-full text-center">
+            Aanmelden &rarr;
+          </span>
+        </a>
+
+      </div>
+
+      <div class="mt-8 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex items-start gap-4">
+        <div class="bg-[#07153b] rounded-xl w-9 h-9 flex items-center justify-center shrink-0 mt-0.5">
+          <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <p class="text-sm text-gray-600 leading-relaxed">Meld je aan met je <strong class="text-[#07153b]">schoolaccount</strong> — dit is hetzelfde account als je Smartschool-login (<span class="font-mono text-xs bg-white border border-gray-200 rounded px-1.5 py-0.5">voornaam.achternaam@sintvictor.be</span>).</p>
+      </div>
+
+      <div class="mt-6 text-center">
+        <a href="/chromebookproject" class="inline-flex items-center gap-2 text-[#07153b] font-semibold text-sm hover:underline">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Terug naar Chromebookproject
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
