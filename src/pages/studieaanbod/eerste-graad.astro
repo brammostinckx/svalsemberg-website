@@ -166,7 +166,46 @@ const talenten = [
         <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
         <h2 class="text-2xl font-extrabold text-[#07153b]">2de jaar</h2>
       </div>
-      <p class="text-gray-500 text-sm mb-10 pl-4">In het tweede jaar bouwen leerlingen verder op de basis van het eerste jaar en verdiepen ze hun keuzes richting de tweede graad.</p>
+      <p class="text-gray-500 text-sm mb-8 pl-4">In het tweede jaar bouwen leerlingen verder op de basis van het eerste jaar en maken ze een eerste keuze richting de tweede graad.</p>
+
+      <!-- 4 basisopties -->
+      <div class="mb-12">
+        <h3 class="font-extrabold text-[#07153b] mb-2 text-lg">4 basisopties</h3>
+        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Leerlingen die in het 1ste jaar secundair reeds een keuze moeten maken, vinden het extreem moeilijk om de 'juiste' knoop door te hakken. Onderstaande omschrijvingen kunnen misschien een duwtje in de juiste richting geven&hellip;</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {[
+            {
+              naam: "Klassieke talen",
+              kleur: "border-[#07153b] bg-blue-50",
+              tag: "bg-[#07153b] text-white",
+              tekst: "Ben je een kei in Latijn? Ben je gepassioneerd door de klassieke samenleving en cultuur? Ben je een talenknobbel en studeer je graag woordenschat? Dan is deze basisoptie zeker iets voor jou! Deze optie kan enkel gekozen worden door leerlingen die in het 1ste reeds Latijn hebben gevolgd.",
+            },
+            {
+              naam: "Economie en organisatie",
+              kleur: "border-yellow-400 bg-yellow-50",
+              tag: "bg-yellow-400 text-[#07153b]",
+              tekst: "Hoe worden de prijzen van producten bepaald? Wie is de consument en wie is de producent? Hoe wordt de economie in ons land georganiseerd? Wil je op deze vragen graag een antwoord en ben je ook geboeid door ICT? Dan is economie en organisatie jouw keuze.",
+            },
+            {
+              naam: "Moderne talen en wetenschappen",
+              kleur: "border-purple-400 bg-purple-50",
+              tag: "bg-purple-500 text-white",
+              tekst: "Ben je een kei in talen en zijn wetenschappen jouw passie? Je verdiept je in vaardigheden, Franse en Vlaamse cultuur. Tijdens de wetenschapsuren krijg je proefjes voorgeschoteld en kom je in aanraking met fysica, chemie en meer. Word je enthousiast? Dan is deze basisoptie geknipt voor jou!",
+            },
+            {
+              naam: "Maatschappij en welzijn",
+              kleur: "border-green-400 bg-green-50",
+              tag: "bg-green-600 text-white",
+              tekst: "Vind je sociale vaardigheden, sociale contacten, milieu, je eigen gezondheid en die van je naasten belangrijk? Twijfel niet en kies voor maatschappij en welzijn.",
+            },
+          ].map(o => (
+            <div class={`rounded-2xl border-l-4 p-6 ${o.kleur}`}>
+              <span class={`text-xs font-extrabold px-3 py-1 rounded-full inline-block mb-3 ${o.tag}`}>{o.naam}</span>
+              <p class="text-gray-700 text-sm leading-relaxed">{o.tekst}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <!-- Google Slides embed -->
       <div class="mb-12">
