@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Chromebook opstarten & instellen" description="Stap voor stap de eerste opstart van je Chromebook op Sint-Victor Alsemberg.">
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Chromebookproject</div>
+      <h1 class="text-4xl font-extrabold mb-4">Chromebook opstarten & instellen</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Volg deze stappen om je Chromebook voor de eerste keer correct in te stellen.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Voorbereiding -->
+      <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 mb-10 flex items-start gap-4">
+        <div class="bg-yellow-400 rounded-xl w-10 h-10 flex items-center justify-center shrink-0 mt-0.5">
+          <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-[#07153b] mb-1">Eerst opladen!</div>
+          <p class="text-sm text-yellow-800 leading-relaxed">Laad je Chromebook thuis al ongeveer <strong>15 minuten op</strong> voordat je hem voor de eerste keer opstart. Doe dit niet op school.</p>
+        </div>
+      </div>
+
+      <!-- Stappen -->
+      <div class="space-y-4">
+
+        {[
+          {
+            stap: "1",
+            titel: "Taal instellen",
+            tekst: "Wijzig op het eerste scherm de taal naar \"Nederlands (België)\".",
+          },
+          {
+            stap: "2",
+            titel: "Bevestigen",
+            tekst: "Druk op \"OK\" om de taalinstelling te bevestigen.",
+          },
+          {
+            stap: "3",
+            titel: "Chromevox",
+            tekst: "Kies \"Nee, doorgaan zonder Chromevox.\" Werd Chromevox per ongeluk geactiveerd? Schakel het uit met Ctrl + Alt + Z.",
+          },
+          {
+            stap: "4",
+            titel: "Aan de slag",
+            tekst: "Klik op de blauwe knop \"Aan de slag\".",
+          },
+          {
+            stap: "5",
+            titel: "Wifi-verbinding",
+            tekst: "Kies je wifi-netwerk en geef het wachtwoord in. Op school maakt de Chromebook automatisch verbinding.",
+          },
+          {
+            stap: "6",
+            titel: "Voorwaarden aanvaarden",
+            tekst: "Vink de optionele vakjes uit indien gewenst en klik op \"Aanvaarden en doorgaan\".",
+          },
+          {
+            stap: "7",
+            titel: "Systeemupdates",
+            tekst: "Het toestel downloadt en installeert automatisch de nieuwste updates. Dit kan even duren.",
+          },
+          {
+            stap: "8",
+            titel: "Inschrijving in schooldomein",
+            tekst: "De Chromebook schrijft zich automatisch in op het domein van de school. Klik op \"Klaar\" wanneer dit voltooid is.",
+          },
+          {
+            stap: "9",
+            titel: "Aanmelden",
+            tekst: "Meld je aan met je Smartschool-gebruikersnaam en -wachtwoord. Na het aanmelden is de installatie volledig afgerond.",
+          },
+        ].map(s => (
+          <div class="flex items-start gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+            <div class="bg-[#07153b] text-yellow-400 font-extrabold text-sm rounded-full w-8 h-8 flex items-center justify-center shrink-0 mt-0.5">{s.stap}</div>
+            <div>
+              <div class="font-bold text-[#07153b] text-sm mb-1">{s.titel}</div>
+              <p class="text-gray-600 text-sm leading-relaxed">{s.tekst}</p>
+            </div>
+          </div>
+        ))}
+
+      </div>
+
+      <!-- Klaar -->
+      <div class="mt-10 bg-[#07153b] text-white rounded-2xl p-8 text-center">
+        <h2 class="text-xl font-bold mb-2">Alles ingesteld?</h2>
+        <p class="text-blue-200 text-sm mb-5">Leer nu werken met Google Workspace via onze Google Skills site.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="https://sites.google.com/vbsasintvictor.be/gwfe-skills/home" target="_blank" rel="noopener"
+            class="bg-yellow-400 text-[#07153b] font-bold px-6 py-2.5 rounded-xl hover:bg-yellow-300 transition text-sm">
+            Google Skills
+          </a>
+          <a href="/chromebookproject"
+            class="border border-white/40 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-white/10 transition text-sm">
+            Terug naar Chromebookproject
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
