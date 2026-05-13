@@ -1,19 +1,122 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const INFOBROCHURE_URL = 'https://docs.google.com/document/d/1SiOvMl0T-tkBZAtKl_6g7KYcRzmjA6t2CbZhlx7Rddg/view';
+const BESTELLEN_URL = 'https://www.easy4u.be';
+const SITE_URL = 'https://sites.google.com/sintvictor.be/gwfe-lln/';
 ---
-<Layout title="Chromebookproject" description="Het Chromebookproject van Sint-Victor Alsemberg.">
+<Layout title="Chromebookproject" description="Alles over het Chromebookproject van Sint-Victor Alsemberg.">
 
   <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Extra</div>
       <h1 class="text-4xl font-extrabold mb-4">Chromebookproject</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Informatie over het Chromebookproject van Sint-Victor Alsemberg.</p>
+      <p class="text-blue-200 text-lg max-w-2xl">Sint-Victor Alsemberg werkt met Chromebooks en Google Workspace. Hier vind je alle info over het bestellen, instellen en gebruiken van je toestel.</p>
     </div>
   </section>
 
   <section class="py-16 px-4">
     <div class="max-w-4xl mx-auto">
-      <p class="text-gray-500 text-center">Inhoud volgt binnenkort.</p>
+
+      <!-- Drie hoofdacties -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+
+        <!-- Infobrochure -->
+        <a href={INFOBROCHURE_URL} target="_blank" rel="noopener"
+          class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#07153b] transition p-8 flex flex-col items-center text-center">
+          <div class="bg-[#07153b]/10 group-hover:bg-[#07153b] rounded-2xl w-14 h-14 flex items-center justify-center mb-5 transition">
+            <svg class="w-7 h-7 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div class="font-extrabold text-[#07153b] text-base mb-2">Infobrochure</div>
+          <p class="text-gray-500 text-sm leading-relaxed">Lees alles over het Chromebookproject: wat, waarom en hoe.</p>
+          <span class="mt-4 text-xs font-bold text-[#07153b] group-hover:underline">Bekijk document &rarr;</span>
+        </a>
+
+        <!-- Bestellen -->
+        <a href={BESTELLEN_URL} target="_blank" rel="noopener"
+          class="group bg-yellow-400 rounded-2xl shadow-sm hover:shadow-md transition p-8 flex flex-col items-center text-center">
+          <div class="bg-[#07153b]/20 rounded-2xl w-14 h-14 flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <div class="font-extrabold text-[#07153b] text-base mb-2">Chromebook bestellen</div>
+          <p class="text-[#07153b]/80 text-sm leading-relaxed">Bestel je Chromebook via de officiële webshop.</p>
+          <span class="mt-4 text-xs font-bold text-[#07153b] group-hover:underline">Naar webshop &rarr;</span>
+        </a>
+
+        <!-- Handleidingen & site -->
+        <a href={SITE_URL} target="_blank" rel="noopener"
+          class="group bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md hover:border-[#07153b] transition p-8 flex flex-col items-center text-center">
+          <div class="bg-[#07153b]/10 group-hover:bg-[#07153b] rounded-2xl w-14 h-14 flex items-center justify-center mb-5 transition">
+            <svg class="w-7 h-7 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div class="font-extrabold text-[#07153b] text-base mb-2">Handleidingen & tips</div>
+          <p class="text-gray-500 text-sm leading-relaxed">Hoe stel je je Chromebook in? Hoe gebruik je Google Workspace?</p>
+          <span class="mt-4 text-xs font-bold text-[#07153b] group-hover:underline">Bekijk de site &rarr;</span>
+        </a>
+
+      </div>
+
+      <!-- Wat is het project -->
+      <div class="bg-gray-50 rounded-2xl p-8 mb-8">
+        <h2 class="text-2xl font-extrabold text-[#07153b] mb-4">Wat is het Chromebookproject?</h2>
+        <div class="w-14 h-1 bg-yellow-400 mb-6 rounded-full"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-600 text-sm leading-relaxed">
+          <div>
+            <p>Sint-Victor Alsemberg werkt volledig digitaal met <strong class="text-[#07153b]">Chromebooks en Google Workspace for Education</strong>. Elke leerling beschikt over een eigen toestel dat thuis en op school gebruikt wordt.</p>
+          </div>
+          <div>
+            <p>Chromebooks zijn licht, snel en veilig. Ze bieden toegang tot alle digitale leermiddelen: Google Classroom, Drive, Docs, Slides en meer — allemaal via het schoolaccount.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wat zit erin -->
+      <div class="mb-8">
+        <h2 class="text-xl font-extrabold text-[#07153b] mb-4">Wat vind je op de site terug?</h2>
+        <div class="w-14 h-1 bg-yellow-400 mb-6 rounded-full"></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {[
+            { icon: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z", label: "Chromebook opstarten & instellen" },
+            { icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z", label: "Apps installeren & shortcuts" },
+            { icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z", label: "Google Drive, Docs, Slides & Sheets" },
+            { icon: "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z", label: "FAQ & veelgestelde vragen" },
+            { icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", label: "Google Classroom & Gmail" },
+            { icon: "M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z", label: "Bestanden delen & uploaden" },
+          ].map(item => (
+            <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3 border border-gray-100 shadow-sm">
+              <div class="bg-[#07153b]/10 rounded-lg w-9 h-9 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon}/>
+                </svg>
+              </div>
+              <span class="text-sm font-medium text-gray-700">{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="bg-[#07153b] text-white rounded-2xl p-8 text-center">
+        <h2 class="text-xl font-bold mb-2">Vragen over het Chromebookproject?</h2>
+        <p class="text-blue-200 text-sm mb-5">Neem contact op met het secretariaat of raadpleeg de handleidingen op de projectsite.</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href={SITE_URL} target="_blank" rel="noopener"
+            class="bg-yellow-400 text-[#07153b] font-bold px-6 py-2.5 rounded-xl hover:bg-yellow-300 transition text-sm">
+            Naar de handleidingen
+          </a>
+          <a href="/contact"
+            class="border border-white/40 text-white font-semibold px-6 py-2.5 rounded-xl hover:bg-white/10 transition text-sm">
+            Contact opnemen
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
