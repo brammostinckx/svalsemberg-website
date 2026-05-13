@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const richtingen = [
+  {
+    naam: "Humane wetenschappen",
+    finaliteit: "ASO — Doorstroom",
+    kleur: "border-[#07153b] bg-blue-50",
+    tag: "bg-[#07153b] text-white",
+    beschrijving: "Mens en maatschappij centraal. Talenkennis, filosofie en sociale wetenschappen als rode draad.",
+  },
+  {
+    naam: "Wetenschappen",
+    finaliteit: "ASO — Doorstroom",
+    kleur: "border-blue-400 bg-blue-50",
+    tag: "bg-blue-600 text-white",
+    beschrijving: "Exacte wetenschappen: wiskunde, fysica, biologie en chemie. Voor wie houdt van nauwkeurig redeneren.",
+  },
+  {
+    naam: "Economie",
+    finaliteit: "ASO — Doorstroom",
+    kleur: "border-yellow-400 bg-yellow-50",
+    tag: "bg-yellow-400 text-[#07153b]",
+    beschrijving: "Economie, bedrijfswetenschappen en wiskunde. Voor wie de wereld begrijpt in cijfers en systemen.",
+  },
+  {
+    naam: "Talen",
+    finaliteit: "ASO — Doorstroom",
+    kleur: "border-purple-400 bg-purple-50",
+    tag: "bg-purple-600 text-white",
+    beschrijving: "Sterke focus op moderne talen: Nederlands, Frans, Engels en Duits.",
+  },
+  {
+    naam: "Handel",
+    finaliteit: "TSO — Dubbele finaliteit",
+    kleur: "border-green-400 bg-green-50",
+    tag: "bg-green-600 text-white",
+    beschrijving: "Praktijkgericht economisch onderwijs met stages. Voorbereiding op de arbeidsmarkt én hogere studies.",
+  },
+  {
+    naam: "Verzorging",
+    finaliteit: "BSO — Arbeidsmarkt",
+    kleur: "border-red-300 bg-red-50",
+    tag: "bg-red-500 text-white",
+    beschrijving: "Zorg en welzijn in de praktijk. Opleiding gericht op de zorgsector.",
+  },
+];
+
+const DOC_ID = '1yMLVwTePKyvtfJUlTyWS89L969h1cb75';
+---
+<Layout title="2de graad — Studieaanbod" description="Studieaanbod 2de graad van Sint-Victor Alsemberg: richtingen, lessentabel en meer.">
+
+  <!-- Hero -->
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Studieaanbod</div>
+      <h1 class="text-4xl font-extrabold mb-4">2de graad</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">In de tweede graad (3de &amp; 4de jaar) kiezen leerlingen een studierichting die aansluit bij hun talenten en toekomstplannen.</p>
+      <div class="flex gap-3 mt-6">
+        <a href="#richtingen" class="bg-yellow-400 text-[#07153b] font-bold px-5 py-2 rounded-xl hover:bg-yellow-300 transition text-sm">Richtingen</a>
+        <a href="#lessentabel" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">Lessentabel</a>
+        <a href="#document" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">Document</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Richtingen -->
+  <section id="richtingen" class="py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
+        <h2 class="text-2xl font-extrabold text-[#07153b]">Studierichtingen</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-8 pl-4">We bieden zowel ASO (doorstroom), TSO (dubbele finaliteit) als BSO (arbeidsmarkt) aan.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+        {richtingen.map(r => (
+          <div class={`rounded-2xl border-l-4 p-6 ${r.kleur}`}>
+            <span class={`text-xs font-extrabold px-3 py-1 rounded-full inline-block mb-3 ${r.tag}`}>{r.finaliteit}</span>
+            <div class="font-extrabold text-[#07153b] mb-2">{r.naam}</div>
+            <p class="text-gray-600 text-sm leading-relaxed">{r.beschrijving}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Lessentabel -->
+      <div id="lessentabel" class="mb-16">
+        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Lessentabel 2de graad</h3>
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <img src="/lessentabellen/2de graad.png" alt="Lessentabel 2de graad" class="w-full h-auto" />
+        </div>
+      </div>
+
+      <!-- Embedded Drive document -->
+      <div id="document">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-extrabold text-[#07153b] text-lg">Meer informatie</h3>
+          <a href={`https://drive.google.com/file/d/${DOC_ID}/view`} target="_blank" rel="noopener"
+            class="text-sm text-[#07153b] font-bold hover:underline flex items-center gap-1">
+            Openen in Drive
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm" style="height:700px;">
+          <iframe
+            src={`https://drive.google.com/file/d/${DOC_ID}/preview`}
+            class="w-full h-full"
+            allow="autoplay"
+            title="Document 2de graad Sint-Victor"
+          ></iframe>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#07153b] text-white py-12 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-xl font-extrabold mb-3">Meer weten over de 2de graad?</h2>
+      <p class="text-blue-200 text-sm mb-6">Kom langs op onze opendeurdag of neem contact op met ons secretariaat.</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="/inschrijvingen" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm">Inschrijven</a>
+        <a href="/contact" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">Contact</a>
+        <a href="/studieaanbod" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">&larr; Alle richtingen</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
