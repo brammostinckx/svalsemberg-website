@@ -1,0 +1,208 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const wijs = [
+  {
+    tag: "STUDIEWIJS",
+    kleur: "bg-blue-50 border-blue-200",
+    tagKleur: "bg-blue-100 text-blue-800",
+    tekst: `Tijdens de lessen studiewijs laten we jullie ontdekken dat "leren" eigenlijk super is. Eenmaal je inzicht krijgt in wat er in je hersenen gebeurt als je echt leert, maakt dat het hele proces zoveel makkelijker. Je leert werken met je "gereedschap" (= je brein) en eenmaal je die handleiding door hebt, zal je heel veel tips en tricks meenemen die ervoor zorgen dat je een echte LEERHOUDING krijgt.`,
+  },
+  {
+    tag: "DIGIWIJS",
+    kleur: "bg-purple-50 border-purple-200",
+    tagKleur: "bg-purple-100 text-purple-800",
+    tekst: `In Digiwijs leren leerlingen vlot werken met digitale tools die ze nodig hebben op school en daarbuiten. Ze communiceren efficiënt via Smartschool en passen de basisacties toe in tekstdocumenten, presentaties en werkbladen. Ze leren bestanden overzichtelijk ordenen via Google Drive en passen de regels van nettiquette toe. Tot slot ontwikkelen ze probleemoplossend vermogen met computationeel denken. Met Digiwijs worden leerlingen digitaal zelfredzaam en klaar voor de toekomst!`,
+  },
+  {
+    tag: "SOCIOWIJS",
+    kleur: "bg-green-50 border-green-200",
+    tagKleur: "bg-green-100 text-green-800",
+    tekst: `In sociowijs ligt de focus op hoe de mens als uniek en relationeel wezen zijn plaats zoekt in de samenleving. De leerlingen leren zichzelf kennen als knooppunt van relaties. Met oog voor de kwetsbaarheid van zichzelf en de ander worden ze uitgedaagd om empathisch en genereus in relatie te treden. Ze leren hun weg vinden in de complexe samenleving en worden uitgenodigd om zich intercultureel te vormen en een meer gastvrije en rechtvaardige wereld te creëren.`,
+  },
+  {
+    tag: "ECOWIJS",
+    kleur: "bg-yellow-50 border-yellow-200",
+    tagKleur: "bg-yellow-100 text-yellow-800",
+    tekst: `Vanuit de wegwijzers duurzaamheid, kwetsbaarheid en belofte leren leerlingen een kritische houding aan te nemen als consument. Ze verkennen de rol van gezinnen, bedrijven en overheid in de economie. We helpen leerlingen weerbaar te maken ten aanzien van invloeden uit de wereld en laten hen nadenken of hun aankopen noodzakelijk en duurzaam zijn. Inzicht in de inkomsten en uitgaven van de overheid biedt leerlingen een correct kader.`,
+  },
+];
+
+const talenten = [
+  {
+    naam: "ECO-wijs",
+    subtitel: "Economie en organisatie",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 10v1m-6-5a6 6 0 1112 0 6 6 0 01-12 0z"/>`,
+    tekst: "Leerlingen leren een kritische houding aannemen als consument en verkennen de rol van gezinnen, bedrijven en overheid in de economie.",
+  },
+  {
+    naam: "SOCIO-wijs",
+    subtitel: "Maatschappij en welzijn",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>`,
+    tekst: "De leerlingen leren zichzelf kennen als knooppunt van relaties en worden uitgedaagd om empathisch en genereus in relatie te treden met de ander.",
+  },
+  {
+    naam: "Sport & gezondheid",
+    subtitel: "Sportieve en gezonde levensstijl",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>`,
+    tekst: "We zetten in op het versterken van kennis en vaardigheden die bijdragen tot een sportieve en gezonde levensstijl, gericht op leerlingen met een brede interesse voor sport en gezondheid.",
+  },
+  {
+    naam: "Kunst & creatie",
+    subtitel: "Dans, toneel, beeldende kunst, fotografie, film, mode",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>`,
+    tekst: "We proeven van de verschillende kunstvormen en gaan projectmatig en praktijkgericht aan de slag om creatieve talenten te ontdekken.",
+  },
+  {
+    naam: "STEM",
+    subtitel: "Science, Technology, Engineering & Mathematics",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/>`,
+    tekst: "Opgesplitst in STEM-Technieken (al doende leren, bouwen, programmeren) en STEM-Wetenschappen (theorie + innovatieve toepassingen). STEM is de basis voor de wereld van morgen!",
+  },
+  {
+    naam: "Taal & cultuur",
+    subtitel: "Talen, communicatie en interculturele vorming",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>`,
+    tekst: "Nieuwsgierig naar andere culturen? Jij neemt graag het woord en kan op een vlotte manier je boodschap overbrengen. Met je sociale vaardigheden kan je mensen overtuigen.",
+  },
+];
+---
+<Layout title="1ste graad — Studieaanbod" description="Studieaanbod 1ste graad van Sint-Victor Alsemberg: FLEX, WIJS en TALENT.">
+
+  <!-- Hero -->
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Studieaanbod</div>
+      <h1 class="text-4xl font-extrabold mb-4">1ste graad</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">De eerste graad vormt de brug tussen het lager en secundair onderwijs. Leerlingen ontdekken hun talenten via een brede, verrijkende omgeving.</p>
+      <div class="flex gap-3 mt-6">
+        <a href="#eerste-jaar" class="bg-yellow-400 text-[#07153b] font-bold px-5 py-2 rounded-xl hover:bg-yellow-300 transition text-sm">1ste jaar</a>
+        <a href="#tweede-jaar" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">2de jaar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 1STE JAAR ===== -->
+  <section id="eerste-jaar" class="py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
+        <h2 class="text-2xl font-extrabold text-[#07153b]">1ste jaar</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-10 pl-4">De A-stroom biedt een brede algemene vorming aangevuld met drie unieke pijlers: FLEX, WIJS en TALENT.</p>
+
+      <!-- Lessentabel -->
+      <div class="mb-14">
+        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Lessentabel 1ste jaar</h3>
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <img src="/lessentabellen/1stes.png" alt="Lessentabel 1ste jaar" class="w-full h-auto" />
+        </div>
+      </div>
+
+      <!-- FLEX -->
+      <div class="mb-14">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">FLEX</span>
+          <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8">
+          <p class="text-gray-700 leading-relaxed mb-4">
+            Flex biedt leerlingen extra uren bovenop de basisvorming, specifiek ontworpen om hun leren te verdiepen en/of te remediëren. Door te werken aan de begeleiding van leerlingen op basis van hun specifieke noden streeft Flex naar een verhoging van de leerwinst en persoonlijke groei voor iedere leerling.
+          </p>
+          <p class="text-gray-600 leading-relaxed text-sm">
+            Differentiëren, remediëren en verdiepen zijn centrale elementen in Flex. Leerlingen krijgen de kans om op hun eigen tempo vooruitgang te boeken door individuele begeleiding of extra instructie voor de vakken <strong>Nederlands, Frans en wiskunde</strong>. Deze kan al dan niet opgelegd worden door de vakleerkrachten of autonoom gekozen worden. Deze aanpak speelt in op de verschillende behoeften en talenten van leerlingen, wat de motivatie en de leerwinst bevordert.
+          </p>
+        </div>
+      </div>
+
+      <!-- WIJS -->
+      <div class="mb-14">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">WIJS</span>
+          <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {wijs.map(w => (
+            <div class={`rounded-2xl border p-6 ${w.kleur}`}>
+              <span class={`text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wide ${w.tagKleur} inline-block mb-3`}>{w.tag}</span>
+              <p class="text-gray-700 text-sm leading-relaxed">{w.tekst}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- TALENT -->
+      <div>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">TALENT</span>
+          <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+        <p class="text-gray-500 text-sm mb-6">Ontdekken van talenten, interesses en vaardigheden van leerlingen. Kies het talent dat bij jou past:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {talenten.map(t => (
+            <div class="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-[#07153b]/20 transition">
+              <div class="bg-[#07153b]/10 rounded-xl w-10 h-10 flex items-center justify-center mb-4">
+                <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <Fragment set:html={t.icon} />
+                </svg>
+              </div>
+              <div class="font-extrabold text-[#07153b] mb-0.5">{t.naam}</div>
+              <div class="text-xs text-yellow-600 font-semibold mb-3">{t.subtitel}</div>
+              <p class="text-gray-600 text-sm leading-relaxed">{t.tekst}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== 2DE JAAR ===== -->
+  <section id="tweede-jaar" class="bg-gray-50 border-t border-gray-100 py-16 px-4">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
+        <h2 class="text-2xl font-extrabold text-[#07153b]">2de jaar</h2>
+      </div>
+      <p class="text-gray-500 text-sm mb-10 pl-4">In het tweede jaar bouwen leerlingen verder op de basis van het eerste jaar en verdiepen ze hun keuzes richting de tweede graad.</p>
+
+      <!-- Google Slides embed -->
+      <div class="mb-12">
+        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Presentatie 2de jaar</h3>
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm aspect-video">
+          <iframe
+            src="https://docs.google.com/presentation/d/14Ooro8gEffPn706qD1AfCD-K0Bb98YyGVgWj6Cv2V_k/embed?start=false&loop=false&delayms=3000"
+            class="w-full h-full"
+            allowfullscreen
+            title="Presentatie 2de jaar Sint-Victor"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- Lessentabel 2de jaar -->
+      <div>
+        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Lessentabel 2de jaar</h3>
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <img src="/lessentabellen/2des.png" alt="Lessentabel 2de jaar" class="w-full h-auto" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#07153b] text-white py-12 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-xl font-extrabold mb-3">Meer weten over de 1ste graad?</h2>
+      <p class="text-blue-200 text-sm mb-6">Kom langs op onze opendeurdag of neem contact op met ons secretariaat.</p>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <a href="/inschrijvingen" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm">Inschrijven</a>
+        <a href="/contact" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">Contact</a>
+        <a href="/studieaanbod" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">&larr; Alle richtingen</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
