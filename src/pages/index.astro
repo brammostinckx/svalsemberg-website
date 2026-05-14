@@ -140,11 +140,12 @@ import Layout from '../layouts/Layout.astro';
         <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
         <div class="space-y-3">
           {[
-            { label: "Schoolreglement", href: "/schoolreglement" },
             { label: "Afwezigheid melden", href: "/afwezigheden" },
             { label: "Infobrochure 2026-2027 (PDF)", href: "/Infobrochure Sint-Victor 26-27.pdf", extern: true },
             { label: "Chromebookproject", href: "/chromebookproject" },
+            { label: "Schoolreglement", href: "/schoolreglement" },
             { label: "FAQ — veelgestelde vragen", href: "/faq" },
+            { label: "SV-Tamtam nieuwskrantjes", href: "/sv-tamtam" },
           ].map(l => (
             <a href={l.href} target={l.extern ? "_blank" : undefined} rel={l.extern ? "noopener" : undefined} class="flex items-center justify-between bg-white rounded-xl px-5 py-4 shadow-sm hover:shadow-md border border-transparent hover:border-[#07153b] transition group">
               <span class="font-medium text-gray-700 group-hover:text-[#07153b] text-sm transition">{l.label}</span>
