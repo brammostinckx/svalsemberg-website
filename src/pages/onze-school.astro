@@ -13,9 +13,9 @@ const waarden = [
 
   <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
-      <h1 class="text-4xl font-extrabold mb-4">Onze school</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Meer dan 150 jaar geleden gesticht door Victor Scheppers. Vandaag nog even warm en gedreven.</p>
+      <div class="hero-item text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3" style="animation-delay:0ms">Sint-Victor Alsemberg</div>
+      <h1 class="hero-item text-4xl font-extrabold mb-4" style="animation-delay:100ms">Onze school</h1>
+      <p class="hero-item text-blue-200 text-lg max-w-2xl" style="animation-delay:200ms">Meer dan 150 jaar geleden gesticht door Victor Scheppers. Vandaag nog even warm en gedreven.</p>
     </div>
   </section>
 
@@ -24,7 +24,7 @@ const waarden = [
     <div class="max-w-5xl mx-auto">
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-16">
-        <div>
+        <div class="scroll-reveal">
           <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide mb-2">Visie & missie</div>
           <h2 class="text-3xl font-extrabold text-[#07153b] mb-5">Wie zijn wij?</h2>
           <p class="text-gray-600 mb-4 leading-relaxed">
@@ -51,8 +51,8 @@ const waarden = [
             { n: "150+", label: "Jaar traditie" },
             { n: "15+", label: "Richtingen" },
             { n: "100+", label: "Personeelsleden" },
-          ].map(s => (
-            <div class="bg-gray-50 rounded-2xl p-6 text-center border border-gray-100">
+          ].map((s, i) => (
+            <div class="scroll-reveal bg-gray-50 rounded-2xl p-6 text-center border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300" style={`transition-delay:${i * 80}ms`}>
               <div class="text-2xl font-extrabold text-[#07153b]">{s.n}</div>
               <div class="text-xs text-gray-500 mt-1">{s.label}</div>
             </div>
@@ -62,7 +62,7 @@ const waarden = [
 
       <!-- Missie & visie kolommen -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100">
+        <div class="scroll-reveal bg-blue-50 rounded-2xl p-6 border border-blue-100 hover:shadow-md transition-all duration-300">
           <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze missie</h3>
           <ul class="space-y-2 text-sm text-gray-600">
             <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een brede algemene vorming aanbieden voor elke leerling</li>
@@ -71,7 +71,7 @@ const waarden = [
             <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een leeromgeving creëren die kritisch en verantwoordelijk denken stimuleert</li>
           </ul>
         </div>
-        <div class="bg-yellow-50 rounded-2xl p-6 border border-yellow-100">
+        <div class="scroll-reveal bg-yellow-50 rounded-2xl p-6 border border-yellow-100 hover:shadow-md transition-all duration-300" style="transition-delay:100ms">
           <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze visie</h3>
           <ul class="space-y-2 text-sm text-gray-600">
             <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Rijke ontplooiingskansen voor elke leerling met aandacht en respect</li>
@@ -82,28 +82,14 @@ const waarden = [
         </div>
       </div>
 
-      <!-- Waarden -->
-      <h2 class="text-2xl font-extrabold text-[#07153b] mb-8">Onze waarden</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-        {waarden.map(w => (
-          <div class="flex gap-4 bg-gray-50 rounded-xl p-5 hover:bg-blue-50 transition">
-            <div class="w-1 bg-yellow-400 rounded-full shrink-0"></div>
-            <div>
-              <h3 class="font-bold text-[#07153b] mb-1 text-sm">{w.titel}</h3>
-              <p class="text-gray-600 text-sm leading-relaxed">{w.tekst}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
     </div>
   </section>
 
-  <!-- Victor Scheppers sectie -->
+  <!-- Victor Scheppers sectie (Onze roots) — voor Onze waarden -->
   <section class="bg-[#07153b] text-white py-16 px-4">
     <div class="max-w-5xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
+        <div class="scroll-reveal">
           <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Onze roots</div>
           <h2 class="text-3xl font-extrabold mb-5">Victor Scheppers</h2>
           <p class="text-blue-100 leading-relaxed mb-4">
@@ -117,7 +103,7 @@ const waarden = [
           </p>
           <div class="flex flex-wrap gap-3">
             <a href="/Opvoedingsconcept Scheppersscholen.pdf" target="_blank" rel="noopener"
-              class="inline-flex items-center gap-2 bg-yellow-400 text-[#07153b] font-bold px-5 py-3 rounded-xl hover:bg-yellow-300 transition text-sm">
+              class="inline-flex items-center gap-2 bg-yellow-400 text-[#07153b] font-bold px-5 py-3 rounded-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all duration-200 text-sm">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
@@ -125,7 +111,7 @@ const waarden = [
             </a>
           </div>
         </div>
-        <div class="flex flex-col items-center gap-6">
+        <div class="scroll-reveal flex flex-col items-center gap-6" style="transition-delay:100ms">
           <img src="/victorscheppers.jpg" alt="Victor Scheppers" class="rounded-2xl w-full max-w-xs shadow-2xl object-cover" />
           <div class="grid grid-cols-1 gap-4 w-full">
           {[
@@ -133,7 +119,7 @@ const waarden = [
             { titel: "Empathische betrokkenheid", tekst: "Toegewijde aanwezigheid bij elke jongere, met aandacht voor wie ze echt zijn." },
             { titel: "Zorg voor de kwetsbare", tekst: "Bijzondere aandacht voor leerlingen die extra ondersteuning nodig hebben." },
           ].map(p => (
-            <div class="bg-white/10 rounded-xl p-4">
+            <div class="bg-white/10 hover:bg-white/20 rounded-xl p-4 transition-all duration-200">
               <div class="font-bold text-yellow-400 text-sm mb-1">{p.titel}</div>
               <div class="text-blue-100 text-sm leading-relaxed">{p.tekst}</div>
             </div>
@@ -144,18 +130,36 @@ const waarden = [
     </div>
   </section>
 
-  <!-- Schoolteam -->
+  <!-- Waarden -->
   <section class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
+      <h2 class="scroll-reveal text-2xl font-extrabold text-[#07153b] mb-8">Onze waarden</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+        {waarden.map((w, i) => (
+          <div class="scroll-reveal flex gap-4 bg-gray-50 rounded-xl p-5 hover:bg-blue-50 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-200" style={`transition-delay:${i * 60}ms`}>
+            <div class="w-1 bg-yellow-400 rounded-full shrink-0"></div>
+            <div>
+              <h3 class="font-bold text-[#07153b] mb-1 text-sm">{w.titel}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{w.tekst}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Schoolteam -->
+  <section class="py-4 px-4 pb-16">
+    <div class="max-w-5xl mx-auto">
       <div id="team">
-        <h2 class="text-2xl font-extrabold text-[#07153b] mb-2">Schoolteam</h2>
+        <h2 class="scroll-reveal text-2xl font-extrabold text-[#07153b] mb-2">Schoolteam</h2>
         <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           {[
             { naam: "Nele Neyt", rol: "Directeur 1ste graad", email: "directie@sintvictor.be" },
             { naam: "Kevin Swaelens", rol: "Directeur 2de & 3de graad", email: "directie@sintvictor.be" },
-          ].map(p => (
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5">
+          ].map((p, i) => (
+            <div class="scroll-reveal bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300" style={`transition-delay:${i * 100}ms`}>
               <div class="bg-[#07153b] rounded-full w-14 h-14 flex items-center justify-center shrink-0">
                 <span class="text-yellow-400 font-extrabold text-lg">{p.naam.split(' ').map((n: string) => n[0]).join('')}</span>
               </div>
@@ -175,3 +179,36 @@ const waarden = [
   </section>
 
 </Layout>
+
+<style>
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-item {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+</script>
