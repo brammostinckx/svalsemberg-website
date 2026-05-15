@@ -23,7 +23,8 @@ const waarden = [
   <section id="visie" class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-16">
+      <!-- Tekst links + missie/visie rechts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start mb-10">
         <div class="scroll-reveal">
           <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide mb-2">Visie & missie</div>
           <h2 class="text-3xl font-extrabold text-[#07153b] mb-5">Wie zijn wij?</h2>
@@ -45,41 +46,41 @@ const waarden = [
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-4 self-center">
-          {[
-            { n: "600+", label: "Leerlingen" },
-            { n: "150+", label: "Jaar traditie" },
-            { n: "15+", label: "Richtingen" },
-            { n: "100+", label: "Personeelsleden" },
-          ].map((s, i) => (
-            <div class="scroll-reveal bg-gray-50 rounded-2xl p-6 text-center border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300" style={`transition-delay:${i * 80}ms`}>
-              <div class="text-2xl font-extrabold text-[#07153b]">{s.n}</div>
-              <div class="text-xs text-gray-500 mt-1">{s.label}</div>
-            </div>
-          ))}
+        <div class="flex flex-col gap-6 self-center">
+          <div class="scroll-reveal bg-blue-50 rounded-2xl p-6 border border-blue-100 hover:shadow-md transition-all duration-300">
+            <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze missie</h3>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een brede algemene vorming aanbieden voor elke leerling</li>
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Jongeren degelijk voorbereiden op het hoger onderwijs</li>
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Elke leerling zich thuis laten voelen op school</li>
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een leeromgeving creëren die kritisch en verantwoordelijk denken stimuleert</li>
+            </ul>
+          </div>
+          <div class="scroll-reveal bg-yellow-50 rounded-2xl p-6 border border-yellow-100 hover:shadow-md transition-all duration-300" style="transition-delay:100ms">
+            <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze visie</h3>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Rijke ontplooiingskansen voor elke leerling met aandacht en respect</li>
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Ambitieus lesgeven met een stevige cognitieve basis</li>
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Actieve betrokkenheid van leerlingen, ouders en leerkrachten</li>
+              <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Inspiratie door het opvoedingsproject van Broeder Victor Scheppers</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <!-- Missie & visie kolommen -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        <div class="scroll-reveal bg-blue-50 rounded-2xl p-6 border border-blue-100 hover:shadow-md transition-all duration-300">
-          <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze missie</h3>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een brede algemene vorming aanbieden voor elke leerling</li>
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Jongeren degelijk voorbereiden op het hoger onderwijs</li>
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Elke leerling zich thuis laten voelen op school</li>
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Een leeromgeving creëren die kritisch en verantwoordelijk denken stimuleert</li>
-          </ul>
-        </div>
-        <div class="scroll-reveal bg-yellow-50 rounded-2xl p-6 border border-yellow-100 hover:shadow-md transition-all duration-300" style="transition-delay:100ms">
-          <h3 class="font-extrabold text-[#07153b] text-lg mb-3">Onze visie</h3>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Rijke ontplooiingskansen voor elke leerling met aandacht en respect</li>
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Ambitieus lesgeven met een stevige cognitieve basis</li>
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Actieve betrokkenheid van leerlingen, ouders en leerkrachten</li>
-            <li class="flex gap-2"><span class="text-yellow-500 font-bold shrink-0">—</span> Inspiratie door het opvoedingsproject van Broeder Victor Scheppers</li>
-          </ul>
-        </div>
+      <!-- Statistieken — 4 naast elkaar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        {[
+          { n: "600+", label: "Leerlingen" },
+          { n: "150+", label: "Jaar traditie" },
+          { n: "15+", label: "Richtingen" },
+          { n: "100+", label: "Personeelsleden" },
+        ].map((s, i) => (
+          <div class="scroll-reveal bg-gray-50 rounded-2xl p-6 text-center border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300" style={`transition-delay:${i * 80}ms`}>
+            <div class="text-2xl font-extrabold text-[#07153b]">{s.n}</div>
+            <div class="text-xs text-gray-500 mt-1">{s.label}</div>
+          </div>
+        ))}
       </div>
 
     </div>
