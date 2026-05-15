@@ -62,8 +62,8 @@ const DOC_ID = '1yMLVwTePKyvtfJUlTyWS89L969h1cb75';
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
         {richtingen.map(r => (
-          <div class={`rounded-2xl border-l-4 p-5 flex items-center gap-4 ${r.kleur}`}>
-            <span class={`text-xs font-extrabold px-3 py-1.5 rounded-full shrink-0 ${r.tag}`}>{r.finaliteit}</span>
+          <div class={`rounded-2xl border-l-4 p-5 ${r.kleur}`}>
+            <span class={`text-xs font-extrabold px-3 py-1.5 rounded-full inline-block mb-3 ${r.tag}`}>{r.finaliteit}</span>
             <p class="text-gray-600 text-sm leading-relaxed">{r.beschrijving}</p>
           </div>
         ))}
