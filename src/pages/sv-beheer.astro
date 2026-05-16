@@ -135,35 +135,53 @@ if (Astro.request.method === 'POST') {
       { method: 'DELETE', headers: GH_HDR,
         body: JSON.stringify({ message: `Nieuwsitem verwijderd: ${fname}`, sha }) }
     );
-    if (resp.ok) { feedbackOk = true; feedbackMsg = `✅ "${fname}" verwijderd.`; }
-    else { feedbackMsg = `❌ Verwijderen mislukt (${resp.status})`; }
-    return Astro.redirect(`${PAGE}?tab=overzicht`);
+    const delMsg = resp.ok
+      ? encodeURIComponent(`✅ "${fname}" verwijderd.`)
+      : encodeURIComponent(`❌ Verwijderen mislukt (${resp.status})`);
+    return Astro.redirect(`${PAGE}?tab=overzicht&msg=${delMsg}`);
 
   } else if (action === 'toggle' && isLoggedIn) {
-    const fname    = form.get('fname')   as string;
-    const sha      = form.get('sha')     as string;
-    const visible  = form.get('visible') === 'true';   // current state
-    // Fetch current content
-    const fr = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`, { headers: GH_HDR });
+    const fname   = form.get('fname')   as string;
+    const visible = form.get('visible') === 'true';   // current published state
+    // Fetch current content (no-store to bypass Cloudflare cache)
+    const fr = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
+      { headers: GH_HDR, cache: 'no-store' });
+    let redirectMsg = '';
     if (fr.ok) {
-      const fd   = await fr.json() as { content: string; sha: string };
-      let text   = new TextDecoder().decode(Uint8Array.from(atob(fd.content.replace(/\n/g,'')), c => c.charCodeAt(0)));
-      // Toggle gepubliceerd
-      if (/gepubliceerd:/.test(text)) {
-        text = text.replace(/gepubliceerd:\s*(true|false)/, `gepubliceerd: ${!visible}`);
+      const fd  = await fr.json() as { content: string; sha: string };
+      // Decode base64 → UTF-8 text
+      const rawB64 = fd.content.replace(/[\r\n]/g, '');
+      const rawBytes = Uint8Array.from(atob(rawB64), c => c.charCodeAt(0));
+      let text = new TextDecoder().decode(rawBytes);
+      // Toggle gepubliceerd field
+      if (/^gepubliceerd:/m.test(text)) {
+        text = text.replace(/^gepubliceerd:\s*(true|false)/m, `gepubliceerd: ${!visible}`);
+      } else if (/^uitgelicht:/m.test(text)) {
+        text = text.replace(/^(uitgelicht:[ \t]*\S+)/m, `$1\ngepubliceerd: ${!visible}`);
       } else {
-        text = text.replace(/(uitgelicht:\s*\S+)/, `$1\ngepubliceerd: ${!visible}`);
+        // Insert before closing ---
+        text = text.replace(/^(---\s*$)/m, `gepubliceerd: ${!visible}\n$1`);
       }
-      const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(text)));
-      const pr  = await fetch(
+      // Encode UTF-8 text → base64 (loop instead of spread to avoid stack overflow)
+      const enc = new TextEncoder().encode(text);
+      let bin = '';
+      for (let i = 0; i < enc.length; i++) bin += String.fromCharCode(enc[i]);
+      const b64 = btoa(bin);
+      const pr = await fetch(
         `https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
         { method: 'PUT', headers: GH_HDR,
           body: JSON.stringify({ message: `Nieuwsitem ${!visible?'verborgen':'zichtbaar'}: ${fname}`, content: b64, sha: fd.sha }) }
       );
-      feedbackOk  = pr.ok;
-      feedbackMsg = pr.ok ? `✅ "${fname}" is nu ${!visible ? 'verborgen' : 'zichtbaar'}.` : `❌ Wijziging mislukt (${pr.status})`;
-    } else { feedbackMsg = `❌ Bestand lezen mislukt (${fr.status})`; }
-    return Astro.redirect(`${PAGE}?tab=overzicht`);
+      if (pr.ok) {
+        redirectMsg = encodeURIComponent(`✅ "${fname}" is nu ${!visible ? 'verborgen' : 'zichtbaar'}.`);
+      } else {
+        const errBody = await pr.text();
+        redirectMsg = encodeURIComponent(`❌ GitHub fout (${pr.status}): ${errBody.slice(0,200)}`);
+      }
+    } else {
+      redirectMsg = encodeURIComponent(`❌ Bestand ophalen mislukt (${fr.status})`);
+    }
+    return Astro.redirect(`${PAGE}?tab=overzicht&msg=${redirectMsg}`);
   }
 }
 
@@ -174,11 +192,12 @@ let overviewError = '';
 
 if (isLoggedIn && tab === 'overzicht') {
   try {
-    const lr = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, { headers: GH_HDR });
+    const lr = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`,
+      { headers: GH_HDR, cache: 'no-store' });
     if (lr.ok) {
       const list = (await lr.json() as any[]).filter(f => f.name.endsWith('.md'));
       const files: FileInfo[] = await Promise.all(list.map(async f => {
-        const cr  = await fetch(f.download_url);
+        const cr  = await fetch(f.download_url, { cache: 'no-store' });
         const txt = cr.ok ? await cr.text() : '';
         const fm  = parseFM(txt);
         const date = fm.datum || dateFromFilename(f.name);
@@ -206,6 +225,7 @@ if (isLoggedIn && tab === 'overzicht') {
 
 const today     = new Date().toISOString().slice(0,10);
 const minsLeft  = Math.ceil((WIN_MS - (Date.now() - att.s)) / 60000);
+const urlMsg    = Astro.url.searchParams.get('msg') ?? '';
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -285,6 +305,7 @@ const minsLeft  = Math.ceil((WIN_MS - (Date.now() - att.s)) / 60000);
   {!ADMIN_PASSWORD && <div class="config-warn">⚠️ <strong>ADMIN_PASSWORD</strong> niet ingesteld in Cloudflare.</div>}
   {isLoggedIn && !GITHUB_TOKEN && <div class="config-warn">⚠️ <strong>GITHUB_TOKEN</strong> niet ingesteld in Cloudflare.</div>}
   {feedbackMsg && <div class={`feedback ${feedbackOk ? 'ok' : 'err'}`}>{feedbackMsg}</div>}
+  {urlMsg && <div class={`feedback ${urlMsg.startsWith('✅') ? 'ok' : 'err'}`}>{urlMsg}</div>}
 
   {!isLoggedIn ? (
     isBlocked ? (
