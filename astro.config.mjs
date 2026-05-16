@@ -11,5 +11,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   integrations: [react(), keystatic()],
-  adapter: cloudflare({ platformProxy: { enabled: true } }),
+  adapter: cloudflare(),
 });
