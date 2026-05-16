@@ -12,6 +12,7 @@ const nieuws = defineCollection({
     gepubliceerd: z.boolean().default(true),
     link: z.string().url().optional(),
     internalLink: z.string().optional(),
+    flyer: z.string().optional(),
   }),
 });
 

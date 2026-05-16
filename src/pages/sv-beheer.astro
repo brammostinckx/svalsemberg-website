@@ -23,6 +23,14 @@ const GH_HDR  = {
 };
 
 // ── Helpers ────────────────────────────────────────────────────────────────
+function bytesToBase64(bytes: Uint8Array): string {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+function textToBase64(text: string): string {
+  return bytesToBase64(new TextEncoder().encode(text));
+}
 async function sessionHash(pw: string) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw + 'sv-admin-2026'));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
@@ -113,18 +121,39 @@ if (Astro.request.method === 'POST') {
     const internalLink = (form.get('internalLink') as string).trim();
     const inhoud       = (form.get('inhoud') as string).trim();
 
+    // ── Flyer upload ──────────────────────────────────────────────────────
+    let flyerPath = '';
+    let flyerNote = '';
+    const flyerFile = form.get('flyer') as File | null;
+    if (flyerFile && flyerFile.size > 0) {
+      if (flyerFile.size > 10 * 1024 * 1024) {
+        flyerNote = ' (flyer te groot, max. 10 MB — niet geüpload)';
+      } else {
+        const ext = (flyerFile.name.split('.').pop() ?? 'bin').toLowerCase();
+        const flyerName = `${datum}-${slugify(titel)}.${ext}`;
+        const flyerBytes = new Uint8Array(await flyerFile.arrayBuffer());
+        const fr2 = await fetch(
+          `https://api.github.com/repos/${REPO}/contents/public/uploads/nieuws/${flyerName}`,
+          { method: 'PUT', headers: GH_HDR,
+            body: JSON.stringify({ message: `Flyer: ${flyerName}`, content: bytesToBase64(flyerBytes) }) }
+        );
+        if (fr2.ok) { flyerPath = `/uploads/nieuws/${flyerName}`; }
+        else { flyerNote = ` (flyer upload mislukt: ${fr2.status})`; }
+      }
+    }
+
     let yaml = `---\ntitel: ${JSON.stringify(titel)}\ndatum: "${datum}"\ntag: "${tag}"\nsamenvatting: ${JSON.stringify(samenvatting)}\nuitgelicht: ${uitgelicht}\ngepubliceerd: true`;
     if (link)         yaml += `\nlink: "${link}"`;
     if (internalLink) yaml += `\ninternalLink: "${internalLink}"`;
+    if (flyerPath)    yaml += `\nflyer: "${flyerPath}"`;
     yaml += '\n---\n';
     if (inhoud) yaml += '\n' + inhoud + '\n';
 
-    const b64  = btoa(String.fromCharCode(...new TextEncoder().encode(yaml)));
     const resp = await fetch(
       `https://api.github.com/repos/${REPO}/contents/${PATH}/${datum}-${slugify(titel)}.md`,
-      { method: 'PUT', headers: GH_HDR, body: JSON.stringify({ message: `Nieuwsitem: ${titel}`, content: b64 }) }
+      { method: 'PUT', headers: GH_HDR, body: JSON.stringify({ message: `Nieuwsitem: ${titel}`, content: textToBase64(yaml) }) }
     );
-    if (resp.ok) { feedbackOk = true; feedbackMsg = `✅ "${titel}" aangemaakt! Site bijgewerkt in ±2 min.`; }
+    if (resp.ok) { feedbackOk = true; feedbackMsg = `✅ "${titel}" aangemaakt${flyerNote}! Site bijgewerkt in ±2 min.`; }
     else { const e = await resp.text(); feedbackMsg = `❌ GitHub HTTP ${resp.status}: ${e}`; }
 
   } else if (action === 'delete' && isLoggedIn) {
@@ -195,6 +224,31 @@ if (Astro.request.method === 'POST') {
     const link         = ((form.get('link') as string) ?? '').trim();
     const internalLink = ((form.get('internalLink') as string) ?? '').trim();
     const inhoud       = ((form.get('inhoud') as string) ?? '').trim();
+
+    // ── Flyer: keep existing, replace, or remove ──────────────────────────
+    let flyerPath   = ((form.get('existingFlyer') as string) ?? '').trim();
+    let flyerNote   = '';
+    const removeFlyer = form.get('removeFlyer') === 'on';
+    const newFlyerFile = form.get('flyer') as File | null;
+    if (removeFlyer) {
+      flyerPath = '';
+    } else if (newFlyerFile && newFlyerFile.size > 0) {
+      if (newFlyerFile.size > 10 * 1024 * 1024) {
+        flyerNote = ' (nieuwe flyer te groot, max. 10 MB — niet vervangen)';
+      } else {
+        const ext = (newFlyerFile.name.split('.').pop() ?? 'bin').toLowerCase();
+        const flyerName = `${datum}-${slugify(titel)}.${ext}`;
+        const flyerBytes = new Uint8Array(await newFlyerFile.arrayBuffer());
+        const fr2 = await fetch(
+          `https://api.github.com/repos/${REPO}/contents/public/uploads/nieuws/${flyerName}`,
+          { method: 'PUT', headers: GH_HDR,
+            body: JSON.stringify({ message: `Flyer: ${flyerName}`, content: bytesToBase64(flyerBytes) }) }
+        );
+        if (fr2.ok) { flyerPath = `/uploads/nieuws/${flyerName}`; }
+        else { flyerNote = ` (flyer upload mislukt: ${fr2.status})`; }
+      }
+    }
+
     const fr = await fetch(
       `https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
       { headers: GH_HDR, cache: 'no-store' }
@@ -205,19 +259,16 @@ if (Astro.request.method === 'POST') {
       let yaml  = `---\ntitel: ${JSON.stringify(titel)}\ndatum: "${datum}"\ntag: "${tag}"\nsamenvatting: ${JSON.stringify(samenvatting)}\nuitgelicht: ${uitgelicht}\ngepubliceerd: ${gepubliceerd}`;
       if (link)         yaml += `\nlink: "${link}"`;
       if (internalLink) yaml += `\ninternalLink: "${internalLink}"`;
+      if (flyerPath)    yaml += `\nflyer: "${flyerPath}"`;
       yaml += '\n---\n';
       if (inhoud) yaml += '\n' + inhoud + '\n';
-      const enc = new TextEncoder().encode(yaml);
-      let bin = '';
-      for (let i = 0; i < enc.length; i++) bin += String.fromCharCode(enc[i]);
-      const b64  = btoa(bin);
       const resp = await fetch(
         `https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
         { method: 'PUT', headers: GH_HDR,
-          body: JSON.stringify({ message: `Nieuwsitem bewerkt: ${titel}`, content: b64, sha: fd.sha }) }
+          body: JSON.stringify({ message: `Nieuwsitem bewerkt: ${titel}`, content: textToBase64(yaml), sha: fd.sha }) }
       );
       if (resp.ok) {
-        updMsg = encodeURIComponent(`✅ "${titel}" opgeslagen! Site bijgewerkt in ±2 min.`);
+        updMsg = encodeURIComponent(`✅ "${titel}" opgeslagen${flyerNote}! Site bijgewerkt in ±2 min.`);
       } else {
         const e = await resp.text();
         updMsg = encodeURIComponent(`❌ Opslaan mislukt (${resp.status}): ${e.slice(0,150)}`);
@@ -418,7 +469,7 @@ const urlMsg    = Astro.url.searchParams.get('msg') ?? '';
 
       {tab === 'nieuw' ? (
         <!-- Nieuw item -->
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
           <input type="hidden" name="action" value="create" />
           <div class="field">
             <label for="titel">Titel *</label>
@@ -479,6 +530,12 @@ const urlMsg    = Astro.url.searchParams.get('msg') ?? '';
             </div>
             <textarea id="inhoud" name="inhoud" rows="8"
               placeholder="Optionele langere tekst die op de detailpagina verschijnt."></textarea>
+          </div>
+          <div class="field">
+            <label for="flyer">Flyer <span style="font-weight:400;text-transform:none">(optioneel — afbeelding of PDF)</span></label>
+            <input type="file" id="flyer" name="flyer" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf"
+              style="padding:.45rem .6rem;cursor:pointer" />
+            <p class="hint">JPG, PNG, WebP, GIF of PDF · max. 10 MB · wordt getoond op de detailpagina van dit bericht</p>
           </div>
           <button type="submit" class="btn">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -545,9 +602,10 @@ const urlMsg    = Astro.url.searchParams.get('msg') ?? '';
           ) : !editItem ? (
             <p style="color:#6b7280">Geen item geselecteerd. <a href={`${PAGE}?tab=overzicht`}>Terug naar overzicht</a></p>
           ) : (
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
               <input type="hidden" name="action" value="update" />
               <input type="hidden" name="fname" value={editItem.fname} />
+              <input type="hidden" name="existingFlyer" value={editItem.fm.flyer || ''} />
               <p class="hint" style="margin-bottom:1rem">Bestand: <code style="background:#f1f5f9;padding:.1rem .3rem;border-radius:.25rem">{editItem.fname}</code></p>
               <div class="field">
                 <label for="e-titel">Titel *</label>
@@ -605,6 +663,23 @@ const urlMsg    = Astro.url.searchParams.get('msg') ?? '';
                   <button type="button" class="tb" data-link>🔗 link</button>
                 </div>
                 <textarea id="inhoud" name="inhoud" rows="8">{editItem.body}</textarea>
+              </div>
+              <div class="field">
+                <label>Flyer <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
+                {editItem.fm.flyer ? (
+                  <div style="margin-bottom:.6rem;padding:.6rem .8rem;background:#f8fafc;border:1.5px solid #d1d5db;border-radius:.5rem;font-size:.85rem">
+                    <strong>Huidige flyer:</strong>{' '}
+                    <a href={editItem.fm.flyer} target="_blank"
+                      style="color:#07153b;text-decoration:underline">{editItem.fm.flyer.split('/').pop()}</a>
+                    <div class="checkbox-row" style="margin-top:.5rem">
+                      <input type="checkbox" id="e-removeFlyer" name="removeFlyer" />
+                      <label for="e-removeFlyer" style="color:#991b1b">Flyer verwijderen</label>
+                    </div>
+                  </div>
+                ) : null}
+                <input type="file" id="e-flyer" name="flyer" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf"
+                  style="padding:.45rem .6rem;cursor:pointer;width:100%" />
+                <p class="hint">{editItem.fm.flyer ? 'Nieuw bestand uploaden vervangt de huidige flyer.' : 'JPG, PNG, WebP, GIF of PDF · max. 10 MB'}</p>
               </div>
               <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
                 <button type="submit" class="btn">
