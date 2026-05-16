@@ -1,8 +1,19 @@
 ---
 export const prerender = false;
 
-const ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD as string | undefined;
-const GITHUB_TOKEN   = import.meta.env.GITHUB_TOKEN   as string | undefined;
+// In Astro v6 + Cloudflare Workers, dashboard secrets are only accessible
+// via cloudflare:workers — import.meta.env does NOT have them at runtime.
+let ADMIN_PASSWORD: string | undefined;
+let GITHUB_TOKEN:   string | undefined;
+try {
+  const { env } = await import('cloudflare:workers');
+  ADMIN_PASSWORD = (env as any).ADMIN_PASSWORD;
+  GITHUB_TOKEN   = (env as any).GITHUB_TOKEN;
+} catch {
+  // Local development fallback
+  ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD;
+  GITHUB_TOKEN   = import.meta.env.GITHUB_TOKEN;
+}
 const REPO = 'brammostinckx/svalsemberg-website';
 
 async function sessionHash(password: string): Promise<string> {
