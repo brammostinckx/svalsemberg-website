@@ -1,6 +1,6 @@
 import { config, collection, fields } from '@keystatic/core';
 
-const isGitHub = !!process.env.KEYSTATIC_GITHUB_CLIENT_ID;
+const isGitHub = !!(import.meta.env.KEYSTATIC_GITHUB_CLIENT_ID || process.env.KEYSTATIC_GITHUB_CLIENT_ID);
 
 export default config({
   storage: isGitHub
