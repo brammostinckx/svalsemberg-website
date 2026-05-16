@@ -11,33 +11,63 @@ try {
   ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD;
   GITHUB_TOKEN   = import.meta.env.GITHUB_TOKEN;
 }
-const REPO = 'brammostinckx/svalsemberg-website';
-const PAGE = '/sv-beheer';
 
+const REPO    = 'brammostinckx/svalsemberg-website';
+const PATH    = 'src/content/nieuws';
+const PAGE    = '/sv-beheer';
+const GH_HDR  = {
+  Authorization: `Bearer ${GITHUB_TOKEN}`,
+  'User-Agent': 'svalsemberg-website',
+  'Content-Type': 'application/json',
+  'X-GitHub-Api-Version': '2022-11-28',
+};
+
+// ── Helpers ────────────────────────────────────────────────────────────────
 async function sessionHash(pw: string) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw + 'sv-admin-2026'));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
-
 function slugify(t: string) {
   return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
     .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 }
-
-// ── Rate limiting: max 5 pogingen per uur ─────────────────────────────────
-const MAX_ATTEMPTS = 5;
-const WINDOW_MS    = 60 * 60 * 1000;
-
-function parseAttempts(raw: string | undefined) {
-  try { const [c,s] = atob(raw??'').split(':').map(Number); if(!isNaN(c)&&!isNaN(s)) return {count:c,since:s}; } catch {}
-  return { count: 0, since: Date.now() };
+function titleFromFilename(name: string) {
+  return name.replace(/^\d{4}-\d{2}-\d{2}-?/, '').replace(/\.md$/, '')
+    .replace(/-/g,' ').replace(/^./, c => c.toUpperCase());
 }
-let attempts = parseAttempts(Astro.cookies.get('sv_fl')?.value);
-if (Date.now() - attempts.since > WINDOW_MS) attempts = { count: 0, since: Date.now() };
-const isBlocked = attempts.count >= MAX_ATTEMPTS;
+function dateFromFilename(name: string) {
+  return name.match(/^(\d{4}-\d{2}-\d{2})/)?.[1] ?? '';
+}
+function schoolYear(dateStr: string) {
+  const d = new Date(dateStr + 'T00:00:00');
+  const y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+  return (m > 8 || (m === 8 && day >= 15)) ? `${y}-${y+1}` : `${y-1}-${y}`;
+}
+function parseFM(text: string): Record<string, any> {
+  const m = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return {};
+  const out: Record<string, any> = {};
+  for (const line of m[1].split('\n')) {
+    const colon = line.indexOf(': ');
+    if (colon < 0) continue;
+    const k = line.slice(0, colon).trim();
+    const v = line.slice(colon + 2).trim().replace(/^["']|["']$/g, '');
+    out[k] = v === 'true' ? true : v === 'false' ? false : v;
+  }
+  return out;
+}
 
-function saveAttempts() {
-  Astro.cookies.set('sv_fl', btoa(`${attempts.count}:${attempts.since}`),
+// ── Rate limiting ──────────────────────────────────────────────────────────
+const MAX_ATT = 5, WIN_MS = 3_600_000;
+function parseAtt(raw?: string) {
+  try { const [c,s] = atob(raw??'').split(':').map(Number); if(!isNaN(c)&&!isNaN(s)) return {c,s}; } catch {}
+  return { c: 0, s: Date.now() };
+}
+let att = parseAtt(Astro.cookies.get('sv_fl')?.value);
+if (Date.now() - att.s > WIN_MS) att = { c: 0, s: Date.now() };
+const isBlocked = att.c >= MAX_ATT;
+function saveAtt() {
+  Astro.cookies.set('sv_fl', btoa(`${att.c}:${att.s}`),
     { httpOnly: true, secure: true, maxAge: 3600, path: '/', sameSite: 'lax' });
 }
 
@@ -46,8 +76,11 @@ let isLoggedIn = false;
 const cookieVal = Astro.cookies.get('sv_admin')?.value;
 if (cookieVal && ADMIN_PASSWORD) isLoggedIn = cookieVal === await sessionHash(ADMIN_PASSWORD);
 
-let feedbackMsg = '';
-let feedbackOk  = false;
+// ── Active tab ─────────────────────────────────────────────────────────────
+const tab = Astro.url.searchParams.get('tab') ?? 'nieuw';
+
+// ── POST actions ───────────────────────────────────────────────────────────
+let feedbackMsg = '', feedbackOk = false;
 
 if (Astro.request.method === 'POST') {
   const form   = await Astro.request.formData();
@@ -61,69 +94,118 @@ if (Astro.request.method === 'POST') {
       Astro.cookies.delete('sv_fl', { path: '/' });
       return Astro.redirect(PAGE);
     }
-    attempts.count++;
-    saveAttempts();
-    const left = MAX_ATTEMPTS - attempts.count;
-    feedbackMsg = left > 0
-      ? `Verkeerd wachtwoord. Nog ${left} poging${left===1?'':'en'} over.`
-      : 'Te veel pogingen. Probeer opnieuw over een uur.';
+    att.c++; saveAtt();
+    const left = MAX_ATT - att.c;
+    feedbackMsg = left > 0 ? `Verkeerd wachtwoord. Nog ${left} poging${left===1?'':'en'}.`
+                           : 'Te veel pogingen. Probeer opnieuw over een uur.';
 
   } else if (action === 'logout') {
     Astro.cookies.delete('sv_admin', { path: '/' });
     return Astro.redirect(PAGE);
 
-  } else if (action === 'create' && isLoggedIn && !isBlocked) {
-    const titel        = (form.get('titel')        as string).trim();
-    const datum        = form.get('datum')         as string;
-    const tag          = form.get('tag')           as string;
+  } else if (action === 'create' && isLoggedIn) {
+    const titel = (form.get('titel') as string).trim();
+    const datum = form.get('datum') as string;
+    const tag   = form.get('tag') as string;
     const samenvatting = (form.get('samenvatting') as string).trim();
     const uitgelicht   = form.get('uitgelicht') === 'on';
-    const link         = (form.get('link')         as string).trim();
+    const link         = (form.get('link') as string).trim();
     const internalLink = (form.get('internalLink') as string).trim();
-    const inhoud       = (form.get('inhoud')       as string).trim();
+    const inhoud       = (form.get('inhoud') as string).trim();
 
-    const fileName = `${datum}-${slugify(titel)}`;
-
-    let yaml = `---\ntitel: ${JSON.stringify(titel)}\ndatum: "${datum}"\ntag: "${tag}"\nsamenvatting: ${JSON.stringify(samenvatting)}\nuitgelicht: ${uitgelicht}`;
+    let yaml = `---\ntitel: ${JSON.stringify(titel)}\ndatum: "${datum}"\ntag: "${tag}"\nsamenvatting: ${JSON.stringify(samenvatting)}\nuitgelicht: ${uitgelicht}\ngepubliceerd: true`;
     if (link)         yaml += `\nlink: "${link}"`;
     if (internalLink) yaml += `\ninternalLink: "${internalLink}"`;
     yaml += '\n---\n';
     if (inhoud) yaml += '\n' + inhoud + '\n';
 
-    // btoa with UTF-8 support
-    const bytes   = new TextEncoder().encode(yaml);
-    const binStr  = String.fromCharCode(...bytes);
-    const b64     = btoa(binStr);
-
+    const b64  = btoa(String.fromCharCode(...new TextEncoder().encode(yaml)));
     const resp = await fetch(
-      `https://api.github.com/repos/${REPO}/contents/src/content/nieuws/${fileName}.md`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-          'Content-Type': 'application/json',
-          'User-Agent': 'svalsemberg-website',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify({
-          message: `Nieuwsitem toevoegen: ${titel}`,
-          content: b64,
-        }),
-      }
+      `https://api.github.com/repos/${REPO}/contents/${PATH}/${datum}-${slugify(titel)}.md`,
+      { method: 'PUT', headers: GH_HDR, body: JSON.stringify({ message: `Nieuwsitem: ${titel}`, content: b64 }) }
     );
+    if (resp.ok) { feedbackOk = true; feedbackMsg = `✅ "${titel}" aangemaakt! Site bijgewerkt in ±2 min.`; }
+    else { const e = await resp.text(); feedbackMsg = `❌ GitHub HTTP ${resp.status}: ${e}`; }
 
-    if (resp.ok) {
-      feedbackOk  = true;
-      feedbackMsg = `✅ "${titel}" is aangemaakt! De site wordt automatisch bijgewerkt (±2 min).`;
-    } else {
-      const errText = await resp.text().catch(() => resp.statusText);
-      feedbackMsg = `❌ GitHub HTTP ${resp.status}: ${errText} (token aanwezig: ${!!GITHUB_TOKEN})`;
-    }
+  } else if (action === 'delete' && isLoggedIn) {
+    const fname = form.get('fname') as string;
+    const sha   = form.get('sha')   as string;
+    const resp  = await fetch(
+      `https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
+      { method: 'DELETE', headers: GH_HDR,
+        body: JSON.stringify({ message: `Nieuwsitem verwijderd: ${fname}`, sha }) }
+    );
+    if (resp.ok) { feedbackOk = true; feedbackMsg = `✅ "${fname}" verwijderd.`; }
+    else { feedbackMsg = `❌ Verwijderen mislukt (${resp.status})`; }
+    return Astro.redirect(`${PAGE}?tab=overzicht`);
+
+  } else if (action === 'toggle' && isLoggedIn) {
+    const fname    = form.get('fname')   as string;
+    const sha      = form.get('sha')     as string;
+    const visible  = form.get('visible') === 'true';   // current state
+    // Fetch current content
+    const fr = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`, { headers: GH_HDR });
+    if (fr.ok) {
+      const fd   = await fr.json() as { content: string; sha: string };
+      let text   = new TextDecoder().decode(Uint8Array.from(atob(fd.content.replace(/\n/g,'')), c => c.charCodeAt(0)));
+      // Toggle gepubliceerd
+      if (/gepubliceerd:/.test(text)) {
+        text = text.replace(/gepubliceerd:\s*(true|false)/, `gepubliceerd: ${!visible}`);
+      } else {
+        text = text.replace(/(uitgelicht:\s*\S+)/, `$1\ngepubliceerd: ${!visible}`);
+      }
+      const b64 = btoa(String.fromCharCode(...new TextEncoder().encode(text)));
+      const pr  = await fetch(
+        `https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
+        { method: 'PUT', headers: GH_HDR,
+          body: JSON.stringify({ message: `Nieuwsitem ${!visible?'verborgen':'zichtbaar'}: ${fname}`, content: b64, sha: fd.sha }) }
+      );
+      feedbackOk  = pr.ok;
+      feedbackMsg = pr.ok ? `✅ "${fname}" is nu ${!visible ? 'verborgen' : 'zichtbaar'}.` : `❌ Wijziging mislukt (${pr.status})`;
+    } else { feedbackMsg = `❌ Bestand lezen mislukt (${fr.status})`; }
+    return Astro.redirect(`${PAGE}?tab=overzicht`);
   }
 }
 
-const today = new Date().toISOString().slice(0, 10);
-const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 60000);
+// ── Fetch overview data ────────────────────────────────────────────────────
+interface FileInfo { name: string; sha: string; date: string; titel: string; tag: string; gepubliceerd: boolean; uitgelicht: boolean; schoolYear: string; }
+let byYear: Map<string, FileInfo[]> = new Map();
+let overviewError = '';
+
+if (isLoggedIn && tab === 'overzicht') {
+  try {
+    const lr = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, { headers: GH_HDR });
+    if (lr.ok) {
+      const list = (await lr.json() as any[]).filter(f => f.name.endsWith('.md'));
+      const files: FileInfo[] = await Promise.all(list.map(async f => {
+        const cr  = await fetch(f.download_url);
+        const txt = cr.ok ? await cr.text() : '';
+        const fm  = parseFM(txt);
+        const date = fm.datum || dateFromFilename(f.name);
+        return {
+          name:         f.name,
+          sha:          f.sha,
+          date,
+          titel:        fm.titel || titleFromFilename(f.name),
+          tag:          fm.tag   || 'Nieuws',
+          gepubliceerd: fm.gepubliceerd !== false,
+          uitgelicht:   fm.uitgelicht   === true,
+          schoolYear:   schoolYear(date),
+        };
+      }));
+      files.sort((a,b) => b.date.localeCompare(a.date));
+      for (const f of files) {
+        if (!byYear.has(f.schoolYear)) byYear.set(f.schoolYear, []);
+        byYear.get(f.schoolYear)!.push(f);
+      }
+      // Sort years descending
+      byYear = new Map([...byYear.entries()].sort((a,b) => b[0].localeCompare(a[0])));
+    } else { overviewError = `GitHub API fout (${lr.status})`; }
+  } catch (e) { overviewError = String(e); }
+}
+
+const today     = new Date().toISOString().slice(0,10);
+const minsLeft  = Math.ceil((WIN_MS - (Date.now() - att.s)) / 60000);
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -131,214 +213,251 @@ const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 6000
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex,nofollow" />
-  <title>Admin – Sint-Victor Alsemberg</title>
+  <title>Nieuwsbeheer – Sint-Victor Alsemberg</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, sans-serif; background: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column; }
-    header { background: #07153b; color: white; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
-    header h1 { font-size: 1.1rem; font-weight: 800; }
-    header span { font-size: .8rem; color: #93c5fd; }
-    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; }
-    .card { background: white; border-radius: 1rem; box-shadow: 0 2px 12px rgba(0,0,0,.08); padding: 2rem; width: 100%; max-width: 640px; }
-    h2 { font-size: 1.3rem; font-weight: 800; color: #07153b; margin-bottom: 1.5rem; }
-    .field { margin-bottom: 1.1rem; }
-    label { display: block; font-size: .8rem; font-weight: 700; color: #374151; margin-bottom: .3rem; text-transform: uppercase; letter-spacing: .04em; }
-    input[type=text], input[type=url], input[type=date], input[type=password], select, textarea {
-      width: 100%; padding: .6rem .8rem; border: 1.5px solid #d1d5db; border-radius: .5rem;
-      font-size: .95rem; transition: border-color .15s; outline: none; font-family: inherit;
-    }
-    input:focus, select:focus, textarea:focus { border-color: #07153b; }
-    textarea { resize: vertical; min-height: 120px; font-family: inherit; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: .3rem; background: #f8fafc; border: 1.5px solid #d1d5db; border-bottom: none; border-radius: .5rem .5rem 0 0; padding: .4rem .5rem; }
-    .toolbar + textarea { border-radius: 0 0 .5rem .5rem; }
-    .tb { background: white; border: 1px solid #d1d5db; border-radius: .3rem; padding: .25rem .45rem; cursor: pointer; font-size: .85rem; line-height: 1; color: #374151; transition: background .1s; }
-    .tb:hover { background: #e0e7ff; border-color: #07153b; color: #07153b; }
-    .checkbox-row { display: flex; align-items: center; gap: .5rem; }
-    .checkbox-row input { width: auto; }
-    .checkbox-row label { margin: 0; text-transform: none; font-size: .9rem; font-weight: 600; letter-spacing: 0; }
-    .hint { font-size: .75rem; color: #6b7280; margin-top: .2rem; }
-    .btn { display: inline-flex; align-items: center; gap: .4rem; background: #07153b; color: white;
-      font-weight: 800; padding: .7rem 1.6rem; border-radius: .7rem; border: none; cursor: pointer;
-      font-size: .95rem; transition: background .15s; }
-    .btn:hover { background: #1e3a8a; }
-    .btn-sm { padding: .4rem .9rem; font-size: .8rem; background: #6b7280; }
-    .btn-sm:hover { background: #4b5563; }
-    .feedback { padding: .85rem 1rem; border-radius: .6rem; font-size: .9rem; font-weight: 600; margin-bottom: 1.2rem; }
-    .feedback.ok  { background: #dcfce7; color: #166534; }
-    .feedback.err { background: #fee2e2; color: #991b1b; }
-    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.2rem 0; }
-    .config-warn { background: #fef9c3; border: 1.5px solid #fde047; border-radius: .6rem; padding: .8rem 1rem; font-size: .85rem; color: #713f12; margin-bottom: 1.2rem; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,sans-serif;background:#f1f5f9;min-height:100vh;display:flex;flex-direction:column}
+    header{background:#07153b;color:white;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+    header h1{font-size:1.1rem;font-weight:800}
+    header span{font-size:.8rem;color:#93c5fd}
+    main{flex:1;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem}
+    .card{background:white;border-radius:1rem;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:2rem;width:100%;max-width:700px}
+    /* Tabs */
+    .tabs{display:flex;gap:.5rem;margin-bottom:1.5rem}
+    .tab-btn{padding:.5rem 1.2rem;border-radius:.5rem .5rem 0 0;border:1.5px solid #d1d5db;border-bottom:none;background:#f8fafc;color:#6b7280;font-weight:700;cursor:pointer;font-size:.9rem}
+    .tab-btn.active{background:white;color:#07153b;border-color:#07153b}
+    /* Form */
+    h2{font-size:1.3rem;font-weight:800;color:#07153b;margin-bottom:1.5rem}
+    .field{margin-bottom:1.1rem}
+    label{display:block;font-size:.8rem;font-weight:700;color:#374151;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.04em}
+    input[type=text],input[type=url],input[type=date],input[type=password],select,textarea{width:100%;padding:.6rem .8rem;border:1.5px solid #d1d5db;border-radius:.5rem;font-size:.95rem;transition:border-color .15s;outline:none;font-family:inherit}
+    input:focus,select:focus,textarea:focus{border-color:#07153b}
+    textarea{resize:vertical;min-height:120px}
+    .checkbox-row{display:flex;align-items:center;gap:.5rem}
+    .checkbox-row input{width:auto}
+    .checkbox-row label{margin:0;text-transform:none;font-size:.9rem;font-weight:600;letter-spacing:0}
+    .hint{font-size:.75rem;color:#6b7280;margin-top:.2rem}
+    .btn{display:inline-flex;align-items:center;gap:.4rem;background:#07153b;color:white;font-weight:800;padding:.7rem 1.6rem;border-radius:.7rem;border:none;cursor:pointer;font-size:.95rem;transition:background .15s}
+    .btn:hover{background:#1e3a8a}
+    .btn-sm{padding:.35rem .8rem;font-size:.8rem;border-radius:.4rem;font-weight:700;border:none;cursor:pointer}
+    .btn-del{background:#fee2e2;color:#991b1b}.btn-del:hover{background:#fca5a5}
+    .btn-hide{background:#e0e7ff;color:#3730a3}.btn-hide:hover{background:#c7d2fe}
+    .btn-show{background:#dcfce7;color:#166534}.btn-show:hover{background:#bbf7d0}
+    .btn-logout{padding:.4rem .9rem;font-size:.8rem;background:#6b7280;color:white;font-weight:800;padding:.4rem .9rem;border-radius:.5rem;border:none;cursor:pointer}
+    .feedback{padding:.85rem 1rem;border-radius:.6rem;font-size:.9rem;font-weight:600;margin-bottom:1.2rem}
+    .feedback.ok{background:#dcfce7;color:#166534}
+    .feedback.err{background:#fee2e2;color:#991b1b}
+    hr{border:none;border-top:1px solid #e5e7eb;margin:1.2rem 0}
+    .config-warn{background:#fef9c3;border:1.5px solid #fde047;border-radius:.6rem;padding:.8rem 1rem;font-size:.85rem;color:#713f12;margin-bottom:1.2rem}
+    .top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+    /* Overview */
+    .year-group{margin-bottom:1.5rem}
+    .year-label{font-size:.75rem;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+    .year-label::after{content:'';flex:1;height:1px;background:#e5e7eb}
+    .news-row{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;border-radius:.6rem;transition:background .1s}
+    .news-row:hover{background:#f8fafc}
+    .news-info{flex:1;min-width:0}
+    .news-title{font-weight:700;font-size:.9rem;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .news-meta{font-size:.75rem;color:#6b7280;margin-top:.1rem}
+    .tag-badge{display:inline-block;padding:.1rem .45rem;border-radius:9999px;font-size:.7rem;font-weight:700;background:#e0e7ff;color:#3730a3;margin-right:.3rem}
+    .hidden-badge{font-size:.7rem;font-weight:700;color:#dc2626;background:#fee2e2;padding:.1rem .4rem;border-radius:9999px}
+    .news-actions{display:flex;gap:.4rem;flex-shrink:0}
+    /* Toolbar */
+    .toolbar{display:flex;flex-wrap:wrap;gap:.3rem;background:#f8fafc;border:1.5px solid #d1d5db;border-bottom:none;border-radius:.5rem .5rem 0 0;padding:.4rem .5rem}
+    .toolbar + textarea{border-radius:0 0 .5rem .5rem}
+    .tb{background:white;border:1px solid #d1d5db;border-radius:.3rem;padding:.25rem .45rem;cursor:pointer;font-size:.85rem;line-height:1;color:#374151;transition:background .1s}
+    .tb:hover{background:#e0e7ff;border-color:#07153b;color:#07153b}
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎓 Sint-Victor Alsemberg — Nieuwsbeheer</h1>
-    {isLoggedIn && <span>Ingelogd</span>}
-  </header>
-  <main>
-    <div class="card">
+<header>
+  <h1>🎓 Sint-Victor Alsemberg — Nieuwsbeheer</h1>
+  {isLoggedIn && (
+    <form method="POST" style="display:inline">
+      <input type="hidden" name="action" value="logout" />
+      <button type="submit" class="btn-logout">Uitloggen</button>
+    </form>
+  )}
+</header>
+<main>
+<div class="card">
 
-      {!ADMIN_PASSWORD && (
-        <div class="config-warn">
-          ⚠️ <strong>ADMIN_PASSWORD</strong> is niet ingesteld in de Cloudflare omgevingsvariabelen. Voeg die toe om in te kunnen loggen.
-        </div>
-      )}
-      {isLoggedIn && !GITHUB_TOKEN && (
-        <div class="config-warn">
-          ⚠️ <strong>GITHUB_TOKEN</strong> is niet ingesteld. Nieuwsitems aanmaken werkt pas als je dit toevoegt.
-        </div>
-      )}
+  {!ADMIN_PASSWORD && <div class="config-warn">⚠️ <strong>ADMIN_PASSWORD</strong> niet ingesteld in Cloudflare.</div>}
+  {isLoggedIn && !GITHUB_TOKEN && <div class="config-warn">⚠️ <strong>GITHUB_TOKEN</strong> niet ingesteld in Cloudflare.</div>}
+  {feedbackMsg && <div class={`feedback ${feedbackOk ? 'ok' : 'err'}`}>{feedbackMsg}</div>}
 
-      {feedbackMsg && (
-        <div class={`feedback ${feedbackOk ? 'ok' : 'err'}`}>{feedbackMsg}</div>
-      )}
-
-      {!isLoggedIn ? (
-        isBlocked ? (
-          <div style="text-align:center;padding:1rem 0;color:#991b1b">
-            <p style="font-size:2.5rem;margin-bottom:.5rem">🔒</p>
-            <h2 style="color:#991b1b;margin-bottom:.5rem">Geblokkeerd</h2>
-            <p>Te veel mislukte pogingen. Probeer opnieuw over {minutesLeft} minuten.</p>
+  {!isLoggedIn ? (
+    isBlocked ? (
+      <div style="text-align:center;padding:1rem 0;color:#991b1b">
+        <div style="font-size:2.5rem;margin-bottom:.5rem">🔒</div>
+        <h2 style="color:#991b1b;margin-bottom:.5rem">Geblokkeerd</h2>
+        <p>Te veel mislukte pogingen. Probeer opnieuw over {minsLeft} minuten.</p>
+      </div>
+    ) : (
+      <div>
+        <h2>Inloggen</h2>
+        <form method="POST">
+          <input type="hidden" name="action" value="login" />
+          <div class="field">
+            <label for="pw">Wachtwoord</label>
+            <input type="password" id="pw" name="password" required autofocus />
           </div>
-        ) : (
-          <div>
-            <h2>Inloggen</h2>
-            <form method="POST">
-              <input type="hidden" name="action" value="login" />
-              <div class="field">
-                <label for="password">Wachtwoord</label>
-                <input type="password" id="password" name="password" required autofocus />
-              </div>
-              <button type="submit" class="btn">Inloggen →</button>
-            </form>
+          <button type="submit" class="btn">Inloggen →</button>
+        </form>
+      </div>
+    )
+  ) : (
+    <div>
+      <!-- Tabs -->
+      <div class="tabs">
+        <a href={PAGE} class={`tab-btn${tab==='nieuw'?' active':''}`}>+ Nieuw item</a>
+        <a href={`${PAGE}?tab=overzicht`} class={`tab-btn${tab==='overzicht'?' active':''}`}>📋 Overzicht</a>
+      </div>
+
+      {tab === 'nieuw' ? (
+        <!-- New item form -->
+        <form method="POST">
+          <input type="hidden" name="action" value="create" />
+          <div class="field">
+            <label for="titel">Titel *</label>
+            <input type="text" id="titel" name="titel" required placeholder="bv. Opendeurdag mei 2027" />
           </div>
-        )
+          <div class="field">
+            <label for="datum">Datum *</label>
+            <input type="date" id="datum" name="datum" required value={today} />
+          </div>
+          <div class="field">
+            <label for="tag">Categorie *</label>
+            <select id="tag" name="tag" required>
+              <option value="Nieuws">Nieuws</option>
+              <option value="Inschrijvingen">Inschrijvingen</option>
+              <option value="Evenement">Evenement</option>
+              <option value="SV-Tamtam">SV-Tamtam</option>
+              <option value="Sport">Sport</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="samenvatting">Korte samenvatting *</label>
+            <textarea id="samenvatting" name="samenvatting" required rows="3"
+              placeholder="Maximaal 2 zinnen. Wordt getoond op de nieuwsoverzichtspagina."></textarea>
+          </div>
+          <div class="field">
+            <div class="checkbox-row">
+              <input type="checkbox" id="uitgelicht" name="uitgelicht" checked />
+              <label for="uitgelicht">Toon op de startpagina (uitgelicht)</label>
+            </div>
+            <p class="hint">Maximaal 3 items worden op de startpagina getoond.</p>
+          </div>
+          <hr />
+          <div class="field">
+            <label for="internalLink">Interne link <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
+            <input type="text" id="internalLink" name="internalLink" placeholder="bv. /inschrijvingen" />
+            <p class="hint">Vul in als dit bericht naar een pagina op de site verwijst.</p>
+          </div>
+          <div class="field">
+            <label for="link">Externe link <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
+            <input type="url" id="link" name="link" placeholder="bv. https://aanmelden.school.be" />
+            <p class="hint">Vul in als dit bericht naar een externe website verwijst.</p>
+          </div>
+          <div class="field">
+            <label for="inhoud">Extra inhoud <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
+            <div class="toolbar" id="tb-inhoud">
+              <button type="button" class="tb" data-wrap="**" title="Vet"><b>V</b></button>
+              <button type="button" class="tb" data-wrap="*" title="Cursief"><i>C</i></button>
+              <button type="button" class="tb" data-wrap="__" title="Onderlijnd"><u>O</u></button>
+              <button type="button" class="tb" data-wrap="~~" title="Doorhalen"><s>D</s></button>
+              <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
+              <button type="button" class="tb" data-prefix="## ">T1</button>
+              <button type="button" class="tb" data-prefix="### ">T2</button>
+              <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
+              <button type="button" class="tb" data-list="- ">• lijst</button>
+              <button type="button" class="tb" data-list="1. ">1. lijst</button>
+              <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
+              <button type="button" class="tb" data-link>🔗 link</button>
+            </div>
+            <textarea id="inhoud" name="inhoud" rows="8"
+              placeholder="Optionele langere tekst die op de detailpagina verschijnt."></textarea>
+          </div>
+          <button type="submit" class="btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Nieuwsitem aanmaken
+          </button>
+        </form>
       ) : (
-        <!-- News creation form -->
+        <!-- Overview -->
         <div>
-          <div class="top-bar">
-            <h2>Nieuw nieuwsitem</h2>
-            <form method="POST" style="display:inline">
-              <input type="hidden" name="action" value="logout" />
-              <button type="submit" class="btn btn-sm">Uitloggen</button>
-            </form>
-          </div>
-
-          <form method="POST">
-            <input type="hidden" name="action" value="create" />
-
-            <div class="field">
-              <label for="titel">Titel *</label>
-              <input type="text" id="titel" name="titel" required placeholder="bv. Opendeurdag mei 2027" />
-            </div>
-
-            <div class="field">
-              <label for="datum">Datum *</label>
-              <input type="date" id="datum" name="datum" required value={today} />
-            </div>
-
-            <div class="field">
-              <label for="tag">Categorie *</label>
-              <select id="tag" name="tag" required>
-                <option value="Nieuws">Nieuws</option>
-                <option value="Inschrijvingen">Inschrijvingen</option>
-                <option value="Evenement">Evenement</option>
-                <option value="SV-Tamtam">SV-Tamtam</option>
-                <option value="Sport">Sport</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="samenvatting">Korte samenvatting *</label>
-              <textarea id="samenvatting" name="samenvatting" required rows="3"
-                placeholder="Maximaal 2 zinnen. Wordt getoond op de nieuwsoverzichtspagina."></textarea>
-            </div>
-
-            <div class="field">
-              <div class="checkbox-row">
-                <input type="checkbox" id="uitgelicht" name="uitgelicht" checked />
-                <label for="uitgelicht">Toon op de startpagina (uitgelicht)</label>
+          {overviewError ? (
+            <div class="feedback err">❌ {overviewError}</div>
+          ) : byYear.size === 0 ? (
+            <p style="color:#6b7280;text-align:center;padding:2rem 0">Nog geen nieuwsitems.</p>
+          ) : (
+            [...byYear.entries()].map(([year, items]) => (
+              <div class="year-group">
+                <div class="year-label">Schooljaar {year} <span>({items.length})</span></div>
+                {items.map(item => (
+                  <div class="news-row">
+                    <div class="news-info">
+                      <div class="news-title">
+                        {!item.gepubliceerd && <span class="hidden-badge">verborgen</span>}
+                        {item.titel}
+                      </div>
+                      <div class="news-meta">
+                        <span class="tag-badge">{item.tag}</span>
+                        {item.date}
+                        {item.uitgelicht && ' · ⭐ startpagina'}
+                      </div>
+                    </div>
+                    <div class="news-actions">
+                      <form method="POST">
+                        <input type="hidden" name="action" value="toggle" />
+                        <input type="hidden" name="fname" value={item.name} />
+                        <input type="hidden" name="sha" value={item.sha} />
+                        <input type="hidden" name="visible" value={String(item.gepubliceerd)} />
+                        <button type="submit" class={`btn-sm ${item.gepubliceerd ? 'btn-hide' : 'btn-show'}`}
+                          title={item.gepubliceerd ? 'Verbergen' : 'Zichtbaar maken'}>
+                          {item.gepubliceerd ? '👁 Verberg' : '👁 Toon'}
+                        </button>
+                      </form>
+                      <form method="POST" onsubmit="return confirm('Zeker verwijderen? Dit kan niet ongedaan worden.')">
+                        <input type="hidden" name="action" value="delete" />
+                        <input type="hidden" name="fname" value={item.name} />
+                        <input type="hidden" name="sha" value={item.sha} />
+                        <button type="submit" class="btn-sm btn-del" title="Verwijderen">🗑 Verwijder</button>
+                      </form>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <p class="hint">Maximaal 3 items worden op de startpagina getoond.</p>
-            </div>
-
-            <hr />
-
-            <div class="field">
-              <label for="internalLink">Interne link <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
-              <input type="text" id="internalLink" name="internalLink" placeholder="bv. /inschrijvingen of /opendeurdag" />
-              <p class="hint">Vul in als dit bericht naar een pagina op de site verwijst. Laat leeg als je geen link wil.</p>
-            </div>
-
-            <div class="field">
-              <label for="link">Externe link <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
-              <input type="url" id="link" name="link" placeholder="bv. https://aanmelden.school.be" />
-              <p class="hint">Vul in als dit bericht naar een externe website verwijst.</p>
-            </div>
-
-            <div class="field">
-              <label for="inhoud">Extra inhoud <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
-              <div class="toolbar" id="tb-inhoud">
-                <button type="button" class="tb" data-wrap="**" title="Vet"><b>V</b></button>
-                <button type="button" class="tb" data-wrap="*" title="Cursief"><i>C</i></button>
-                <button type="button" class="tb" data-wrap="__" title="Onderlijnd"><u>O</u></button>
-                <button type="button" class="tb" data-wrap="~~" title="Doorhalen"><s>D</s></button>
-                <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
-                <button type="button" class="tb" data-prefix="## " title="Titel">T1</button>
-                <button type="button" class="tb" data-prefix="### " title="Subtitel">T2</button>
-                <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
-                <button type="button" class="tb" data-list="- " title="Opsomming">• lijst</button>
-                <button type="button" class="tb" data-list="1. " title="Genummerde lijst">1. lijst</button>
-                <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
-                <button type="button" class="tb" data-link title="Link">🔗 link</button>
-              </div>
-              <textarea id="inhoud" name="inhoud" rows="8"
-                placeholder="Optionele langere tekst die op de detailpagina verschijnt."></textarea>
-            </div>
-
-            <button type="submit" class="btn">
-              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Nieuwsitem aanmaken
-            </button>
-          </form>
+            ))
+          )}
         </div>
       )}
     </div>
-  </main>
-  <script>
-    document.querySelectorAll('#tb-inhoud .tb').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const ta = document.getElementById('inhoud');
-        const start = ta.selectionStart, end = ta.selectionEnd;
-        const sel = ta.value.slice(start, end);
-
-        if (btn.dataset.wrap) {
-          const w = btn.dataset.wrap;
-          const replacement = sel ? `${w}${sel}${w}` : `${w}tekst${w}`;
-          ta.setRangeText(replacement, start, end, 'select');
-
-        } else if (btn.dataset.prefix) {
-          // Insert heading at start of line
-          const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
-          const prefix = btn.dataset.prefix;
-          ta.setRangeText(prefix, lineStart, lineStart, 'end');
-
-        } else if (btn.dataset.list !== undefined) {
-          // Insert list item on new line
-          const before = start > 0 ? '\n' : '';
-          ta.setRangeText(`${before}${btn.dataset.list}`, start, start, 'end');
-
-        } else if (btn.dataset.link !== undefined) {
-          const text = sel || 'linktekst';
-          const url = prompt('URL:') || 'https://';
-          ta.setRangeText(`[${text}](${url})`, start, end, 'end');
-        }
-        ta.focus();
-      });
+  )}
+</div>
+</main>
+<script>
+  document.querySelectorAll('#tb-inhoud .tb').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ta = document.getElementById('inhoud');
+      const s = ta.selectionStart, e = ta.selectionEnd, sel = ta.value.slice(s,e);
+      if (btn.dataset.wrap) {
+        const w = btn.dataset.wrap;
+        ta.setRangeText(sel ? `${w}${sel}${w}` : `${w}tekst${w}`, s, e, 'select');
+      } else if (btn.dataset.prefix !== undefined) {
+        const ls = ta.value.lastIndexOf('\n', s-1)+1;
+        ta.setRangeText(btn.dataset.prefix, ls, ls, 'end');
+      } else if (btn.dataset.list !== undefined) {
+        ta.setRangeText(`${s>0?'\n':''}${btn.dataset.list}`, s, s, 'end');
+      } else if (btn.dataset.link !== undefined) {
+        const url = prompt('URL:') || 'https://';
+        ta.setRangeText(`[${sel||'linktekst'}](${url})`, s, e, 'end');
+      }
+      ta.focus();
     });
-  </script>
+  });
+</script>
 </body>
 </html>

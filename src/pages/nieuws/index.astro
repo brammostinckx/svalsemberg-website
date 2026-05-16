@@ -3,9 +3,9 @@ export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const items = (await getCollection('nieuws')).sort(
-  (a, b) => new Date(b.data.datum).getTime() - new Date(a.data.datum).getTime()
-);
+const items = (await getCollection('nieuws'))
+  .filter(i => i.data.gepubliceerd !== false)
+  .sort((a, b) => new Date(b.data.datum).getTime() - new Date(a.data.datum).getTime());
 
 function formatDatum(d: string) {
   return new Date(d).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });

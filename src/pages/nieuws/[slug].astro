@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const items = await getCollection('nieuws');
 const item = items.find(i => i.id === slug);
-if (!item) return Astro.redirect('/nieuws');
+if (!item || item.data.gepubliceerd === false) return Astro.redirect('/nieuws');
 
 const { Content } = await render(item);
 

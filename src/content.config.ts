@@ -9,6 +9,7 @@ const nieuws = defineCollection({
     tag: z.string(),
     samenvatting: z.string(),
     uitgelicht: z.boolean().default(false),
+    gepubliceerd: z.boolean().default(true),
     link: z.string().url().optional(),
     internalLink: z.string().optional(),
   }),
