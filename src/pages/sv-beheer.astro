@@ -115,8 +115,8 @@ if (Astro.request.method === 'POST') {
       feedbackOk  = true;
       feedbackMsg = `✅ "${titel}" is aangemaakt! De site wordt automatisch bijgewerkt (±2 min).`;
     } else {
-      const err = await resp.json().catch(() => ({ message: resp.statusText }));
-      feedbackMsg = `❌ GitHub fout: ${err.message}`;
+      const errText = await resp.text().catch(() => resp.statusText);
+      feedbackMsg = `❌ GitHub HTTP ${resp.status}: ${errText} (token aanwezig: ${!!GITHUB_TOKEN})`;
     }
   }
 }
