@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const nieuwsItems = (await getCollection('nieuws'))
-  .filter(n => n.data.uitgelicht)
+  .filter(n => n.data.uitgelicht && n.data.gepubliceerd !== false)
   .sort((a, b) => new Date(b.data.datum).getTime() - new Date(a.data.datum).getTime())
   .slice(0, 3);
 

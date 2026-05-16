@@ -167,13 +167,14 @@ if (Astro.request.method === 'POST') {
       let bin = '';
       for (let i = 0; i < enc.length; i++) bin += String.fromCharCode(enc[i]);
       const b64 = btoa(bin);
+      const newState = visible ? 'verborgen' : 'zichtbaar';   // after toggle
       const pr = await fetch(
         `https://api.github.com/repos/${REPO}/contents/${PATH}/${fname}`,
         { method: 'PUT', headers: GH_HDR,
-          body: JSON.stringify({ message: `Nieuwsitem ${!visible?'verborgen':'zichtbaar'}: ${fname}`, content: b64, sha: fd.sha }) }
+          body: JSON.stringify({ message: `Nieuwsitem ${newState}: ${fname}`, content: b64, sha: fd.sha }) }
       );
       if (pr.ok) {
-        redirectMsg = encodeURIComponent(`✅ "${fname}" is nu ${!visible ? 'verborgen' : 'zichtbaar'}.`);
+        redirectMsg = encodeURIComponent(`✅ "${fname}" is nu ${newState}.`);
       } else {
         const errBody = await pr.text();
         redirectMsg = encodeURIComponent(`❌ GitHub fout (${pr.status}): ${errBody.slice(0,200)}`);
@@ -197,8 +198,19 @@ if (isLoggedIn && tab === 'overzicht') {
     if (lr.ok) {
       const list = (await lr.json() as any[]).filter(f => f.name.endsWith('.md'));
       const files: FileInfo[] = await Promise.all(list.map(async f => {
-        const cr  = await fetch(f.download_url, { cache: 'no-store' });
-        const txt = cr.ok ? await cr.text() : '';
+        // Use authenticated API (not download_url) to bypass CDN caching
+        const cr  = await fetch(
+          `https://api.github.com/repos/${REPO}/contents/${PATH}/${f.name}`,
+          { headers: GH_HDR, cache: 'no-store' }
+        );
+        let txt = '';
+        if (cr.ok) {
+          const fd2 = await cr.json() as { content?: string };
+          if (fd2.content) {
+            const rawBytes = Uint8Array.from(atob(fd2.content.replace(/[\r\n]/g, '')), c => c.charCodeAt(0));
+            txt = new TextDecoder().decode(rawBytes);
+          }
+        }
         const fm  = parseFM(txt);
         const date = fm.datum || dateFromFilename(f.name);
         return {
