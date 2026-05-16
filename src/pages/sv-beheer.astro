@@ -148,7 +148,11 @@ const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 6000
       font-size: .95rem; transition: border-color .15s; outline: none; font-family: inherit;
     }
     input:focus, select:focus, textarea:focus { border-color: #07153b; }
-    textarea { resize: vertical; min-height: 120px; }
+    textarea { resize: vertical; min-height: 120px; font-family: inherit; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: .3rem; background: #f8fafc; border: 1.5px solid #d1d5db; border-bottom: none; border-radius: .5rem .5rem 0 0; padding: .4rem .5rem; }
+    .toolbar + textarea { border-radius: 0 0 .5rem .5rem; }
+    .tb { background: white; border: 1px solid #d1d5db; border-radius: .3rem; padding: .25rem .45rem; cursor: pointer; font-size: .85rem; line-height: 1; color: #374151; transition: background .1s; }
+    .tb:hover { background: #e0e7ff; border-color: #07153b; color: #07153b; }
     .checkbox-row { display: flex; align-items: center; gap: .5rem; }
     .checkbox-row input { width: auto; }
     .checkbox-row label { margin: 0; text-transform: none; font-size: .9rem; font-weight: 600; letter-spacing: 0; }
@@ -253,7 +257,7 @@ const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 6000
 
             <div class="field">
               <div class="checkbox-row">
-                <input type="checkbox" id="uitgelicht" name="uitgelicht" />
+                <input type="checkbox" id="uitgelicht" name="uitgelicht" checked />
                 <label for="uitgelicht">Toon op de startpagina (uitgelicht)</label>
               </div>
               <p class="hint">Maximaal 3 items worden op de startpagina getoond.</p>
@@ -275,8 +279,22 @@ const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 6000
 
             <div class="field">
               <label for="inhoud">Extra inhoud <span style="font-weight:400;text-transform:none">(optioneel)</span></label>
-              <textarea id="inhoud" name="inhoud" rows="6"
-                placeholder="Optionele langere tekst die op de detailpagina verschijnt. Gewone tekst of Markdown."></textarea>
+              <div class="toolbar" id="tb-inhoud">
+                <button type="button" class="tb" data-wrap="**" title="Vet"><b>V</b></button>
+                <button type="button" class="tb" data-wrap="*" title="Cursief"><i>C</i></button>
+                <button type="button" class="tb" data-wrap="__" title="Onderlijnd"><u>O</u></button>
+                <button type="button" class="tb" data-wrap="~~" title="Doorhalen"><s>D</s></button>
+                <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
+                <button type="button" class="tb" data-prefix="## " title="Titel">T1</button>
+                <button type="button" class="tb" data-prefix="### " title="Subtitel">T2</button>
+                <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
+                <button type="button" class="tb" data-list="- " title="Opsomming">• lijst</button>
+                <button type="button" class="tb" data-list="1. " title="Genummerde lijst">1. lijst</button>
+                <span style="width:1px;background:#d1d5db;margin:0 .1rem"></span>
+                <button type="button" class="tb" data-link title="Link">🔗 link</button>
+              </div>
+              <textarea id="inhoud" name="inhoud" rows="8"
+                placeholder="Optionele langere tekst die op de detailpagina verschijnt."></textarea>
             </div>
 
             <button type="submit" class="btn">
@@ -290,5 +308,37 @@ const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 6000
       )}
     </div>
   </main>
+  <script>
+    document.querySelectorAll('#tb-inhoud .tb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ta = document.getElementById('inhoud');
+        const start = ta.selectionStart, end = ta.selectionEnd;
+        const sel = ta.value.slice(start, end);
+
+        if (btn.dataset.wrap) {
+          const w = btn.dataset.wrap;
+          const replacement = sel ? `${w}${sel}${w}` : `${w}tekst${w}`;
+          ta.setRangeText(replacement, start, end, 'select');
+
+        } else if (btn.dataset.prefix) {
+          // Insert heading at start of line
+          const lineStart = ta.value.lastIndexOf('\n', start - 1) + 1;
+          const prefix = btn.dataset.prefix;
+          ta.setRangeText(prefix, lineStart, lineStart, 'end');
+
+        } else if (btn.dataset.list !== undefined) {
+          // Insert list item on new line
+          const before = start > 0 ? '\n' : '';
+          ta.setRangeText(`${before}${btn.dataset.list}`, start, start, 'end');
+
+        } else if (btn.dataset.link !== undefined) {
+          const text = sel || 'linktekst';
+          const url = prompt('URL:') || 'https://';
+          ta.setRangeText(`[${text}](${url})`, start, end, 'end');
+        }
+        ta.focus();
+      });
+    });
+  </script>
 </body>
 </html>
