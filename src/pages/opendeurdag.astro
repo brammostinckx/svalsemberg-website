@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Opendeurdag" description="Bezoek Sint-Victor Alsemberg tijdens onze opendeurdag.">
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Evenement</div>
+      <h1 class="text-4xl font-extrabold mb-4">Opendeurdag</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">Kom onze school ontdekken op zaterdag 9 mei 2026 van 9u tot 12u.</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 mb-10 flex gap-4 items-start">
+        <div class="bg-[#07153b] rounded-xl w-12 h-12 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-bold text-[#07153b] mb-1">Zaterdag 9 mei 2026 — 9u tot 12u</div>
+          <p class="text-gray-600 text-sm">Brusselsesteenweg 20, 1652 Alsemberg — Gratis, zonder inschrijving</p>
+        </div>
+      </div>
+
+      <div class="prose prose-sm max-w-none text-gray-600 space-y-4 mb-10">
+        <h2 class="text-xl font-extrabold text-[#07153b]">Welkom op onze opendeurdag</h2>
+        <p>Op zaterdag 9 mei 2026 van 9u tot 12u kan je onze school vrijblijvend bezoeken. Ontdek onze studierichtingen, stel vragen aan leerkrachten en leerlingen, en voel de sfeer van Sint-Victor Alsemberg.</p>
+
+        <ul class="space-y-2">
+          {[
+            'Gratis toegang, geen inschrijving nodig',
+            'Alle studierichtingen worden voorgesteld',
+            'Rondleiding door leerlingen',
+            'Infostand voor ouders',
+          ].map(item => (
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-yellow-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bg-[#07153b] text-white rounded-2xl p-6 text-center">
+        <p class="text-blue-200 mb-4 text-sm">Vragen over de opendeurdag?</p>
+        <a href="/contact" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm inline-block">
+          Contacteer ons
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>

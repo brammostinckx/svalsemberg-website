@@ -1,0 +1,65 @@
+---
+export const prerender = true;
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('nieuws');
+  return items.map(item => ({ params: { slug: item.id } }));
+}
+
+const { slug } = Astro.params;
+const items = await getCollection('nieuws');
+const item = items.find(i => i.id === slug);
+if (!item) return Astro.redirect('/nieuws');
+
+const { Content } = await render(item);
+
+function formatDatum(d: string) {
+  return new Date(d).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+<Layout title={item.data.titel} description={item.data.samenvatting}>
+
+  <section class="bg-[#07153b] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="bg-yellow-400/20 text-yellow-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">{item.data.tag}</span>
+        <span class="text-blue-300 text-xs">{formatDatum(item.data.datum)}</span>
+      </div>
+      <h1 class="text-4xl font-extrabold mb-4">{item.data.titel}</h1>
+      <p class="text-blue-200 text-lg max-w-2xl">{item.data.samenvatting}</p>
+    </div>
+  </section>
+
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="prose prose-sm max-w-none text-gray-600">
+        <Content />
+      </div>
+
+      {(item.data.internalLink || item.data.link) && (
+        <div class="mt-8">
+          <a href={item.data.internalLink || item.data.link}
+            target={item.data.link && !item.data.internalLink ? '_blank' : undefined}
+            class="inline-flex items-center gap-2 bg-[#07153b] text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-900 transition text-sm">
+            Meer informatie
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      )}
+
+      <div class="mt-10">
+        <a href="/nieuws" class="text-[#07153b] text-sm font-semibold hover:underline flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Terug naar nieuws
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>

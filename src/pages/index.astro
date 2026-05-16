@@ -1,5 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const nieuwsItems = (await getCollection('nieuws'))
+  .filter(n => n.data.uitgelicht)
+  .sort((a, b) => new Date(b.data.datum).getTime() - new Date(a.data.datum).getTime())
+  .slice(0, 3);
+
+function formatDatum(d: string) {
+  return new Date(d).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 ---
 <Layout title="Welkom">
 
@@ -235,7 +245,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- SV-Tamtam nieuws -->
+  <!-- Nieuws -->
   <section class="py-16 px-4">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-end justify-between mb-10">
@@ -244,29 +254,33 @@ import Layout from '../layouts/Layout.astro';
           <div class="w-14 h-1 bg-yellow-400 mt-3 rounded-full"></div>
           <p class="text-gray-500 text-sm mt-3">Het laatste nieuws uit onze school</p>
         </div>
-        
+        <a href="/nieuws" class="text-sm font-bold text-[#07153b] hover:underline hidden md:flex items-center gap-1">
+          Alle nieuws
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {[
-          { datum: "20 mei 2026", tag: "Inschrijvingen", titel: "Inschrijvingen 2026-2027", tekst: "De inschrijfperiode loopt van 20/05 tot 16/06/2026. Op 29 mei organiseren we op school de inschrijvingen voor nieuwe leerlingen van het 1ste jaar." },
-          { datum: "29 april 2026", tag: "Evenement", titel: "Opendeurdag zaterdag 9 mei", tekst: "Kom onze school ontdekken! Van 9u tot 12u stellen we alle studierichtingen voor. Leerlingen en leerkrachten tonen je rond." },
-          { datum: "18 april 2026", tag: "SV-Tamtam", titel: "14de editie SV-Tamtam beschikbaar", tekst: "De nieuwste editie van ons schoolmagazine staat klaar. Boordevol reportages, interviews en foto's van het schoolleven." },
-        ].map(b => (
-          <article class="scroll-reveal bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group border border-gray-100">
-            <div class="h-1.5 bg-[#07153b] group-hover:bg-yellow-400 transition-colors"></div>
-            <div class="p-6">
-              <div class="flex items-center gap-2 mb-3">
-                <span class="bg-blue-50 text-[#07153b] text-xs font-bold px-2 py-0.5 rounded-full">{b.tag}</span>
-                <span class="text-gray-400 text-xs">{b.datum}</span>
+        {nieuwsItems.map(item => {
+          const href = item.data.internalLink || item.data.link || `/nieuws/${item.id}`;
+          const extern = !!item.data.link && !item.data.internalLink;
+          return (
+            <a href={href} target={extern ? '_blank' : undefined} rel={extern ? 'noopener' : undefined}
+              class="scroll-reveal bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group border border-gray-100">
+              <div class="h-1.5 bg-[#07153b] group-hover:bg-yellow-400 transition-colors"></div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="bg-blue-50 text-[#07153b] text-xs font-bold px-2 py-0.5 rounded-full">{item.data.tag}</span>
+                  <span class="text-gray-400 text-xs">{formatDatum(item.data.datum)}</span>
+                </div>
+                <h3 class="font-bold text-[#07153b] text-base mb-2 leading-snug">{item.data.titel}</h3>
+                <p class="text-gray-500 text-sm leading-relaxed">{item.data.samenvatting}</p>
+                <div class="mt-4 inline-flex items-center gap-1 text-[#07153b] text-xs font-semibold group-hover:underline">
+                  Lees meer <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </div>
               </div>
-              <h3 class="font-bold text-[#07153b] text-base mb-2 leading-snug">{b.titel}</h3>
-              <p class="text-gray-500 text-sm leading-relaxed">{b.tekst}</p>
-              <a href="/sv-tamtam" class="mt-4 inline-flex items-center gap-1 text-[#07153b] text-xs font-semibold hover:underline">
-                Lees meer <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-              </a>
-            </div>
-          </article>
-        ))}
+            </a>
+          );
+        })}
       </div>
     </div>
   </section>
