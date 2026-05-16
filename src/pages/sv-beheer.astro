@@ -1,8 +1,6 @@
 ---
 export const prerender = false;
 
-// In Astro v6 + Cloudflare Workers, dashboard secrets are only accessible
-// via cloudflare:workers — import.meta.env does NOT have them at runtime.
 let ADMIN_PASSWORD: string | undefined;
 let GITHUB_TOKEN:   string | undefined;
 try {
@@ -10,52 +8,71 @@ try {
   ADMIN_PASSWORD = (env as any).ADMIN_PASSWORD;
   GITHUB_TOKEN   = (env as any).GITHUB_TOKEN;
 } catch {
-  // Local development fallback
   ADMIN_PASSWORD = import.meta.env.ADMIN_PASSWORD;
   GITHUB_TOKEN   = import.meta.env.GITHUB_TOKEN;
 }
 const REPO = 'brammostinckx/svalsemberg-website';
+const PAGE = '/sv-beheer';
 
-async function sessionHash(password: string): Promise<string> {
-  const data = new TextEncoder().encode(password + 'sv-admin-2026');
-  const buf  = await crypto.subtle.digest('SHA-256', data);
+async function sessionHash(pw: string) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw + 'sv-admin-2026'));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
-function slugify(text: string): string {
-  return text.toLowerCase()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function slugify(t: string) {
+  return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 }
 
+// ── Rate limiting: max 5 pogingen per uur ─────────────────────────────────
+const MAX_ATTEMPTS = 5;
+const WINDOW_MS    = 60 * 60 * 1000;
+
+function parseAttempts(raw: string | undefined) {
+  try { const [c,s] = atob(raw??'').split(':').map(Number); if(!isNaN(c)&&!isNaN(s)) return {count:c,since:s}; } catch {}
+  return { count: 0, since: Date.now() };
+}
+let attempts = parseAttempts(Astro.cookies.get('sv_fl')?.value);
+if (Date.now() - attempts.since > WINDOW_MS) attempts = { count: 0, since: Date.now() };
+const isBlocked = attempts.count >= MAX_ATTEMPTS;
+
+function saveAttempts() {
+  Astro.cookies.set('sv_fl', btoa(`${attempts.count}:${attempts.since}`),
+    { httpOnly: true, secure: true, maxAge: 3600, path: '/', sameSite: 'lax' });
+}
+
+// ── Session ────────────────────────────────────────────────────────────────
 let isLoggedIn = false;
+const cookieVal = Astro.cookies.get('sv_admin')?.value;
+if (cookieVal && ADMIN_PASSWORD) isLoggedIn = cookieVal === await sessionHash(ADMIN_PASSWORD);
+
 let feedbackMsg = '';
 let feedbackOk  = false;
-
-// Verify existing session
-const cookieVal = Astro.cookies.get('sv_admin')?.value;
-if (cookieVal && ADMIN_PASSWORD) {
-  isLoggedIn = cookieVal === await sessionHash(ADMIN_PASSWORD);
-}
 
 if (Astro.request.method === 'POST') {
   const form   = await Astro.request.formData();
   const action = form.get('action') as string;
 
-  if (action === 'login') {
+  if (action === 'login' && !isBlocked) {
     const pw = form.get('password') as string;
     if (pw === ADMIN_PASSWORD) {
       Astro.cookies.set('sv_admin', await sessionHash(pw),
         { httpOnly: true, secure: true, maxAge: 28800, path: '/', sameSite: 'lax' });
-      return Astro.redirect('/admin');
+      Astro.cookies.delete('sv_fl', { path: '/' });
+      return Astro.redirect(PAGE);
     }
-    feedbackMsg = 'Verkeerd wachtwoord.';
+    attempts.count++;
+    saveAttempts();
+    const left = MAX_ATTEMPTS - attempts.count;
+    feedbackMsg = left > 0
+      ? `Verkeerd wachtwoord. Nog ${left} poging${left===1?'':'en'} over.`
+      : 'Te veel pogingen. Probeer opnieuw over een uur.';
 
   } else if (action === 'logout') {
     Astro.cookies.delete('sv_admin', { path: '/' });
-    return Astro.redirect('/admin');
+    return Astro.redirect(PAGE);
 
-  } else if (action === 'create' && isLoggedIn) {
+  } else if (action === 'create' && isLoggedIn && !isBlocked) {
     const titel        = (form.get('titel')        as string).trim();
     const datum        = form.get('datum')         as string;
     const tag          = form.get('tag')           as string;
@@ -105,6 +122,7 @@ if (Astro.request.method === 'POST') {
 }
 
 const today = new Date().toISOString().slice(0, 10);
+const minutesLeft = Math.ceil((WINDOW_MS - (Date.now() - attempts.since)) / 60000);
 ---
 <!DOCTYPE html>
 <html lang="nl">
@@ -172,18 +190,25 @@ const today = new Date().toISOString().slice(0, 10);
       )}
 
       {!isLoggedIn ? (
-        <!-- Login form -->
-        <div>
-          <h2>Inloggen</h2>
-          <form method="POST">
-            <input type="hidden" name="action" value="login" />
-            <div class="field">
-              <label for="password">Wachtwoord</label>
-              <input type="password" id="password" name="password" required autofocus />
-            </div>
-            <button type="submit" class="btn">Inloggen →</button>
-          </form>
-        </div>
+        isBlocked ? (
+          <div style="text-align:center;padding:1rem 0;color:#991b1b">
+            <p style="font-size:2.5rem;margin-bottom:.5rem">🔒</p>
+            <h2 style="color:#991b1b;margin-bottom:.5rem">Geblokkeerd</h2>
+            <p>Te veel mislukte pogingen. Probeer opnieuw over {minutesLeft} minuten.</p>
+          </div>
+        ) : (
+          <div>
+            <h2>Inloggen</h2>
+            <form method="POST">
+              <input type="hidden" name="action" value="login" />
+              <div class="field">
+                <label for="password">Wachtwoord</label>
+                <input type="password" id="password" name="password" required autofocus />
+              </div>
+              <button type="submit" class="btn">Inloggen →</button>
+            </form>
+          </div>
+        )
       ) : (
         <!-- News creation form -->
         <div>
