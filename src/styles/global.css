@@ -1,6 +1,90 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy: #07153b;
+  --color-navy-700: #13265e;
+
+  --ease-fluid: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --shadow-card: 0 1px 2px rgb(7 21 59 / 0.05), 0 4px 16px -8px rgb(7 21 59 / 0.12);
+  --shadow-card-hover: 0 2px 4px rgb(7 21 59 / 0.06), 0 18px 40px -16px rgb(7 21 59 / 0.28);
+}
+
 :root {
   --kleur-primair: #07153b;
   --kleur-accent: #f5a623;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: #facc15;
+    color: #07153b;
+  }
+
+  :where(a, button, summary, input, select, textarea):focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Tactiele feedback; utilities zoals active:scale-95 gaan nog altijd voor. */
+  :where(a.rounded-xl, a.rounded-lg, button):active {
+    scale: 0.97;
+  }
+}
+
+@keyframes sv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Animatie op `transform`, hover-effecten op `translate`/`scale`: ze bijten elkaar niet. */
+.hero-item {
+  animation: sv-rise 900ms var(--ease-fluid) both;
+}
+
+.js .scroll-reveal {
+  opacity: 0;
+}
+
+.js .scroll-reveal.visible {
+  animation: sv-rise 800ms var(--ease-fluid) var(--d, 0ms) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-item,
+  .js .scroll-reveal,
+  .js .scroll-reveal.visible {
+    animation: none;
+    opacity: 1;
+  }
 }

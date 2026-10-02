@@ -10,183 +10,219 @@ const nieuwsItems = (await getCollection('nieuws'))
 function formatDatum(d: string) {
   return new Date(d).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
 }
+
+const pijlers = [
+  { woord: "Warm", titel: "Iedereen hoort erbij", tekst: "We bouwen aan een sterke schoolgemeenschap waar elke leerling zich gezien en gewaardeerd voelt. Geen leerling valt uit de boot." },
+  { woord: "Sterk", titel: "Leren met een stevige basis", tekst: "Ambitieus onderwijs met aandacht voor elk leerpad. We bereiden leerlingen voor op hoger onderwijs én op het leven." },
+  { woord: "Samen", titel: "Ouders dichtbij", tekst: "Ouders zijn welkome partners in het schoolgebeuren. Open communicatie via Smartschool en regelmatige contactmomenten." },
+];
+
+const praktisch = [
+  { label: "Afwezigheid melden", href: "/afwezigheden" },
+  { label: "Infobrochure 2026-2027", sub: "PDF", href: "/Infobrochure Sint-Victor 26-27.pdf", extern: true },
+  { label: "Chromebookproject", href: "/chromebookproject" },
+  { label: "Schoolreglement", href: "/schoolreglement" },
+  { label: "Veelgestelde vragen", href: "/faq" },
+  { label: "SV-Tamtam nieuwskrantjes", href: "/sv-tamtam" },
+];
+
+const pijl = "M13 7l5 5m0 0l-5 5m5-5H6";
+const extern = "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14";
 ---
 <Layout title="Welkom">
 
   <!-- Hero -->
-  <section class="relative bg-[#07153b] overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-yellow-400"></div>
-      <div class="absolute bottom-0 -left-10 w-80 h-80 rounded-full bg-blue-400"></div>
-    </div>
-    <div class="relative max-w-6xl mx-auto px-4 py-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <div class="text-white">
-        <div class="hero-item inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 text-xs font-bold px-3 py-1 rounded-full mb-5 uppercase tracking-wide" style="animation-delay:0ms">
+  <section class="relative isolate overflow-hidden bg-[#07153b] text-white">
+    <div aria-hidden="true" class="absolute inset-0 -z-10 opacity-[0.08] [background-image:radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_bottom,black_30%,transparent)]"></div>
+    <div aria-hidden="true" class="absolute -z-10 -top-48 -right-32 w-[44rem] h-[44rem] rounded-full bg-blue-500/25 blur-3xl"></div>
+    <div aria-hidden="true" class="absolute -z-10 -bottom-40 -left-40 w-[32rem] h-[32rem] rounded-full bg-blue-500/20 blur-3xl"></div>
+
+    <img
+      src="/school-schets.png"
+      alt=""
+      aria-hidden="true"
+      class="hero-item hidden lg:block absolute bottom-0 right-0 -z-10 w-[60%] max-w-[980px] opacity-80 mix-blend-lighten [mask-image:linear-gradient(to_right,transparent,black_22%)]"
+      style="animation-delay:200ms"
+    />
+
+    <div class="max-w-6xl mx-auto px-4 pt-14 md:pt-20 lg:min-h-[620px]">
+      <div class="max-w-2xl pb-6 lg:pb-20">
+        <div class="hero-item inline-flex items-center gap-2 bg-white/[0.07] border border-white/15 text-yellow-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide">
+          <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
           Secundair onderwijs · Alsemberg
         </div>
-        <h1 class="hero-item text-4xl md:text-5xl font-extrabold leading-tight mb-5" style="animation-delay:100ms">
-          Groeien, leren en<br/>
-          <span class="text-yellow-400">thuiskomen</span><br/>
+        <h1 class="hero-item text-[2.75rem] leading-[1] sm:text-6xl md:text-7xl font-extrabold md:leading-[0.95] tracking-[-0.035em] mb-6" style="animation-delay:80ms">
+          Groeien, leren en
+          <span class="relative inline-block text-yellow-400">
+            thuiskomen
+            <svg aria-hidden="true" class="absolute left-0 -bottom-2 w-full h-3 text-yellow-400/60" viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M2 9c40-6 120-8 196-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          </span>
           in Sint-Victor
         </h1>
-        <p class="hero-item text-blue-200 text-lg mb-8 leading-relaxed max-w-lg" style="animation-delay:200ms">
-          Wij zijn een katholieke school met meer dan 150 jaar traditie. Hier voelt elke leerling zich welkom en uitgedaagd om het beste van zichzelf te worden.
+        <p class="hero-item text-blue-100/85 text-lg md:text-xl mb-9 leading-relaxed max-w-[34rem]" style="animation-delay:160ms">
+          Een katholieke school met meer dan 150 jaar traditie. Hier voelt elke leerling zich welkom en uitgedaagd om het beste van zichzelf te worden.
         </p>
-        <div class="hero-item flex flex-wrap gap-4" style="animation-delay:300ms">
-          <a href="/inschrijvingen" class="bg-yellow-400 text-[#07153b] font-bold px-7 py-3 rounded-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all shadow-lg text-sm">
+        <div class="hero-item flex flex-wrap gap-3" style="animation-delay:240ms">
+          <a href="/inschrijvingen" class="group inline-flex items-center gap-2 bg-yellow-400 text-[#07153b] font-bold px-6 py-3.5 rounded-xl hover:bg-yellow-300 transition-[background-color,scale] duration-150 shadow-[0_8px_24px_-8px_rgb(250_204_21/0.55)]">
             Inschrijven 2026-2027
+            <svg class="w-4 h-4 transition-transform duration-200 ease-fluid group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
           </a>
-          <a href="/sv-tamtam" class="bg-white/10 border border-white/30 text-white font-semibold px-7 py-3 rounded-xl hover:bg-white/20 hover:scale-105 active:scale-95 transition-all text-sm">
+          <a href="/sv-tamtam" class="inline-flex items-center gap-2 bg-white/[0.06] border border-white/20 text-white font-semibold px-6 py-3.5 rounded-xl hover:bg-white/[0.12] hover:border-white/30 transition-[background-color,border-color,scale] duration-150">
             SV-Tamtam
           </a>
         </div>
+
+        <dl class="hero-item mt-12 pt-6 border-t border-white/10 grid grid-cols-3 gap-4 max-w-md" style="animation-delay:320ms">
+          <div>
+            <dt class="sr-only">Traditie</dt>
+            <dd class="font-display text-3xl font-extrabold tracking-tight">150+</dd>
+            <dd class="text-blue-200/70 text-xs mt-0.5">jaar traditie</dd>
+          </div>
+          <div>
+            <dt class="sr-only">Leerlingen</dt>
+            <dd class="font-display text-3xl font-extrabold tracking-tight">600+</dd>
+            <dd class="text-blue-200/70 text-xs mt-0.5">leerlingen</dd>
+          </div>
+          <div>
+            <dt class="sr-only">Richtingen</dt>
+            <dd class="font-display text-3xl font-extrabold tracking-tight">15+</dd>
+            <dd class="text-blue-200/70 text-xs mt-0.5">richtingen</dd>
+          </div>
+        </dl>
       </div>
-      <div class="flex items-end justify-center">
-        <img
-          src="/school-schets.png"
-          alt="Schets van de schoolgebouwen van Sint-Victor Alsemberg"
-          class="w-full max-w-2xl opacity-90 mix-blend-lighten"
-        />
-      </div>
+
     </div>
+    <img
+      src="/school-schets.png"
+      alt="Schets van de schoolgebouwen van Sint-Victor Alsemberg"
+      class="hero-item lg:hidden block w-full max-w-3xl ml-auto opacity-85 mix-blend-lighten"
+      style="animation-delay:200ms"
+    />
   </section>
 
-  <!-- Drie pijlers -->
-  <section class="py-16 px-4 bg-gray-50">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-[#07153b]">Onze aanpak</h2>
-        <div class="w-14 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
-        <p class="text-gray-500 mt-4 max-w-xl mx-auto">Drie woorden vatten samen waar Sint-Victor voor staat.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-t-4 border-[#07153b]">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="bg-[#07153b]/10 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            </div>
-            <span class="bg-[#07153b] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Warm</span>
-          </div>
-          <h3 class="text-xl font-bold text-[#07153b] mb-3">Iedereen hoort erbij</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">We bouwen aan een sterke schoolgemeenschap waar elke leerling zich gezien en gewaardeerd voelt. Geen leerling valt uit de boot.</p>
-        </div>
-        <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-t-4 border-[#07153b]" style="transition-delay:100ms">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="bg-[#07153b]/10 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            </div>
-            <span class="bg-[#07153b] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Sterk</span>
-          </div>
-          <h3 class="text-xl font-bold text-[#07153b] mb-3">Leren met stevige basis</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Ambitieus onderwijs met aandacht voor elk leerpad. We bereiden leerlingen voor op hoger onderwijs én op het leven.</p>
-        </div>
-        <div class="scroll-reveal bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-t-4 border-[#07153b]" style="transition-delay:200ms">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="bg-[#07153b]/10 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-            </div>
-            <span class="bg-[#07153b] text-yellow-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Samen</span>
-          </div>
-          <h3 class="text-xl font-bold text-[#07153b] mb-3">Ouders dichtbij</h3>
-          <p class="text-gray-600 leading-relaxed text-sm">Ouders zijn welkome partners in het schoolgebeuren. Open communicatie via Smartschool en regelmatige contactmomenten.</p>
+  <!-- Onze aanpak -->
+  <section class="py-20 md:py-28 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
+      <div class="md:col-span-5">
+        <div class="md:sticky md:top-32 scroll-reveal">
+          <div class="text-yellow-600 text-xs font-bold uppercase tracking-[0.14em] mb-4">Onze aanpak</div>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-[#07153b] leading-[1.05]">Drie woorden die zeggen waar we voor staan.</h2>
+          <p class="text-gray-500 mt-5 leading-relaxed max-w-sm">Geen slogans, maar hoe we elke dag met leerlingen en ouders samenwerken.</p>
         </div>
       </div>
+      <ol class="md:col-span-7 divide-y divide-gray-200 border-y border-gray-200">
+        {pijlers.map((p, i) => (
+          <li class="scroll-reveal group grid grid-cols-[auto_1fr] gap-x-6 md:gap-x-10 py-8 md:py-10" style={`--d:${i * 90}ms`}>
+            <span class="font-display text-5xl md:text-6xl font-extrabold text-[#07153b]/10 leading-none tabular-nums transition-colors duration-300 group-hover:text-yellow-400">0{i + 1}</span>
+            <div>
+              <span class="inline-block bg-[#07153b] text-yellow-400 text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-[0.12em] mb-3">{p.woord}</span>
+              <h3 class="text-2xl font-bold text-[#07153b] mb-2">{p.titel}</h3>
+              <p class="text-gray-600 leading-relaxed max-w-[52ch]">{p.tekst}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
   <!-- Snel naar -->
-  <section class="py-16 px-4">
+  <section class="pb-20 md:pb-28 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-extrabold text-[#07153b]">Snel naar</h2>
-        <div class="w-14 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <a href="/Infobrochure Sint-Victor 26-27.pdf" target="_blank" rel="noopener" class="scroll-reveal bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 border border-gray-100 hover:border-[#07153b] transition-all duration-300 group text-center">
-          <div class="flex justify-center mb-3">
-            <div class="bg-[#07153b]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#07153b] transition">
-              <svg class="w-6 h-6 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            </div>
+      <h2 class="scroll-reveal text-3xl md:text-4xl font-extrabold text-[#07153b] mb-8">Snel naar</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4">
+
+        <a href="/studieaanbod" class="scroll-reveal group relative overflow-hidden sm:col-span-2 md:row-span-2 bg-[#07153b] text-white rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-72 transition-[translate,box-shadow] duration-300 ease-fluid hover:-translate-y-1 hover:shadow-card-hover">
+          <div aria-hidden="true" class="absolute -right-16 -bottom-16 w-72 h-72 rounded-full border-[40px] border-white/[0.04] transition-transform duration-700 ease-fluid group-hover:scale-110"></div>
+          <div aria-hidden="true" class="absolute right-10 top-10 w-24 h-24 rounded-full bg-yellow-400/10 blur-2xl"></div>
+          <div class="relative">
+            <div class="text-yellow-400 text-xs font-bold uppercase tracking-[0.14em] mb-3">Studieaanbod</div>
+            <h3 class="text-3xl md:text-4xl font-extrabold leading-tight max-w-sm">Van 1ste tot 3de graad: vind de richting die bij je past.</h3>
           </div>
-          <div class="font-bold text-[#07153b] text-sm mb-1">Infobrochure</div>
-          <div class="text-gray-400 text-xs">2026-2027</div>
+          <div class="relative mt-8 flex flex-wrap items-center gap-2">
+            <span class="text-xs font-semibold bg-white/10 px-3 py-1.5 rounded-full">1ste graad</span>
+            <span class="text-xs font-semibold bg-white/10 px-3 py-1.5 rounded-full">2de graad</span>
+            <span class="text-xs font-semibold bg-white/10 px-3 py-1.5 rounded-full">3de graad</span>
+            <span class="ml-auto inline-flex items-center justify-center w-11 h-11 rounded-full bg-yellow-400 text-[#07153b] transition-transform duration-300 ease-fluid group-hover:translate-x-1">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
+            </span>
+          </div>
         </a>
-        <a href="/onze-school#visie" class="scroll-reveal bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 border border-gray-100 hover:border-[#07153b] transition-all duration-300 group text-center" style="transition-delay:100ms">
-          <div class="flex justify-center mb-3">
-            <div class="bg-[#07153b]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#07153b] transition">
-              <svg class="w-6 h-6 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
-            </div>
+
+        <a href="/Infobrochure Sint-Victor 26-27.pdf" target="_blank" rel="noopener" class="scroll-reveal group sm:col-span-2 bg-yellow-400 text-[#07153b] rounded-2xl p-7 flex items-center justify-between gap-6 transition-[translate,box-shadow] duration-300 ease-fluid hover:-translate-y-1 hover:shadow-card-hover" style="--d:80ms">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-[0.14em] mb-2 text-[#07153b]/70">PDF · 2026-2027</div>
+            <h3 class="text-2xl font-extrabold">Infobrochure</h3>
+            <p class="text-sm text-[#07153b]/80 mt-1">Alles over onze school in één document.</p>
           </div>
-          <div class="font-bold text-[#07153b] text-sm mb-1">Onze visie</div>
-          <div class="text-gray-400 text-xs">Waar staan we voor?</div>
+          <span class="shrink-0 inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#07153b] text-yellow-400 transition-transform duration-300 ease-fluid group-hover:translate-y-0.5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          </span>
         </a>
-        <a href="/studieaanbod" class="scroll-reveal bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 border border-gray-100 hover:border-[#07153b] transition-all duration-300 group text-center" style="transition-delay:200ms">
-          <div class="flex justify-center mb-3">
-            <div class="bg-[#07153b]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#07153b] transition">
-              <svg class="w-6 h-6 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            </div>
+
+        <a href="/onze-school#visie" class="scroll-reveal group bg-white border border-gray-200 rounded-2xl p-7 flex flex-col justify-between gap-6 transition-[translate,box-shadow,border-color] duration-300 ease-fluid hover:-translate-y-1 hover:shadow-card-hover hover:border-transparent" style="--d:160ms">
+          <svg class="w-7 h-7 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          <div>
+            <h3 class="text-lg font-bold text-[#07153b] flex items-center gap-1.5">Onze visie
+              <svg class="w-4 h-4 opacity-0 -translate-x-1 transition-[opacity,translate] duration-200 ease-fluid group-hover:opacity-100 group-hover:translate-x-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
+            </h3>
+            <p class="text-gray-500 text-sm">Waar staan we voor?</p>
           </div>
-          <div class="font-bold text-[#07153b] text-sm mb-1">Studieaanbod</div>
-          <div class="text-gray-400 text-xs">Alle richtingen</div>
         </a>
-        <a href="/schoolreglement" class="scroll-reveal bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 border border-gray-100 hover:border-[#07153b] transition-all duration-300 group text-center" style="transition-delay:300ms">
-          <div class="flex justify-center mb-3">
-            <div class="bg-[#07153b]/10 rounded-xl w-12 h-12 flex items-center justify-center group-hover:bg-[#07153b] transition">
-              <svg class="w-6 h-6 text-[#07153b] group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-            </div>
+
+        <a href="/schoolreglement" class="scroll-reveal group bg-white border border-gray-200 rounded-2xl p-7 flex flex-col justify-between gap-6 transition-[translate,box-shadow,border-color] duration-300 ease-fluid hover:-translate-y-1 hover:shadow-card-hover hover:border-transparent" style="--d:240ms">
+          <svg class="w-7 h-7 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          <div>
+            <h3 class="text-lg font-bold text-[#07153b] flex items-center gap-1.5">Schoolreglement
+              <svg class="w-4 h-4 opacity-0 -translate-x-1 transition-[opacity,translate] duration-200 ease-fluid group-hover:opacity-100 group-hover:translate-x-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
+            </h3>
+            <p class="text-gray-500 text-sm">Regels &amp; afspraken</p>
           </div>
-          <div class="font-bold text-[#07153b] text-sm mb-1">Schoolreglement</div>
-          <div class="text-gray-400 text-xs">Regels & afspraken</div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Praktisch -->
-  <section class="py-16 px-4 bg-gray-50">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-      <div>
-        <h2 class="text-3xl font-extrabold text-[#07153b] mb-3">Praktisch</h2>
-        <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
-        <div class="space-y-3">
-          {[
-            { label: "Afwezigheid melden", href: "/afwezigheden" },
-            { label: "Infobrochure 2026-2027 (PDF)", href: "/Infobrochure Sint-Victor 26-27.pdf", extern: true },
-            { label: "Chromebookproject", href: "/chromebookproject" },
-            { label: "Schoolreglement", href: "/schoolreglement" },
-            { label: "FAQ — veelgestelde vragen", href: "/faq" },
-            { label: "SV-Tamtam nieuwskrantjes", href: "/sv-tamtam" },
-          ].map(l => (
-            <a href={l.href} target={l.extern ? "_blank" : undefined} rel={l.extern ? "noopener" : undefined} class="flex items-center justify-between bg-white rounded-xl px-5 py-4 shadow-sm hover:shadow-md border border-transparent hover:border-[#07153b] hover:-translate-y-0.5 transition-all duration-200 group">
-              <span class="font-medium text-gray-700 group-hover:text-[#07153b] text-sm transition">{l.label}</span>
-              <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] group-hover:translate-x-1 transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
+  <!-- Praktisch & digitale tools -->
+  <section class="py-20 md:py-28 px-4 bg-gray-50">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-start">
+      <div class="scroll-reveal">
+        <div class="text-yellow-600 text-xs font-bold uppercase tracking-[0.14em] mb-3">Voor ouders &amp; leerlingen</div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-8">Praktisch</h2>
+        <ul class="bg-white rounded-2xl shadow-card divide-y divide-gray-100 overflow-hidden">
+          {praktisch.map(l => (
+            <li>
+              <a href={l.href} target={l.extern ? "_blank" : undefined} rel={l.extern ? "noopener" : undefined}
+                class="group flex items-center justify-between gap-4 px-6 py-4 transition-colors duration-150 hover:bg-gray-50">
+                <span class="font-medium text-gray-700 group-hover:text-[#07153b] transition-colors">
+                  {l.label}
+                  {l.sub && <span class="ml-1.5 text-[11px] font-bold text-gray-400 align-middle">{l.sub}</span>}
+                </span>
+                <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] transition-[color,translate] duration-200 ease-fluid group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
-      <div>
-        <h2 class="text-3xl font-extrabold text-[#07153b] mb-3">Digitale tools</h2>
-        <div class="w-14 h-1 bg-yellow-400 mb-8 rounded-full"></div>
-        <div class="space-y-4">
-          <a href="https://sv.smartschool.be" target="_blank" rel="noopener"
-            class="flex items-center gap-4 bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-transparent hover:border-[#07153b] transition group">
-            <div class="rounded-xl w-12 h-12 shrink-0 overflow-hidden">
-              <img src="/smartschool-logo.png" alt="Smartschool" class="w-full h-full object-cover" />
-            </div>
-            <div>
-              <div class="font-bold text-[#07153b] text-sm">Smartschool</div>
-              <div class="text-gray-400 text-xs">sv.smartschool.be · digitaal leerplatform</div>
-            </div>
-            <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] ml-auto transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-          <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener"
-            class="flex items-center gap-4 bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-transparent hover:border-pink-400 transition group">
-            <div class="rounded-xl w-12 h-12 shrink-0 overflow-hidden">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+
+      <div class="scroll-reveal" style="--d:100ms">
+        <div class="text-yellow-600 text-xs font-bold uppercase tracking-[0.14em] mb-3">Blijf verbonden</div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-8">Digitale tools</h2>
+        <ul class="bg-white rounded-2xl shadow-card divide-y divide-gray-100 overflow-hidden">
+          <li>
+            <a href="https://sv.smartschool.be" target="_blank" rel="noopener" class="group flex items-center gap-4 px-6 py-4 transition-colors duration-150 hover:bg-gray-50">
+              <img src="/smartschool-logo.png" alt="" class="w-11 h-11 rounded-xl object-cover shrink-0" />
+              <div class="min-w-0">
+                <div class="font-bold text-[#07153b]">Smartschool</div>
+                <div class="text-gray-500 text-sm truncate">Digitaal leerplatform</div>
+              </div>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] ml-auto shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={extern} /></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener" class="group flex items-center gap-4 px-6 py-4 transition-colors duration-150 hover:bg-gray-50">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11 shrink-0" aria-hidden="true">
                 <defs>
                   <radialGradient id="ig-grad" cx="30%" cy="107%" r="150%">
                     <stop offset="0%" stop-color="#ffd676"/>
@@ -202,98 +238,94 @@ function formatDatum(d: string) {
                 <circle cx="24" cy="24" r="5.5" fill="none" stroke="white" stroke-width="2.5"/>
                 <circle cx="35" cy="13" r="1.8" fill="white"/>
               </svg>
-            </div>
-            <div>
-              <div class="font-bold text-gray-800 text-sm">Instagram</div>
-              <div class="text-gray-400 text-xs">@sintvictor · schoolleven in beelden</div>
-            </div>
-            <svg class="w-4 h-4 text-gray-300 group-hover:text-pink-400 ml-auto transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-          <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener"
-            class="flex items-center gap-4 bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-transparent hover:border-blue-500 transition group">
-            <div class="rounded-xl w-12 h-12 shrink-0 overflow-hidden">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <div class="min-w-0">
+                <div class="font-bold text-[#07153b]">Instagram</div>
+                <div class="text-gray-500 text-sm truncate">@sintvictor · schoolleven in beelden</div>
+              </div>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] ml-auto shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={extern} /></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener" class="group flex items-center gap-4 px-6 py-4 transition-colors duration-150 hover:bg-gray-50">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="w-11 h-11 shrink-0" aria-hidden="true">
                 <rect width="48" height="48" rx="12" fill="#1877F2"/>
                 <path d="M26.5 25.5h3.2l0.6-4H26.5v-2.2c0-1.1 0.5-2.1 2.2-2.1h1.7V13.4c0 0-1.5-0.3-3-0.3-3.1 0-5.1 1.9-5.1 5.2v3.2H19v4h3.3V36h4.2V25.5z" fill="white"/>
               </svg>
-            </div>
-            <div>
-              <div class="font-bold text-gray-800 text-sm">Facebook</div>
-              <div class="text-gray-400 text-xs">@sintvictor · nieuws & evenementen</div>
-            </div>
-            <svg class="w-4 h-4 text-gray-300 group-hover:text-blue-500 ml-auto transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-          <a href="https://www.youtube.com/@SintVictorAlsemberg" target="_blank" rel="noopener"
-            class="flex items-center gap-4 bg-white rounded-xl p-5 shadow-sm hover:shadow-md border border-transparent hover:border-red-500 transition group">
-            <div class="bg-red-600 rounded-xl w-12 h-12 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </div>
-            <div>
-              <div class="font-bold text-gray-800 text-sm">YouTube</div>
-              <div class="text-gray-400 text-xs">@SintVictorAlsemberg · video's & reportages</div>
-            </div>
-            <svg class="w-4 h-4 text-gray-300 group-hover:text-red-500 ml-auto transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
+              <div class="min-w-0">
+                <div class="font-bold text-[#07153b]">Facebook</div>
+                <div class="text-gray-500 text-sm truncate">@sintvictor · nieuws &amp; evenementen</div>
+              </div>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] ml-auto shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={extern} /></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@SintVictorAlsemberg" target="_blank" rel="noopener" class="group flex items-center gap-4 px-6 py-4 transition-colors duration-150 hover:bg-gray-50">
+              <span class="bg-red-600 rounded-xl w-11 h-11 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </span>
+              <div class="min-w-0">
+                <div class="font-bold text-[#07153b]">YouTube</div>
+                <div class="text-gray-500 text-sm truncate">Video's &amp; reportages</div>
+              </div>
+              <svg class="w-4 h-4 text-gray-300 group-hover:text-[#07153b] ml-auto shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={extern} /></svg>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
   <!-- Nieuws -->
-  <section class="py-16 px-4">
+  <section class="py-20 md:py-28 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="flex items-end justify-between mb-10">
-        <div>
-          <h2 class="text-3xl font-extrabold text-[#07153b]">SV-Nieuws</h2>
-          <div class="w-14 h-1 bg-yellow-400 mt-3 rounded-full"></div>
-          <p class="text-gray-500 text-sm mt-3">Het laatste nieuws uit onze school</p>
+      <div class="flex items-end justify-between gap-6 mb-10">
+        <div class="scroll-reveal">
+          <div class="text-yellow-600 text-xs font-bold uppercase tracking-[0.14em] mb-3">Uit de school</div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b]">SV-Nieuws</h2>
         </div>
-        <a href="/nieuws" class="text-sm font-bold text-[#07153b] hover:underline hidden md:flex items-center gap-1">
+        <a href="/nieuws" class="group hidden md:inline-flex items-center gap-1.5 text-sm font-bold text-[#07153b]">
           Alle nieuws
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <svg class="w-4 h-4 transition-transform duration-200 ease-fluid group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {nieuwsItems.map(item => {
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {nieuwsItems.map((item, i) => {
           const href = item.data.internalLink || item.data.link || `/nieuws/${item.id}`;
-          const extern = !!item.data.link && !item.data.internalLink;
+          const isExtern = !!item.data.link && !item.data.internalLink;
           return (
-            <a href={href} target={extern ? '_blank' : undefined} rel={extern ? 'noopener' : undefined}
-              class="scroll-reveal bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group border border-gray-100">
-              <div class="h-1.5 bg-[#07153b] group-hover:bg-yellow-400 transition-colors"></div>
-              <div class="p-6">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="bg-blue-50 text-[#07153b] text-xs font-bold px-2 py-0.5 rounded-full">{item.data.tag}</span>
-                  <span class="text-gray-400 text-xs">{formatDatum(item.data.datum)}</span>
-                </div>
-                <h3 class="font-bold text-[#07153b] text-base mb-2 leading-snug">{item.data.titel}</h3>
-                <p class="text-gray-500 text-sm leading-relaxed">{item.data.samenvatting}</p>
-                <div class="mt-4 inline-flex items-center gap-1 text-[#07153b] text-xs font-semibold group-hover:underline">
-                  Lees meer <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
+            <a href={href} target={isExtern ? '_blank' : undefined} rel={isExtern ? 'noopener' : undefined}
+              class="scroll-reveal group flex flex-col bg-white rounded-2xl p-7 border border-gray-200 transition-[translate,box-shadow,border-color] duration-300 ease-fluid hover:-translate-y-1 hover:shadow-card-hover hover:border-transparent"
+              style={`--d:${i * 90}ms`}>
+              <div class="flex items-center gap-2 mb-4">
+                <span class="bg-yellow-100 text-[#07153b] text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">{item.data.tag}</span>
+                <span class="text-gray-400 text-xs">{formatDatum(item.data.datum)}</span>
+              </div>
+              <h3 class="font-bold text-[#07153b] text-xl leading-snug mb-2">{item.data.titel}</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">{item.data.samenvatting}</p>
+              <div class="mt-auto pt-6 inline-flex items-center gap-1.5 text-[#07153b] text-sm font-semibold">
+                Lees meer
+                <svg class="w-4 h-4 transition-transform duration-200 ease-fluid group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
               </div>
             </a>
           );
         })}
       </div>
+      <a href="/nieuws" class="md:hidden mt-6 flex items-center justify-center gap-1.5 text-sm font-bold text-[#07153b] border border-gray-200 rounded-xl py-3">
+        Alle nieuws
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
+      </a>
     </div>
   </section>
 
   <!-- Instagram feed -->
-  <section class="py-16 px-4 bg-gray-50">
+  <section class="py-20 md:py-28 px-4 bg-gray-50">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl font-extrabold text-[#07153b]">Volg ons op Instagram</h2>
-        <div class="w-14 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>
-        <p class="text-gray-500 text-sm mt-3">
-          <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener" class="text-[#07153b] font-semibold hover:underline">@sintvictor</a>
-        </p>
+      <div class="flex items-end justify-between gap-6 mb-10">
+        <div class="scroll-reveal">
+          <div class="text-yellow-600 text-xs font-bold uppercase tracking-[0.14em] mb-3">Schoolleven in beeld</div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b]">Volg ons op Instagram</h2>
+        </div>
+        <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold text-[#07153b] hover:underline underline-offset-4">@sintvictor</a>
       </div>
       <behold-widget feed-id="bFML90ombZcWYKUN4vTf"></behold-widget>
       <script>
@@ -306,57 +338,21 @@ function formatDatum(d: string) {
   </section>
 
   <!-- CTA -->
-  <section class="bg-[#07153b] py-16 px-4">
-    <div class="max-w-4xl mx-auto text-center text-white">
-      <h2 class="text-3xl font-extrabold mb-3">Klaar om deel uit te maken van Sint-Victor?</h2>
-      <p class="text-blue-200 text-lg mb-8 max-w-xl mx-auto">
-        Schrijf je in voor schooljaar 2026-2027:
-      </p>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href="/inschrijvingen" class="bg-yellow-400 text-[#07153b] font-bold px-8 py-3 rounded-xl hover:bg-yellow-300 hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg">Inschrijven</a>
+  <section class="relative isolate overflow-hidden bg-[#07153b] text-white py-20 md:py-24 px-4">
+    <div aria-hidden="true" class="absolute -z-10 -top-32 left-1/3 w-[36rem] h-[36rem] rounded-full bg-blue-500/20 blur-3xl"></div>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8 scroll-reveal">
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-[1.05]">Klaar om deel uit te maken van <span class="text-yellow-400">Sint-Victor</span>?</h2>
+        <p class="text-blue-100/80 text-lg mt-4 max-w-xl">Schrijf je in voor schooljaar 2026-2027, of neem contact op met ons secretariaat als je eerst vragen hebt.</p>
+      </div>
+      <div class="md:col-span-4 flex flex-wrap md:justify-end gap-3 scroll-reveal" style="--d:100ms">
+        <a href="/inschrijvingen" class="group inline-flex items-center gap-2 bg-yellow-400 text-[#07153b] font-bold px-7 py-3.5 rounded-xl hover:bg-yellow-300 transition-[background-color,scale] duration-150">
+          Inschrijven
+          <svg class="w-4 h-4 transition-transform duration-200 ease-fluid group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d={pijl}/></svg>
+        </a>
+        <a href="/contact" class="inline-flex items-center bg-white/[0.06] border border-white/20 text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-white/[0.12] transition-[background-color,scale] duration-150">Contact</a>
       </div>
     </div>
   </section>
-
-
-<style>
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-12px); }
-  }
-  .hero-item {
-    opacity: 0;
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-  .animate-float {
-    animation: float 5s ease-in-out infinite;
-  }
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
-</script>
 
 </Layout>
