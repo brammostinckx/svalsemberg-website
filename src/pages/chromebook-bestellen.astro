@@ -2,6 +2,10 @@
 // Sint-Victor — Digitaal huurovereenkomst-formulier Chromebook
 // Last Modified: 2026-06-05
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const veld = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-[border-color,box-shadow] duration-150 hover:border-gray-300 focus:outline-none focus:border-[#07153b] focus:ring-4 focus:ring-[#07153b]/10";
+const label = "block text-sm font-semibold text-[#07153b] mb-1.5";
 
 const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyIKqpL5AMygtdkDtUuD0VzMklh36Ry46Iz5PL6ze30qL51S4P6MuUqZBxTXQV0KhxtLQ/exec';
 const SHARED_SECRET = '81edad35-de30-4d4e-a70b-c53ba23118ca5cfdfb89-6b5d-476e-ad0d-81c21a326340';
@@ -9,90 +13,93 @@ const SHARED_SECRET = '81edad35-de30-4d4e-a70b-c53ba23118ca5cfdfb89-6b5d-476e-ad
 
 <Layout title="Chromebook bestellen" description="Digitaal een Chromebook huren bij Sint-Victor Alsemberg — vul het formulier in en onderteken online.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
+  <PageHero
+    eyebrow="Chromebookproject"
+    title="Chromebook huren"
+    intro="Vul het formulier in en onderteken digitaal. U ontvangt het ondertekende contract meteen per e-mail."
+    width="4xl"
+  />
+
+  <section class="py-16 md:py-24 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Chromebookproject</div>
-      <h1 class="text-4xl font-extrabold mb-4">Chromebook huren</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">
-        Vul het formulier in en onderteken digitaal. U ontvangt het ondertekende contract meteen per e-mail.
-      </p>
-    </div>
-  </section>
+      <div class="max-w-3xl space-y-6">
 
-  <section class="py-12 px-4">
-    <div class="max-w-3xl mx-auto space-y-6">
-
-      <div class="bg-blue-50 border border-blue-100 rounded-2xl px-6 py-5 text-sm text-[#07153b]">
-        <div class="font-bold mb-2">Praktisch</div>
-        <ul class="list-disc ml-5 space-y-1 text-gray-700">
-          <li>Huurprijs: <strong>€ 91,67 per schooljaar</strong> (via gewone schoolfacturen)</li>
-          <li>Eenmalige waarborg: <strong>€ 50</strong> (terugbetaald bij schadevrije inlevering)</li>
-          <li>Het toestel wordt door de school klaargemaakt en u krijgt bericht voor uitlevering.</li>
-        </ul>
-      </div>
-
-      <form id="huurForm" class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
-        <div>
-          <label class="block text-sm font-bold text-[#07153b] mb-1" for="naamOuder">Naam ouder / voogd *</label>
-          <input id="naamOuder" name="naamOuder" type="text" required autocomplete="name"
-                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#07153b] focus:border-transparent focus:outline-none" />
+        <div class="scroll-reveal bg-blue-50 border border-blue-100 rounded-2xl px-6 py-5 text-sm text-[#07153b]">
+          <span class="eyebrow">Praktisch</span>
+          <ul class="list-disc ml-5 space-y-1.5 text-gray-700 marker:text-[#07153b]/40">
+            <li>Huurprijs: <strong class="text-[#07153b]">€ 91,67 per schooljaar</strong> (via gewone schoolfacturen)</li>
+            <li>Eenmalige waarborg: <strong class="text-[#07153b]">€ 50</strong> (terugbetaald bij schadevrije inlevering)</li>
+            <li>Het toestel wordt door de school klaargemaakt en u krijgt bericht voor uitlevering.</li>
+          </ul>
         </div>
 
-        <div>
-          <label class="block text-sm font-bold text-[#07153b] mb-1" for="naamLeerling">Naam leerling *</label>
-          <input id="naamLeerling" name="naamLeerling" type="text" required
-                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#07153b] focus:border-transparent focus:outline-none" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-bold text-[#07153b] mb-1" for="email">E-mailadres ouder *</label>
-          <input id="email" name="email" type="email" required autocomplete="email"
-                 class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#07153b] focus:border-transparent focus:outline-none" />
-          <p class="text-xs text-gray-500 mt-1">U ontvangt op dit adres een kopie van het ondertekende contract.</p>
-        </div>
-
-        <div>
-          <label class="block text-sm font-bold text-[#07153b] mb-1">Handtekening *</label>
-          <div class="border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 relative">
-            <canvas id="sigPad" class="w-full touch-none rounded-lg block" style="height:180px"></canvas>
-            <button type="button" id="clearSig"
-                    class="absolute top-2 right-2 text-xs text-gray-600 hover:text-red-600 bg-white px-2 py-1 rounded shadow">
-              Wissen
-            </button>
+        <form id="huurForm" class="scroll-reveal bg-white rounded-2xl border border-gray-100 shadow-card p-6 md:p-8 space-y-5" style="--d:80ms">
+          <div>
+            <label class={label} for="naamOuder">Naam ouder / voogd *</label>
+            <input id="naamOuder" name="naamOuder" type="text" required autocomplete="name"
+                   class={veld} />
           </div>
-          <p class="text-xs text-gray-500 mt-1">Teken met uw muis of vinger.</p>
+
+          <div>
+            <label class={label} for="naamLeerling">Naam leerling *</label>
+            <input id="naamLeerling" name="naamLeerling" type="text" required
+                   class={veld} />
+          </div>
+
+          <div>
+            <label class={label} for="email">E-mailadres ouder *</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+                   class={veld} />
+            <p class="text-xs text-gray-500 mt-1.5">U ontvangt op dit adres een kopie van het ondertekende contract.</p>
+          </div>
+
+          <div>
+            <label class={label}>Handtekening *</label>
+            <div class="border-2 border-dashed border-gray-200 rounded-xl bg-gray-50 relative transition-colors duration-150 hover:border-gray-300">
+              <canvas id="sigPad" class="w-full touch-none rounded-xl block" style="height:180px"></canvas>
+              <button type="button" id="clearSig"
+                      class="absolute top-2 right-2 text-xs font-semibold text-gray-600 hover:text-red-600 bg-white border border-gray-200 px-2.5 py-1 rounded-lg shadow-card transition-colors duration-150">
+                Wissen
+              </button>
+            </div>
+            <p class="text-xs text-gray-500 mt-1.5">Teken met uw muis of vinger.</p>
+          </div>
+
+          <div class="flex items-start gap-3 bg-gray-50 border border-gray-100 rounded-xl p-4">
+            <input id="akkoord" type="checkbox" required class="mt-1 w-4 h-4 accent-[#07153b]" />
+            <label for="akkoord" class="text-sm text-gray-700 leading-relaxed">
+              Ik verklaar kennis genomen te hebben van de
+              <a href="/Huurovereenkomst-Chromebook-2026-2027.pdf" target="_blank" class="text-[#07153b] font-semibold underline underline-offset-2">
+                volledige huurovereenkomst</a>
+              en ga akkoord met alle bepalingen. *
+            </label>
+          </div>
+
+          <button type="submit" id="submitBtn"
+                  class="btn btn-navy w-full disabled:opacity-50 disabled:cursor-not-allowed">
+            <span id="submitText">Onderteken en verzend</span>
+            <svg id="submitSpinner" class="hidden animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
+              <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" class="opacity-75"></path>
+            </svg>
+          </button>
+
+          <p id="formStatus" class="text-sm text-center"></p>
+        </form>
+
+        <div id="successBox" class="hidden bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
+          <div class="mx-auto mb-4 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-extrabold text-green-800 mb-2">Bedankt!</h2>
+          <p class="text-green-900">
+            Uw huurovereenkomst is succesvol verzonden. U ontvangt binnen enkele minuten een kopie per e-mail.
+          </p>
         </div>
 
-        <div class="flex items-start gap-3 bg-gray-50 border border-gray-100 rounded-lg p-3">
-          <input id="akkoord" type="checkbox" required class="mt-1 w-4 h-4" />
-          <label for="akkoord" class="text-sm text-gray-700 leading-relaxed">
-            Ik verklaar kennis genomen te hebben van de
-            <a href="/Huurovereenkomst-Chromebook-2026-2027.pdf" target="_blank" class="text-[#07153b] font-semibold underline">
-              volledige huurovereenkomst</a>
-            en ga akkoord met alle bepalingen. *
-          </label>
-        </div>
-
-        <button type="submit" id="submitBtn"
-                class="w-full bg-[#07153b] text-white font-bold py-3 rounded-lg hover:bg-[#0a1d52] disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center justify-center gap-2">
-          <span id="submitText">Onderteken en verzend</span>
-          <svg id="submitSpinner" class="hidden animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-            <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" class="opacity-75"></path>
-          </svg>
-        </button>
-
-        <p id="formStatus" class="text-sm text-center"></p>
-      </form>
-
-      <div id="successBox" class="hidden bg-green-50 border border-green-200 rounded-2xl p-6 text-center">
-        <div class="text-green-600 text-4xl mb-2">✓</div>
-        <h2 class="text-xl font-extrabold text-green-800 mb-2">Bedankt!</h2>
-        <p class="text-green-900">
-          Uw huurovereenkomst is succesvol verzonden. U ontvangt binnen enkele minuten een kopie per e-mail.
-        </p>
       </div>
-
     </div>
   </section>
 

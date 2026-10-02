@@ -1,48 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 const gegevens = [
   { label: "Adres", waarde: "Brusselsesteenweg 20\n1652 Alsemberg" },
-  { label: "Telefoon", waarde: "02/380.15.89" },
-  { label: "Algemeen", waarde: "info@sintvictor.be" },
-  { label: "Solliciteren", waarde: "solliciteren@sintvictor.be" },
+  { label: "Telefoon", waarde: "02/380.15.89", href: "tel:+3223801589" },
+  { label: "Algemeen", waarde: "info@sintvictor.be", href: "mailto:info@sintvictor.be" },
+  { label: "Solliciteren", waarde: "solliciteren@sintvictor.be", href: "mailto:solliciteren@sintvictor.be" },
   { label: "Secretariaat", waarde: "Ma-Vr: 8u00 - 16u30" },
 ];
+const veld = "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm bg-white transition-[border-color,box-shadow] duration-150 hover:border-gray-300 focus:outline-none focus:border-[#07153b] focus:ring-4 focus:ring-[#07153b]/10";
+const label = "block text-sm font-semibold text-[#07153b] mb-1.5";
 ---
 <Layout title="Contact" description="Contactgegevens van Sint-Victor Alsemberg.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
-      <h1 class="text-4xl font-extrabold mb-4">Contact</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">We horen graag van je. Ons secretariaat staat je graag te woord.</p>
-    </div>
-  </section>
+  <PageHero eyebrow="Sint-Victor Alsemberg" title="Contact" intro="We horen graag van je. Ons secretariaat staat je graag te woord." />
 
-  <section class="py-16 px-4">
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+  <section class="py-16 md:py-24 px-4">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
 
-      <div>
-        <h2 class="text-2xl font-extrabold text-[#07153b] mb-6">Gegevens</h2>
-        <div class="space-y-3 mb-8">
+      <div class="md:col-span-5 scroll-reveal">
+        <span class="eyebrow">Bereikbaar</span>
+        <h2 class="text-3xl font-extrabold text-[#07153b] mb-6">Gegevens</h2>
+        <dl class="divide-y divide-gray-100 border-y border-gray-100 mb-10">
           {gegevens.map(c => (
-            <div class="flex gap-4 items-start bg-gray-50 rounded-xl p-4">
-              <div class="w-1.5 h-full min-h-4 bg-yellow-400 rounded-full shrink-0 mt-1"></div>
-              <div>
-                <div class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-0.5">{c.label}</div>
-                <div class="text-gray-700 text-sm whitespace-pre-line">{c.waarde}</div>
-              </div>
+            <div class="py-4 grid grid-cols-[7.5rem_1fr] gap-4">
+              <dt class="text-xs font-bold text-gray-400 uppercase tracking-wide pt-0.5">{c.label}</dt>
+              <dd class="text-gray-800 text-sm whitespace-pre-line">
+                {c.href ? <a href={c.href} class="font-medium text-[#07153b] hover:underline underline-offset-4">{c.waarde}</a> : c.waarde}
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
 
-        <h3 class="font-extrabold text-[#07153b] mb-4">Directie</h3>
+        <h3 class="text-xl font-bold text-[#07153b] mb-4">Directie</h3>
         <div class="space-y-3">
           {[
             { naam: "Nele Neyt", rol: "Directeur 1ste graad" },
             { naam: "Kevin Swaelens", rol: "Directeur 2de & 3de graad" },
           ].map(d => (
-            <div class="flex items-center gap-4 bg-gray-50 rounded-xl p-4">
-              <div class="bg-[#07153b] rounded-full w-10 h-10 flex items-center justify-center shrink-0">
+            <div class="flex items-center gap-4">
+              <div class="bg-[#07153b] rounded-full w-11 h-11 flex items-center justify-center shrink-0">
                 <span class="text-yellow-400 font-bold text-xs">{d.naam.split(' ').map((n: string) => n[0]).join('')}</span>
               </div>
               <div>
@@ -53,72 +50,75 @@ const gegevens = [
           ))}
         </div>
 
-        <div class="mt-8 bg-[#07153b] text-white rounded-2xl p-5">
-          <div class="font-bold text-yellow-400 mb-2 text-sm">Digitale platforms</div>
-          <div class="space-y-2 text-sm text-blue-200">
-            <div>Smartschool: <a href="https://sv.smartschool.be" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition">sv.smartschool.be</a></div>
-            <div>Instagram: <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition">@sintvictor</a></div>
-            <div>Facebook: <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition">@sintvictor</a></div>
+        <div class="mt-10 bg-[#07153b] text-white rounded-2xl p-6">
+          <div class="font-bold text-yellow-400 mb-3 text-sm">Digitale platforms</div>
+          <div class="space-y-2 text-sm text-blue-100/80">
+            <div>Smartschool: <a href="https://sv.smartschool.be" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition-colors">sv.smartschool.be</a></div>
+            <div>Instagram: <a href="https://instagram.com/sintvictor" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition-colors">@sintvictor</a></div>
+            <div>Facebook: <a href="https://facebook.com/sintvictor" target="_blank" rel="noopener" class="text-white hover:text-yellow-300 transition-colors">@sintvictor</a></div>
           </div>
         </div>
       </div>
 
-      <div>
-        <h2 class="text-2xl font-extrabold text-[#07153b] mb-6">Stuur ons een bericht</h2>
-        <form class="space-y-4" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="c45abed7-7b00-40ad-92a2-3db65d9405bd" />
-          <input type="hidden" name="subject" value="Nieuw bericht via de website van Sint-Victor" />
-          <input type="hidden" name="from_name" value="Sint-Victor Website" />
-          <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="naam">Naam</label>
-            <input id="naam" name="naam" type="text" required placeholder="Voornaam en naam"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="email">E-mail</label>
-            <input id="email" name="email" type="email" required placeholder="jouw@email.be"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="onderwerp">Onderwerp</label>
-            <select id="onderwerp" name="onderwerp"
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50">
-              <option value="">Kies een onderwerp...</option>
-              <option>Inschrijvingen</option>
-              <option>Studieaanbod</option>
-              <option>Afwezigheid</option>
-              <option>Praktische info</option>
-              <option>Andere</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1" for="bericht">Bericht</label>
-            <textarea id="bericht" name="bericht" rows="5" required placeholder="Jouw bericht..."
-              class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#07153b] transition bg-gray-50 resize-none"></textarea>
-          </div>
-          <input type="hidden" name="redirect" value="https://svalsemberg-website.lucky-frost-7e00.workers.dev/contact?verzonden=1" />
-          <button type="submit" class="w-full bg-[#07153b] text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition text-sm">
-            Verstuur bericht
-          </button>
-        </form>
+      <div class="md:col-span-7 scroll-reveal" style="--d:100ms">
+        <div class="bg-white rounded-2xl shadow-card border border-gray-100 p-6 md:p-8">
+          <span class="eyebrow">Formulier</span>
+          <h2 class="text-3xl font-extrabold text-[#07153b] mb-6">Stuur ons een bericht</h2>
 
-        {Astro.url.searchParams.get('verzonden') === '1' && (
-          <div class="mt-4 bg-green-50 border border-green-200 rounded-xl px-5 py-4 text-green-800 text-sm font-medium flex items-center gap-3">
-            <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            Je bericht is verstuurd! We nemen zo snel mogelijk contact met je op.
-          </div>
-        )}
+          {Astro.url.searchParams.get('verzonden') === '1' && (
+            <div class="mb-6 bg-green-50 border border-green-200 rounded-xl px-5 py-4 text-green-800 text-sm font-medium flex items-center gap-3">
+              <svg class="w-5 h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Je bericht is verstuurd! We nemen zo snel mogelijk contact met je op.
+            </div>
+          )}
+
+          <form class="space-y-5" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="c45abed7-7b00-40ad-92a2-3db65d9405bd" />
+            <input type="hidden" name="subject" value="Nieuw bericht via de website van Sint-Victor" />
+            <input type="hidden" name="from_name" value="Sint-Victor Website" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class={label} for="naam">Naam</label>
+                <input id="naam" name="naam" type="text" required autocomplete="name" placeholder="Voornaam en naam" class={veld} />
+              </div>
+              <div>
+                <label class={label} for="email">E-mail</label>
+                <input id="email" name="email" type="email" required autocomplete="email" placeholder="jouw@email.be" class={veld} />
+              </div>
+            </div>
+            <div>
+              <label class={label} for="onderwerp">Onderwerp</label>
+              <select id="onderwerp" name="onderwerp" class={veld}>
+                <option value="">Kies een onderwerp...</option>
+                <option>Inschrijvingen</option>
+                <option>Studieaanbod</option>
+                <option>Afwezigheid</option>
+                <option>Praktische info</option>
+                <option>Andere</option>
+              </select>
+            </div>
+            <div>
+              <label class={label} for="bericht">Bericht</label>
+              <textarea id="bericht" name="bericht" rows="5" required placeholder="Jouw bericht..." class={`${veld} resize-none`}></textarea>
+            </div>
+            <input type="hidden" name="redirect" value="https://svalsemberg-website.lucky-frost-7e00.workers.dev/contact?verzonden=1" />
+            <button type="submit" class="btn btn-navy w-full">
+              Verstuur bericht
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </button>
+          </form>
+        </div>
 
         <div class="mt-8">
-          <h3 class="font-extrabold text-[#07153b] mb-3 text-sm uppercase tracking-wide">Hoe ons vinden</h3>
-          <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-bold text-[#07153b] mb-4">Hoe ons vinden</h3>
+          <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-card">
             <iframe
               src="https://maps.google.com/maps?q=Brusselsesteenweg+20,+1652+Alsemberg,+Belgi%C3%AB&t=&z=15&ie=UTF8&iwloc=&output=embed"
               width="100%"
-              height="260"
+              height="280"
               style="border:0;display:block"
               allowfullscreen
               loading="lazy"
@@ -128,8 +128,8 @@ const gegevens = [
           </div>
           <a href="https://maps.google.com/maps?q=Brusselsesteenweg+20,+1652+Alsemberg,+Belgi%C3%AB"
             target="_blank" rel="noopener"
-            class="inline-flex items-center gap-1 mt-2 text-xs text-[#07153b] font-semibold hover:underline">
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            class="inline-flex items-center gap-1.5 mt-3 text-sm text-[#07153b] font-semibold hover:underline underline-offset-4">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>

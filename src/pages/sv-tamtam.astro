@@ -1,54 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 const FOLDER_ID = '1-XYeqjkuNCGUcYoMdHlPVifV-OTbczwq';
 const LAATSTE_NAAM = 'SV TAMTAM #14';
 const LAATSTE_LINK = 'https://drive.google.com/file/d/11-gUsKFxN8-8ERRgPaPZJVwmTWNg9LTD/view';
 ---
 <Layout title="SV-Tamtam" description="Alle edities van het SV-Tamtam schoolmagazine van Sint-Victor Alsemberg.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Schoolmagazine</div>
-      <h1 class="text-4xl font-extrabold mb-4">SV-Tamtam</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Het schoolmagazine van Sint-Victor Alsemberg. Alle edities beschikbaar als PDF.</p>
-    </div>
-  </section>
+  <PageHero eyebrow="Schoolmagazine" title="SV-Tamtam" intro="Het schoolmagazine van Sint-Victor Alsemberg. Alle edities beschikbaar als PDF." width="5xl" />
 
-  <section class="py-16 px-4">
+  <section class="py-16 md:py-24 px-4">
     <div class="max-w-5xl mx-auto">
 
       <!-- Laatste editie knop (hardcoded) -->
-      <div class="mb-10">
-        <div class="bg-[#07153b] rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-5">
+      <div class="mb-14 scroll-reveal">
+        <div class="relative isolate overflow-hidden bg-[#07153b] rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row items-center gap-5 shadow-card">
+          <div aria-hidden="true" class="absolute -z-10 -top-24 -right-16 w-72 h-72 rounded-full bg-blue-500/20 blur-3xl"></div>
           <div class="bg-yellow-400 rounded-xl w-14 h-14 flex items-center justify-center shrink-0">
-            <svg class="w-7 h-7 text-[#07153b]" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-7 h-7 text-[#07153b]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/>
             </svg>
           </div>
           <div class="flex-1 text-center sm:text-left">
-            <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-1">Nieuwste editie</div>
-            <div class="text-white font-extrabold text-lg">{LAATSTE_NAAM}</div>
+            <div class="text-yellow-300 text-xs font-bold uppercase tracking-[0.14em] mb-1">Nieuwste editie</div>
+            <div class="text-white font-extrabold text-xl">{LAATSTE_NAAM}</div>
           </div>
           <a href={LAATSTE_LINK} target="_blank" rel="noopener"
-            class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm shrink-0 whitespace-nowrap">
-            Lees de laatste editie &rarr;
+            class="btn btn-primary shrink-0 whitespace-nowrap">
+            Lees de laatste editie
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
         </div>
       </div>
 
-      <div class="flex items-center justify-between mb-2">
-        <h2 class="text-2xl font-extrabold text-[#07153b]">Alle edities</h2>
+      <div class="flex items-end justify-between gap-6 mb-8 scroll-reveal">
+        <div>
+          <span class="eyebrow">Archief</span>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b]">Alle edities</h2>
+        </div>
         <a href={`https://drive.google.com/drive/folders/${FOLDER_ID}`} target="_blank" rel="noopener"
-          class="text-sm text-[#07153b] font-bold hover:underline flex items-center gap-1">
+          class="text-sm text-[#07153b] font-bold hover:underline underline-offset-4 inline-flex items-center gap-1.5 shrink-0">
           Openen in Drive
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
           </svg>
         </a>
       </div>
-      <div class="w-14 h-1 bg-yellow-400 mb-6 rounded-full"></div>
 
-      <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+      <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-card">
         <iframe
           src={`https://drive.google.com/embeddedfolderview?id=${FOLDER_ID}#list`}
           class="w-full"
@@ -57,7 +56,7 @@ const LAATSTE_LINK = 'https://drive.google.com/file/d/11-gUsKFxN8-8ERRgPaPZJVwmT
         ></iframe>
       </div>
 
-      <p class="text-xs text-gray-400 mt-3 text-center">
+      <p class="text-xs text-gray-500 mt-3 text-center">
         Klik op een editie om ze te openen. Het archief wordt automatisch bijgewerkt wanneer er een nieuwe editie verschijnt.
       </p>
 

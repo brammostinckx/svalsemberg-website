@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 
 const vragen = [
   {
@@ -99,33 +100,31 @@ const categorieen = [...new Set(vragen.map(v => v.categorie))];
 ---
 <Layout title="FAQ" description="Veelgestelde vragen over Sint-Victor Alsemberg.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Veelgestelde vragen</div>
-      <h1 class="text-4xl font-extrabold mb-4">FAQ</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Antwoorden op de meest gestelde vragen. Staat jouw vraag er niet bij? Contacteer ons.</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Veelgestelde vragen"
+    title="FAQ"
+    intro="Antwoorden op de meest gestelde vragen. Staat jouw vraag er niet bij? Contacteer ons."
+    width="4xl"
+  />
 
-  <section class="py-16 px-4">
-    <div class="max-w-3xl mx-auto">
+  <section class="py-16 md:py-24 px-4">
+    <div class="max-w-4xl mx-auto">
 
       {categorieen.map(cat => (
-        <div class="mb-10">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="bg-[#07153b] text-yellow-400 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wide">{cat}</span>
-            <div class="flex-1 h-px bg-gray-100"></div>
-          </div>
-          <div class="space-y-3">
+        <div class="scroll-reveal mb-14">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-[#07153b] mb-5">{cat}</h2>
+          <div class="divide-y divide-gray-200 border-y border-gray-200">
             {vragen.filter(f => f.categorie === cat).map(faq => (
-              <details class="bg-white rounded-2xl shadow-sm border border-gray-100 group overflow-hidden">
-                <summary class="flex items-center justify-between px-6 py-4 cursor-pointer font-bold text-[#07153b] text-sm hover:bg-blue-50 transition list-none">
+              <details class="group">
+                <summary class="flex items-center justify-between gap-6 py-5 cursor-pointer font-bold text-[#07153b] list-none [&::-webkit-details-marker]:hidden transition-colors duration-150 hover:text-[#13265e]">
                   {faq.v}
-                  <svg class="w-5 h-5 text-gray-400 shrink-0 group-open:rotate-180 transition-transform ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 text-[#07153b] transition-[background-color,border-color] duration-200 group-hover:border-[#07153b]/30 group-open:bg-yellow-400 group-open:border-yellow-400">
+                    <svg class="w-4 h-4 transition-transform duration-200 ease-fluid group-open:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 5v14m7-7H5" />
+                    </svg>
+                  </span>
                 </summary>
-                <div class="px-6 py-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
+                <div class="pb-6 md:pr-14 text-gray-600 text-sm leading-relaxed">
                   {faq.a && <p>{faq.a}</p>}
                   {faq.lijst && (
                     <ul class="mt-3 space-y-2">
@@ -164,10 +163,10 @@ const categorieen = [...new Set(vragen.map(v => v.categorie))];
                     </div>
                   )}
                   {faq.link && (
-                    <a href={faq.link.href} target={faq.link.extern ? "_blank" : undefined} rel={faq.link.extern ? "noopener" : undefined} class="inline-flex items-center gap-1 mt-3 text-[#07153b] font-bold hover:underline text-xs">
+                    <a href={faq.link.href} target={faq.link.extern ? "_blank" : undefined} rel={faq.link.extern ? "noopener" : undefined} class="group/link inline-flex items-center gap-1.5 mt-4 text-[#07153b] font-bold text-sm hover:underline underline-offset-4">
                       {faq.link.tekst}
-                      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                      <svg class="w-4 h-4 transition-transform duration-200 ease-fluid group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                       </svg>
                     </a>
                   )}
@@ -178,10 +177,11 @@ const categorieen = [...new Set(vragen.map(v => v.categorie))];
         </div>
       ))}
 
-      <div class="mt-6 bg-gray-50 rounded-2xl p-6 text-center">
-        <p class="text-gray-600 mb-4">Staat jouw vraag er niet bij?</p>
-        <a href="/contact" class="bg-[#07153b] text-white font-bold px-6 py-3 rounded-xl hover:bg-blue-900 transition text-sm inline-block">
+      <div class="scroll-reveal mt-4 bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p class="text-gray-600 font-medium">Staat jouw vraag er niet bij?</p>
+        <a href="/contact" class="btn btn-navy">
           Neem contact op
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
         </a>
       </div>
 

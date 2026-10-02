@@ -1,29 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 <Layout title="Schoolreglement" description="Het schoolreglement van Sint-Victor Alsemberg.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Regels & Afspraken</div>
-      <h1 class="text-4xl font-extrabold mb-4">Schoolreglement</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Het schoolreglement beschrijft de rechten en plichten van leerlingen, ouders en school.</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Regels & Afspraken"
+    title="Schoolreglement"
+    intro="Het schoolreglement beschrijft de rechten en plichten van leerlingen, ouders en school."
+    width="4xl"
+  />
 
-  <section class="py-16 px-4">
-    <div class="max-w-3xl mx-auto">
-      <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 mb-10 flex gap-4 items-start">
+  <section class="py-16 md:py-24 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="scroll-reveal bg-yellow-50 border border-yellow-200 rounded-2xl p-6 md:p-7 mb-14 flex flex-col sm:flex-row gap-5 items-start">
         <div class="bg-[#07153b] rounded-xl w-12 h-12 flex items-center justify-center shrink-0">
           <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
         <div>
-          <div class="font-bold text-[#07153b] mb-1">Schoolreglement 2026-2027</div>
-          <p class="text-gray-600 text-sm mb-3">Het volledige schoolreglement is beschikbaar als PDF-document. Je ontvangt dit ook bij inschrijving.</p>
-          <a href="/Schoolreglement 2026-2027.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#07153b] text-white font-bold px-5 py-2 rounded-xl hover:bg-blue-900 transition text-sm">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="text-lg font-bold text-[#07153b] mb-1">Schoolreglement 2026-2027</div>
+          <p class="text-gray-600 text-sm mb-4">Het volledige schoolreglement is beschikbaar als PDF-document. Je ontvangt dit ook bij inschrijving.</p>
+          <a href="/Schoolreglement 2026-2027.pdf" target="_blank" rel="noopener" class="btn btn-navy">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             Download schoolreglement (PDF)
@@ -31,83 +31,79 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <div class="space-y-8">
+      <div class="divide-y divide-gray-200 border-y border-gray-200">
 
-        <div>
-          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+        <div class="scroll-reveal grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 py-8 md:py-10">
+          <h2 class="md:col-span-4 text-2xl font-extrabold text-[#07153b] leading-tight">
             Aanwezigheid & afwezigheid
           </h2>
-          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+          <div class="md:col-span-8 text-gray-600 leading-relaxed space-y-3">
             <p>Leerlingen zijn verplicht aanwezig op alle lessen en activiteiten, inclusief buitenschoolse activiteiten en bezinningsdagen.</p>
-            <p>Bij ziekte melden ouders de afwezigheid <strong>telefonisch vóór 8u30</strong> via <strong>02 380 15 89</strong> of via het meldingsformulier op <a href="https://afwezigheden.svalsemberg.be" target="_blank" rel="noopener" class="text-[#07153b] font-semibold hover:underline">afwezigheden.svalsemberg.be</a>.</p>
-            <p>Voor afwezigheid tot en met <strong>3 opeenvolgende kalenderdagen</strong> volstaat een briefje van de ouders (leerlingen ontvangen bij het begin van het schooljaar een document met 4 strookjes). Vanaf de <strong>4de opeenvolgende kalenderdag</strong> is een doktersattest verplicht. Dixit-attesten zijn niet rechtsgeldig.</p>
+            <p>Bij ziekte melden ouders de afwezigheid <strong class="text-gray-800">telefonisch vóór 8u30</strong> via <strong class="text-gray-800">02 380 15 89</strong> of via het meldingsformulier op <a href="https://afwezigheden.svalsemberg.be" target="_blank" rel="noopener" class="text-[#07153b] font-semibold hover:underline underline-offset-4">afwezigheden.svalsemberg.be</a>.</p>
+            <p>Voor afwezigheid tot en met <strong class="text-gray-800">3 opeenvolgende kalenderdagen</strong> volstaat een briefje van de ouders (leerlingen ontvangen bij het begin van het schooljaar een document met 4 strookjes). Vanaf de <strong class="text-gray-800">4de opeenvolgende kalenderdag</strong> is een doktersattest verplicht. Dixit-attesten zijn niet rechtsgeldig.</p>
             <p>Wie later dan 09.20u op school aankomt, heeft een schriftelijke motivering nodig van de ouders of de arts. Zoniet wordt die halve dag als onwettig afwezig beschouwd.</p>
           </div>
         </div>
 
-        <div>
-          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+        <div class="scroll-reveal grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 py-8 md:py-10">
+          <h2 class="md:col-span-4 text-2xl font-extrabold text-[#07153b] leading-tight">
             Kledij
           </h2>
-          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
+          <div class="md:col-span-8 text-gray-600 leading-relaxed space-y-3">
             <p>Kledij en kapsels mogen niet provocerend zijn. Kleding die de goede zeden schendt of waarbij ondergoed zichtbaar is, is niet toegestaan.</p>
-            <p><strong>Hoofddeksels zijn verboden</strong> in de gebouwen, tijdens lessen (ook LO), tijdens studies en op de bus van en naar activiteiten. Op de speelplaats en tijdens buitenactiviteiten zijn ze wel toegelaten.</p>
+            <p><strong class="text-gray-800">Hoofddeksels zijn verboden</strong> in de gebouwen, tijdens lessen (ook LO), tijdens studies en op de bus van en naar activiteiten. Op de speelplaats en tijdens buitenactiviteiten zijn ze wel toegelaten.</p>
             <p>Wie zich niet aan de kledijregels houdt, krijgt een gepaste outfit van de school die de volledige schooldag gedragen moet worden.</p>
           </div>
         </div>
 
-        <div>
-          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+        <div class="scroll-reveal grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 py-8 md:py-10">
+          <h2 class="md:col-span-4 text-2xl font-extrabold text-[#07153b] leading-tight">
             Elektronische toestellen
           </h2>
-          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
-            <p>Voor alle leerlingen geldt een <strong>verbod op het gebruik van slimme apparaten</strong> (smartphones, tablets, smartwatches, gsm's …) tijdens de volledige periode van aanwezigheid op school — van het eerste belsignaal om 8u25 tot het verlaten van de schoolpoort na de laatste les.</p>
+          <div class="md:col-span-8 text-gray-600 leading-relaxed space-y-3">
+            <p>Voor alle leerlingen geldt een <strong class="text-gray-800">verbod op het gebruik van slimme apparaten</strong> (smartphones, tablets, smartwatches, gsm's …) tijdens de volledige periode van aanwezigheid op school — van het eerste belsignaal om 8u25 tot het verlaten van de schoolpoort na de laatste les.</p>
             <p>Gebruik is enkel toegelaten voor onderwijsdoeleinden bepaald door de school, bij redelijke aanpassingen of om medische redenen, en tijdens extra-murosactiviteiten mits toestemming van de directeur.</p>
-            <p>Bij inbeslagname krijg je het toestel terug om <strong>15.45u</strong> (op woensdag om 12.25u). De school is niet verantwoordelijk bij schade, verlies of diefstal.</p>
-            <p><strong>Chromebooks</strong> worden als digitaal werkinstrument gebruikt tijdens de lessen, mits toestemming van de leerkracht.</p>
+            <p>Bij inbeslagname krijg je het toestel terug om <strong class="text-gray-800">15.45u</strong> (op woensdag om 12.25u). De school is niet verantwoordelijk bij schade, verlies of diefstal.</p>
+            <p><strong class="text-gray-800">Chromebooks</strong> worden als digitaal werkinstrument gebruikt tijdens de lessen, mits toestemming van de leerkracht.</p>
           </div>
         </div>
 
-        <div>
-          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+        <div class="scroll-reveal grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 py-8 md:py-10">
+          <h2 class="md:col-span-4 text-2xl font-extrabold text-[#07153b] leading-tight">
             Gedrag & respect
           </h2>
-          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
-            <p>Elke leerling gedraagt zich correct en respectvol tegenover directie, leerkrachten, medeleerlingen en alle andere campusbewoners. De voertaal op school is het <strong>Nederlands</strong>.</p>
-            <p><strong>Pesten wordt niet getolereerd.</strong> De school zorgt voor preventieopdrachten, begeleiding via gesprekken en sancties bij aanhoudende pesterijen. Als je getuige bent van pesterijen, is het je plicht dit te melden — via Smartschool of aan een personeelslid.</p>
-            <p>Roken, alcohol en drugs zijn <strong>strikt verboden</strong> op het volledige schooldomein (inclusief een zone van 10 meter buiten de schoolpoort) en tijdens alle schoolactiviteiten.</p>
+          <div class="md:col-span-8 text-gray-600 leading-relaxed space-y-3">
+            <p>Elke leerling gedraagt zich correct en respectvol tegenover directie, leerkrachten, medeleerlingen en alle andere campusbewoners. De voertaal op school is het <strong class="text-gray-800">Nederlands</strong>.</p>
+            <p><strong class="text-gray-800">Pesten wordt niet getolereerd.</strong> De school zorgt voor preventieopdrachten, begeleiding via gesprekken en sancties bij aanhoudende pesterijen. Als je getuige bent van pesterijen, is het je plicht dit te melden — via Smartschool of aan een personeelslid.</p>
+            <p>Roken, alcohol en drugs zijn <strong class="text-gray-800">strikt verboden</strong> op het volledige schooldomein (inclusief een zone van 10 meter buiten de schoolpoort) en tijdens alle schoolactiviteiten.</p>
           </div>
         </div>
 
-        <div>
-          <h2 class="text-xl font-extrabold text-[#07153b] mb-3 flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-400 rounded-full inline-block"></span>
+        <div class="scroll-reveal grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-10 py-8 md:py-10">
+          <h2 class="md:col-span-4 text-2xl font-extrabold text-[#07153b] leading-tight">
             Punten & evaluatie
           </h2>
-          <div class="text-gray-600 leading-relaxed text-sm pl-4 space-y-2">
-            <p>Er zijn twee soorten vakken: <strong>examenvakken</strong> en <strong>vakken met gespreide evaluatie</strong>. Resultaten zijn permanent te volgen via <strong>'Resultaten'</strong> in Smartschool. Tijdens de examenperiode worden de resultaten tijdelijk afgesloten voor leerlingen en ouders.</p>
-            <p>Toetsen en taken staan <strong>elke vrijdag om 18u</strong> voor de volgende week ingepland in de planner. Herhalingstoetsen worden minstens een week op voorhand aangekondigd.</p>
-            <p>Er zijn meerdere oudercontacten per schooljaar. Ouders kunnen ook op eigen initiatief een afspraak maken via <strong>02 380 15 89</strong>. Bij zorgen wordt tussentijds contact opgenomen.</p>
+          <div class="md:col-span-8 text-gray-600 leading-relaxed space-y-3">
+            <p>Er zijn twee soorten vakken: <strong class="text-gray-800">examenvakken</strong> en <strong class="text-gray-800">vakken met gespreide evaluatie</strong>. Resultaten zijn permanent te volgen via <strong class="text-gray-800">'Resultaten'</strong> in Smartschool. Tijdens de examenperiode worden de resultaten tijdelijk afgesloten voor leerlingen en ouders.</p>
+            <p>Toetsen en taken staan <strong class="text-gray-800">elke vrijdag om 18u</strong> voor de volgende week ingepland in de planner. Herhalingstoetsen worden minstens een week op voorhand aangekondigd.</p>
+            <p>Er zijn meerdere oudercontacten per schooljaar. Ouders kunnen ook op eigen initiatief een afspraak maken via <strong class="text-gray-800">02 380 15 89</strong>. Bij zorgen wordt tussentijds contact opgenomen.</p>
           </div>
         </div>
 
       </div>
 
-      <div class="mt-8 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex items-start gap-3">
+      <div class="scroll-reveal mt-10 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex items-start gap-3">
         <svg class="w-5 h-5 text-[#07153b] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
         <p class="text-sm text-gray-600">Dit is een samenvatting. Het volledige en bindende schoolreglement vind je in de PDF hierboven.</p>
       </div>
 
-      <div class="mt-10 bg-[#07153b] text-white rounded-2xl p-6 text-center">
-        <p class="text-blue-200 mb-4 text-sm">Vragen over het schoolreglement?</p>
-        <a href="/contact" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm inline-block">
+      <div class="scroll-reveal mt-10 bg-[#07153b] text-white rounded-2xl p-6 md:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p class="text-blue-100/80 font-medium">Vragen over het schoolreglement?</p>
+        <a href="/contact" class="btn btn-primary">
           Contacteer ons
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
         </a>
       </div>
     </div>

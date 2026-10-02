@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import PageCta from '../components/PageCta.astro';
 const graden = [
   {
     id: "eerste-graad",
@@ -54,51 +56,42 @@ const graden = [
 ---
 <Layout title="Studieaanbod" description="Alle studierichtingen van Sint-Victor Alsemberg per graad.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Sint-Victor Alsemberg</div>
-      <h1 class="text-4xl font-extrabold mb-4">Studieaanbod</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Van eerste graad tot zesde jaar &mdash; een volledig ASO-aanbod voor elk talent.</p>
-    </div>
-  </section>
+  <PageHero eyebrow="Sint-Victor Alsemberg" title="Studieaanbod" intro="Van eerste graad tot zesde jaar — een volledig ASO-aanbod voor elk talent." width="5xl" />
 
-  <section class="py-16 px-4">
-    <div class="max-w-5xl mx-auto space-y-16">
+  <section class="py-16 md:py-24 px-4">
+    <div class="max-w-5xl mx-auto divide-y divide-gray-200">
       {graden.map(g => (
-        <div id={g.id}>
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-1 h-12 rounded-full bg-[#07153b]"></div>
-            <div>
-              <div class="text-yellow-500 text-xs font-bold uppercase tracking-wide">{g.subtitel}</div>
-              <h2 class="text-2xl font-extrabold text-[#07153b]">{g.graad}</h2>
-            </div>
+        <div id={g.id} class="py-14 first:pt-0 last:pb-0 scroll-mt-28">
+          <div class="scroll-reveal">
+            <span class="eyebrow">{g.subtitel}</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-4">{g.graad}</h2>
+            <p class="text-gray-600 mb-8 leading-relaxed max-w-2xl">{g.beschrijving}</p>
           </div>
-          <p class="text-gray-600 mb-6 leading-relaxed max-w-2xl">{g.beschrijving}</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-            {g.opties.map((o: { naam: string; beschrijving: string }) => (
-              <div class={`rounded-xl border-l-4 ${g.kleur} ${g.bg} p-5 hover:shadow-sm transition`}>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {g.opties.map((o: { naam: string; beschrijving: string }, i: number) => (
+              <div class={`scroll-reveal rounded-2xl border-l-4 ${g.kleur} ${g.bg} p-5`} style={`--d:${Math.min(i * 60, 400)}ms`}>
                 <div class="font-bold text-[#07153b] mb-1 text-sm">{o.naam}</div>
                 <div class="text-gray-600 text-xs leading-relaxed">{o.beschrijving}</div>
               </div>
             ))}
           </div>
           {'link' in g && g.link && (
-            <a href={g.link} class="inline-flex items-center gap-2 bg-[#07153b] text-white font-bold px-5 py-2.5 rounded-xl hover:bg-blue-900 transition text-sm">
-              {(g as any).linkTekst} &rarr;
+            <a href={g.link} class="btn btn-navy">
+              {(g as any).linkTekst}
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
             </a>
           )}
         </div>
       ))}
-
-      <div class="bg-[#07153b] text-white rounded-2xl p-8 text-center">
-        <h2 class="text-2xl font-bold mb-3">Twijfel je welke richting past bij jou?</h2>
-        <p class="text-blue-200 mb-6 max-w-xl mx-auto">Onze leerlingenbegeleiding helpt je graag bij de studiekeuze. Maak een afspraak of kom langs tijdens de opendeurdag.</p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/contact" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition">Afspraak maken</a>
-          <a href="/inschrijvingen" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition">Inschrijven</a>
-        </div>
-      </div>
     </div>
   </section>
+
+  <PageCta title="Twijfel je welke richting past bij jou?" intro="Onze leerlingenbegeleiding helpt je graag bij de studiekeuze. Maak een afspraak of kom langs tijdens de opendeurdag.">
+    <a href="/contact" class="btn btn-primary">
+      Afspraak maken
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+    <a href="/inschrijvingen" class="btn btn-ghost">Inschrijven</a>
+  </PageCta>
 
 </Layout>

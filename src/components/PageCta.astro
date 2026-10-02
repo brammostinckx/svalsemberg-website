@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  intro?: string;
+}
+const { title, intro } = Astro.props;
+---
+<section class="relative isolate overflow-hidden bg-[#07153b] text-white py-16 md:py-20 px-4">
+  <div aria-hidden="true" class="absolute -z-10 -top-32 left-1/3 w-[34rem] h-[34rem] rounded-full bg-blue-500/20 blur-3xl"></div>
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+    <div class="md:col-span-7 scroll-reveal">
+      <h2 class="text-3xl md:text-4xl font-extrabold leading-[1.08]">{title}</h2>
+      {intro && <p class="text-blue-100/80 text-lg mt-3 max-w-xl">{intro}</p>}
+    </div>
+    <div class="md:col-span-5 flex flex-wrap md:justify-end gap-3 scroll-reveal" style="--d:100ms">
+      <slot />
+    </div>
+  </div>
+</section>

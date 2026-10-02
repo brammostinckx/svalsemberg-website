@@ -1,24 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 <Layout title="Sint-Victor Strava" description="De Strava club van Sint-Victor Alsemberg — recentste ritten en activiteiten.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Extra</div>
-      <h1 class="text-4xl font-extrabold mb-4">Sint-Victor Strava</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">Volg de activiteiten van onze Strava-club.</p>
-    </div>
-  </section>
+  <PageHero eyebrow="Extra" title="Sint-Victor Strava" intro="Volg de activiteiten van onze Strava-club." width="4xl" />
 
-  <section class="py-16 px-4">
+  <section class="py-16 md:py-24 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="flex flex-col md:flex-row gap-8 items-start justify-center">
+      <div class="flex flex-col md:flex-row gap-8 items-center md:items-start justify-center">
 
         <!-- Club info -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-          <div class="bg-[#07153b] px-5 py-3">
-            <span class="text-yellow-400 text-xs font-bold uppercase tracking-wide">Club</span>
+        <div class="scroll-reveal bg-white rounded-2xl border border-gray-200 shadow-card overflow-hidden">
+          <div class="px-5 pt-5">
+            <span class="block text-yellow-600 text-xs font-bold uppercase tracking-[0.14em]">Club</span>
           </div>
           <div class="p-4">
             <iframe
@@ -34,9 +29,9 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Laatste ritten -->
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-          <div class="bg-[#07153b] px-5 py-3">
-            <span class="text-yellow-400 text-xs font-bold uppercase tracking-wide">Recentste ritten</span>
+        <div class="scroll-reveal bg-white rounded-2xl border border-gray-200 shadow-card overflow-hidden" style="--d:100ms">
+          <div class="px-5 pt-5">
+            <span class="block text-yellow-600 text-xs font-bold uppercase tracking-[0.14em]">Recentste ritten</span>
           </div>
           <div class="p-4">
             <iframe
@@ -53,10 +48,10 @@ import Layout from '../layouts/Layout.astro';
 
       </div>
 
-      <div class="mt-10 text-center">
+      <div class="mt-12 text-center scroll-reveal" style="--d:160ms">
         <a href="https://www.strava.com/clubs/1106164" target="_blank" rel="noopener"
-          class="inline-flex items-center gap-2 bg-[#FC4C02] text-white font-bold px-6 py-3 rounded-xl hover:bg-orange-600 transition text-sm">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          class="btn bg-[#FC4C02] text-white hover:bg-[#e04402]">
+          <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/>
           </svg>
           Bekijk de club op Strava

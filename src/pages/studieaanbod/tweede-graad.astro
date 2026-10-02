@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PageCta from '../../components/PageCta.astro';
 
 const richtingen = [
   {
@@ -37,32 +39,25 @@ const DOC_ID = '1yMLVwTePKyvtfJUlTyWS89L969h1cb75';
 <Layout title="2de graad — Studieaanbod" description="Studieaanbod 2de graad van Sint-Victor Alsemberg: richtingen, lessentabel en meer.">
 
   <!-- Hero -->
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Studieaanbod</div>
-      <h1 class="text-4xl font-extrabold mb-4">2de graad</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">In de tweede graad (3de &amp; 4de jaar) kiezen leerlingen een ASO-studierichting die hen voorbereidt op het hoger onderwijs.</p>
-      <div class="flex gap-3 mt-6">
-        <a href="#richtingen" class="bg-yellow-400 text-[#07153b] font-bold px-5 py-2 rounded-xl hover:bg-yellow-300 transition text-sm">Richtingen</a>
-        <a href="#lessentabel" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">Lessentabel</a>
-        <a href="#document" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">Document</a>
-      </div>
-    </div>
-  </section>
+  <PageHero eyebrow="Studieaanbod" title="2de graad" intro="In de tweede graad (3de & 4de jaar) kiezen leerlingen een ASO-studierichting die hen voorbereidt op het hoger onderwijs." width="5xl">
+    <a href="#richtingen" class="btn btn-primary">Richtingen</a>
+    <a href="#lessentabel" class="btn btn-ghost">Lessentabel</a>
+    <a href="#document" class="btn btn-ghost">Document</a>
+  </PageHero>
 
   <!-- Richtingen -->
-  <section id="richtingen" class="py-16 px-4">
+  <section id="richtingen" class="py-16 md:py-24 px-4">
     <div class="max-w-5xl mx-auto">
 
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
-        <h2 class="text-2xl font-extrabold text-[#07153b]">Studierichtingen</h2>
+      <div class="scroll-reveal mb-10">
+        <span class="eyebrow">ASO-richtingen</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-4">Studierichtingen</h2>
+        <p class="text-gray-600 leading-relaxed max-w-2xl">Alle richtingen zijn ASO met doorstroomfinaliteit naar het hoger onderwijs.</p>
       </div>
-      <p class="text-gray-500 text-sm mb-8 pl-4">Alle richtingen zijn ASO met doorstroomfinaliteit naar het hoger onderwijs.</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
-        {richtingen.map(r => (
-          <div class={`rounded-2xl border-l-4 p-5 ${r.kleur}`}>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20">
+        {richtingen.map((r, i) => (
+          <div class={`scroll-reveal rounded-2xl border-l-4 p-5 ${r.kleur}`} style={`--d:${Math.min(i * 60, 400)}ms`}>
             <span class={`text-xs font-extrabold px-3 py-1.5 rounded-full inline-block mb-3 ${r.tag}`}>{r.finaliteit}</span>
             <p class="text-gray-600 text-sm leading-relaxed">{r.beschrijving}</p>
           </div>
@@ -70,26 +65,26 @@ const DOC_ID = '1yMLVwTePKyvtfJUlTyWS89L969h1cb75';
       </div>
 
       <!-- Lessentabel -->
-      <div id="lessentabel" class="mb-16">
-        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Lessentabel 2de graad</h3>
-        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+      <div id="lessentabel" class="mb-20">
+        <h3 class="scroll-reveal text-xl md:text-2xl font-extrabold text-[#07153b] mb-5">Lessentabel 2de graad</h3>
+        <div class="scroll-reveal rounded-2xl overflow-hidden border border-gray-200 shadow-card" style="--d:80ms">
           <img src="/lessentabellen/2de graad.png" alt="Lessentabel 2de graad" class="w-full h-auto" />
         </div>
       </div>
 
       <!-- Embedded Drive document -->
       <div id="document">
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="font-extrabold text-[#07153b] text-lg">Meer informatie</h3>
+        <div class="scroll-reveal flex flex-wrap items-end justify-between gap-3 mb-5">
+          <h3 class="text-xl md:text-2xl font-extrabold text-[#07153b]">Meer informatie</h3>
           <a href={`https://drive.google.com/file/d/${DOC_ID}/view`} target="_blank" rel="noopener"
-            class="text-sm text-[#07153b] font-bold hover:underline flex items-center gap-1">
+            class="text-sm text-[#07153b] font-semibold hover:underline underline-offset-4 inline-flex items-center gap-1.5">
             Openen in Drive
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
             </svg>
           </a>
         </div>
-        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm" style="height:700px;">
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-card" style="height:700px;">
           <iframe
             src={`https://drive.google.com/file/d/${DOC_ID}/preview`}
             class="w-full h-full"
@@ -103,16 +98,16 @@ const DOC_ID = '1yMLVwTePKyvtfJUlTyWS89L969h1cb75';
   </section>
 
   <!-- CTA -->
-  <section class="bg-[#07153b] text-white py-12 px-4 text-center">
-    <div class="max-w-2xl mx-auto">
-      <h2 class="text-xl font-extrabold mb-3">Meer weten over de 2de graad?</h2>
-      <p class="text-blue-200 text-sm mb-6">Kom langs op onze opendeurdag of neem contact op met ons secretariaat.</p>
-      <div class="flex flex-wrap gap-3 justify-center">
-        <a href="/inschrijvingen" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm">Inschrijven</a>
-        <a href="/contact" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">Contact</a>
-        <a href="/studieaanbod" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">&larr; Alle richtingen</a>
-      </div>
-    </div>
-  </section>
+  <PageCta title="Meer weten over de 2de graad?" intro="Kom langs op onze opendeurdag of neem contact op met ons secretariaat.">
+    <a href="/inschrijvingen" class="btn btn-primary">
+      Inschrijven
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+    <a href="/contact" class="btn btn-ghost">Contact</a>
+    <a href="/studieaanbod" class="btn btn-ghost group">
+      <svg class="group-hover:-translate-x-[3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 17l-5-5m0 0l5-5m-5 5h12"/></svg>
+      Alle richtingen
+    </a>
+  </PageCta>
 
 </Layout>

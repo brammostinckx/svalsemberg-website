@@ -1,46 +1,55 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 <Layout title="Over ons" description="Leer meer over Sint-Victor Alsemberg, onze missie en ons team.">
 
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold mb-4">Over Sint-Victor</h1>
-      <p class="text-blue-200 text-lg">Wie zijn wij en waar staan we voor?</p>
-    </div>
-  </section>
+  <PageHero
+    title="Over Sint-Victor"
+    intro="Wie zijn wij en waar staan we voor?"
+    width="4xl"
+  />
 
-  <section class="py-16 px-4">
+  <section class="py-16 md:py-24 px-4">
     <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-        <div>
-          <h2 class="text-2xl font-bold text-[#07153b] mb-4">Onze school</h2>
-          <p class="text-gray-600 mb-4">Sint-Victor Alsemberg is een katholieke secundaire school gelegen in het groene Zennevallei. Al generaties lang bieden we kwaliteitsonderwijs aan in een warme en veilige omgeving.</p>
-          <p class="text-gray-600">We geloven dat elke leerling uniek is en de kans verdient om zijn of haar talenten maximaal te ontplooien â op academisch, sociaal en persoonlijk vlak.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
+        <div class="scroll-reveal">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-6">Onze school</h2>
+          <p class="text-gray-600 leading-relaxed mb-4">Sint-Victor Alsemberg is een katholieke secundaire school gelegen in het groene Zennevallei. Al generaties lang bieden we kwaliteitsonderwijs aan in een warme en veilige omgeving.</p>
+          <p class="text-gray-600 leading-relaxed">We geloven dat elke leerling uniek is en de kans verdient om zijn of haar talenten maximaal te ontplooien â€” op academisch, sociaal en persoonlijk vlak.</p>
         </div>
-        <div class="bg-gradient-to-br from-[#07153b] to-[#0050c0] rounded-2xl p-8 text-white text-center">
-          <div class="text-6xl font-bold text-[#f5a623] mb-2">50+</div>
-          <div class="text-lg">jaar kwaliteitsonderwijs</div>
-          <div class="mt-6 text-6xl font-bold text-[#f5a623] mb-2">600+</div>
-          <div class="text-lg">leerlingen</div>
-          <div class="mt-6 text-6xl font-bold text-[#f5a623] mb-2">80+</div>
-          <div class="text-lg">medewerkers</div>
-        </div>
+        <dl class="scroll-reveal relative isolate overflow-hidden bg-[#07153b] rounded-2xl p-8 text-white divide-y divide-white/10" style="--d:100ms">
+          <div aria-hidden="true" class="absolute -z-10 -top-24 -right-24 w-72 h-72 rounded-full bg-blue-500/25 blur-3xl"></div>
+          <div class="flex flex-col-reverse pb-5">
+            <dt class="text-blue-100/80">jaar kwaliteitsonderwijs</dt>
+            <dd class="font-display text-5xl font-extrabold tracking-tight text-yellow-400">50+</dd>
+          </div>
+          <div class="flex flex-col-reverse py-5">
+            <dt class="text-blue-100/80">leerlingen</dt>
+            <dd class="font-display text-5xl font-extrabold tracking-tight text-yellow-400">600+</dd>
+          </div>
+          <div class="flex flex-col-reverse pt-5">
+            <dt class="text-blue-100/80">medewerkers</dt>
+            <dd class="font-display text-5xl font-extrabold tracking-tight text-yellow-400">80+</dd>
+          </div>
+        </dl>
       </div>
 
-      <h2 class="text-2xl font-bold text-[#07153b] mb-8">Onze waarden</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <h2 class="scroll-reveal text-3xl md:text-4xl font-extrabold text-[#07153b] mb-10">Onze waarden</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {[
-          { icon: "ðŸ¤", titel: "Gemeenschap", tekst: "We vormen Ã©Ã©n grote familie waar iedereen welkom is en erbij hoort." },
-          { icon: "ðŸ", titel: "Kwaliteit", tekst: "We streven naar uitmuntend onderwijs dat leerlingen voorbereidt op de toekomst." },
-          { icon: "ðŸ", titel: "Engagement", tekst: "We engageren ons voor een duurzame en rechtvaardige samenleving." },
-          { icon: "â¨", titel: "Respect", tekst: "Respect voor elkaar, voor de omgeving en voor ieders eigenheid staat centraal." },
-        ].map(w => (
-          <div class="flex gap-4 bg-gray-50 rounded-xl p-6">
-            <div class="text-3xl">{w.icon}</div>
+          { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z", titel: "Gemeenschap", tekst: "We vormen Ã©Ã©n grote familie waar iedereen welkom is en erbij hoort." },
+          { icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z", titel: "Kwaliteit", tekst: "We streven naar uitmuntend onderwijs dat leerlingen voorbereidt op de toekomst." },
+          { icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z", titel: "Engagement", tekst: "We engageren ons voor een duurzame en rechtvaardige samenleving." },
+          { icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z", titel: "Respect", tekst: "Respect voor elkaar, voor de omgeving en voor ieders eigenheid staat centraal." },
+        ].map((w, i) => (
+          <div class="scroll-reveal flex gap-5 bg-white border border-gray-200 shadow-card rounded-2xl p-6" style={`--d:${i * 80}ms`}>
+            <div class="w-11 h-11 bg-[#07153b]/[0.06] rounded-xl flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d={w.icon}/></svg>
+            </div>
             <div>
-              <h3 class="font-bold text-[#07153b] mb-1">{w.titel}</h3>
-              <p class="text-gray-600 text-sm">{w.tekst}</p>
+              <h3 class="font-bold text-lg text-[#07153b] mb-1">{w.titel}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{w.tekst}</p>
             </div>
           </div>
         ))}

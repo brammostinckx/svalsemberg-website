@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PageCta from '../../components/PageCta.astro';
 
 const wijs = [
   {
@@ -70,38 +72,31 @@ const talenten = [
 <Layout title="1ste graad — Studieaanbod" description="Studieaanbod 1ste graad van Sint-Victor Alsemberg: FLEX, WIJS en TALENT.">
 
   <!-- Hero -->
-  <section class="bg-[#07153b] text-white py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-yellow-400 text-xs font-bold uppercase tracking-wide mb-3">Studieaanbod</div>
-      <h1 class="text-4xl font-extrabold mb-4">1ste graad</h1>
-      <p class="text-blue-200 text-lg max-w-2xl">De eerste graad vormt de brug tussen het lager en secundair onderwijs. Leerlingen ontdekken hun talenten via een brede, verrijkende omgeving.</p>
-      <div class="flex gap-3 mt-6 flex-wrap">
-        <a href="#visie" class="bg-yellow-400 text-[#07153b] font-bold px-5 py-2 rounded-xl hover:bg-yellow-300 transition text-sm">Onze visie</a>
-        <a href="#eerste-jaar" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">1ste jaar</a>
-        <a href="#tweede-jaar" class="border border-white/40 text-white font-semibold px-5 py-2 rounded-xl hover:bg-white/10 transition text-sm">2de jaar</a>
-      </div>
-    </div>
-  </section>
+  <PageHero eyebrow="Studieaanbod" title="1ste graad" intro="De eerste graad vormt de brug tussen het lager en secundair onderwijs. Leerlingen ontdekken hun talenten via een brede, verrijkende omgeving." width="5xl">
+    <a href="#visie" class="btn btn-primary">Onze visie</a>
+    <a href="#eerste-jaar" class="btn btn-ghost">1ste jaar</a>
+    <a href="#tweede-jaar" class="btn btn-ghost">2de jaar</a>
+  </PageHero>
 
   <!-- ===== VISIE ===== -->
-  <section id="visie" class="py-16 px-4 bg-blue-50 border-t border-blue-100">
-    <div class="max-w-4xl mx-auto">
+  <section id="visie" class="py-16 md:py-24 px-4 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+    <div class="max-w-4xl">
 
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
-        <h2 class="text-2xl font-extrabold text-[#07153b]">Visie modernisering 1ste graad</h2>
+      <div class="scroll-reveal mb-10">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b]">Visie modernisering 1ste graad</h2>
+        <p class="text-yellow-600 font-bold text-xs uppercase tracking-[0.14em] mt-3">Streven naar excelleren in onderwijs</p>
       </div>
-      <p class="text-yellow-600 font-bold text-sm mb-8 pl-4 uppercase tracking-wide">Streven naar excelleren in onderwijs</p>
 
-      <div class="bg-white rounded-2xl border border-blue-100 shadow-sm p-8 mb-10">
-        <h3 class="font-extrabold text-[#07153b] text-lg mb-4">Observerende en oriënterende 1ste graad</h3>
+      <div class="scroll-reveal bg-white rounded-2xl border border-gray-200 shadow-card p-6 md:p-10 mb-14" style="--d:80ms">
+        <h3 class="text-xl md:text-2xl font-extrabold text-[#07153b] mb-4">Observerende en oriënterende 1ste graad</h3>
         <div class="space-y-4 text-gray-600 text-sm leading-relaxed">
           <p>Het team 1ste graad wil verder doorontwikkelen naar een echte observerende en oriënterende 1ste graad. We geloven in krachtig onderwijs dat onze leerlingen maximaal ondersteunt in hun leerproces. Door gebruik te maken van een gedragen visie willen we samen de talenten, interesses en mogelijkheden van elke leerling optimaal ontwikkelen. Ons ultieme doel is om aan het einde van de 1ste graad een goed onderbouwd advies te kunnen geven over hun verdere studieloopbaan, wat bijdraagt tot toekomstige succeservaringen voor elke leerling.</p>
           <p>Met krachtig onderwijs als stevige basis en vertrekkend vanuit vijf fundamentele bouwstenen, stippelen wij onze visie uit. Bij elke stap zetten we in op het ontdekken van de unieke talenten van elk kind, met een scherp oog voor de verschillende behoeften en capaciteiten. Differentiatie, remediëring en verdieping vormen daarbij de sleutels tot succes, waarbij we streven naar een omgeving waarin elke leerling zich volledig kan ontplooien. Keuzevrijheid en loopbaanbegeleiding staan hoog op onze agenda, omdat we geloven in het belang van het begeleiden van leerlingen om hun eigen weg te vinden. Onze aanpak wordt verder gekenmerkt door een cultuur van motivatie en hoge verwachtingen, waarin we elke leerling uitdagen om het beste uit zichzelf te halen. Tot slot omarmen we een allesomvattende benadering van leren en studeren, waarbij we leerlingen begeleiden in hun groeiproces en samenwerken met ouders en de bredere gemeenschap om een ideale leeromgeving te creëren.</p>
         </div>
       </div>
 
-      <h3 class="font-extrabold text-[#07153b] mb-5 text-lg">De vijf bouwstenen</h3>
+      <h3 class="scroll-reveal text-xl md:text-2xl font-extrabold text-[#07153b] mb-5">De vijf bouwstenen</h3>
       <div class="space-y-3">
         {[
           {
@@ -129,48 +124,49 @@ const talenten = [
             titel: "Leren en studeren",
             tekst: "We zetten in op krachtig onderwijs waarbij leerkrachten leerlingen helpen bij het plannen en studeren, hen studievaardigheden en leerstrategieën aanreiken en implementeren om het leerproces van de leerlingen efficiënter te maken en de leerwinst van elke leerling te vergroten.\n\nDe collega's van leerlingbegeleiding ondersteunen leerkrachten en leerlingen indien er bijkomende ondersteuning nodig is.",
           },
-        ].map(b => (
-          <details class="bg-white rounded-2xl border border-blue-100 shadow-sm overflow-hidden group">
-            <summary class="flex items-center gap-4 px-6 py-4 cursor-pointer hover:bg-blue-50 transition list-none">
+        ].map((b, i) => (
+          <details class="scroll-reveal bg-white rounded-2xl border border-gray-200 shadow-card overflow-hidden group" style={`--d:${i * 60}ms`}>
+            <summary class="flex items-center gap-4 px-6 py-4 cursor-pointer hover:bg-gray-50 transition-colors duration-150 list-none">
               <div class="bg-[#07153b] text-yellow-400 font-extrabold text-sm rounded-full w-8 h-8 flex items-center justify-center shrink-0">{b.nr}</div>
-              <span class="font-extrabold text-[#07153b] text-sm flex-1">{b.titel}</span>
-              <svg class="w-5 h-5 text-gray-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span class="font-bold text-[#07153b] flex-1">{b.titel}</span>
+              <svg class="w-5 h-5 text-gray-400 shrink-0 group-open:rotate-180 transition-transform duration-300 ease-fluid" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </summary>
-            <div class="px-6 py-5 border-t border-blue-50 text-gray-600 text-sm leading-relaxed whitespace-pre-line">{b.tekst}</div>
+            <div class="px-6 py-5 border-t border-gray-100 text-gray-600 text-sm leading-relaxed whitespace-pre-line">{b.tekst}</div>
           </details>
         ))}
       </div>
 
     </div>
+    </div>
   </section>
 
   <!-- ===== 1STE JAAR ===== -->
-  <section id="eerste-jaar" class="py-16 px-4">
+  <section id="eerste-jaar" class="py-16 md:py-24 px-4">
     <div class="max-w-5xl mx-auto">
 
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
-        <h2 class="text-2xl font-extrabold text-[#07153b]">1ste jaar</h2>
+      <div class="scroll-reveal mb-12">
+        <span class="eyebrow">Brede basis</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-4">1ste jaar</h2>
+        <p class="text-gray-600 leading-relaxed max-w-2xl">Sint-Victor is een pure ASO-school. De eerste graad biedt een brede algemene vorming aangevuld met drie unieke pijlers: FLEX, WIJS en TALENT.</p>
       </div>
-      <p class="text-gray-500 text-sm mb-10 pl-4">Sint-Victor is een pure ASO-school. De eerste graad biedt een brede algemene vorming aangevuld met drie unieke pijlers: FLEX, WIJS en TALENT.</p>
 
       <!-- Lessentabel -->
-      <div class="mb-14">
-        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Lessentabel 1ste jaar</h3>
-        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+      <div class="mb-16">
+        <h3 class="scroll-reveal text-xl md:text-2xl font-extrabold text-[#07153b] mb-5">Lessentabel 1ste jaar</h3>
+        <div class="scroll-reveal rounded-2xl overflow-hidden border border-gray-200 shadow-card" style="--d:80ms">
           <img src="/lessentabellen/1stes.png" alt="Lessentabel 1ste jaar" class="w-full h-auto" />
         </div>
       </div>
 
       <!-- FLEX -->
-      <div class="mb-14">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">FLEX</span>
+      <div class="mb-16">
+        <div class="scroll-reveal flex items-center gap-3 mb-5">
+          <span class="font-display bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">FLEX</span>
           <div class="flex-1 h-px bg-gray-200"></div>
         </div>
-        <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8">
+        <div class="scroll-reveal bg-blue-50 border border-blue-100 rounded-2xl p-6 md:p-8" style="--d:80ms">
           <p class="text-gray-700 leading-relaxed mb-4">
             Flex biedt leerlingen extra uren bovenop de basisvorming, specifiek ontworpen om hun leren te verdiepen en/of te remediëren. Door te werken aan de begeleiding van leerlingen op basis van hun specifieke noden streeft Flex naar een verhoging van de leerwinst en persoonlijke groei voor iedere leerling.
           </p>
@@ -181,14 +177,14 @@ const talenten = [
       </div>
 
       <!-- WIJS -->
-      <div class="mb-14">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">WIJS</span>
+      <div class="mb-16">
+        <div class="scroll-reveal flex items-center gap-3 mb-5">
+          <span class="font-display bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">WIJS</span>
           <div class="flex-1 h-px bg-gray-200"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {wijs.map(w => (
-            <div class={`rounded-2xl border p-6 ${w.kleur}`}>
+          {wijs.map((w, i) => (
+            <div class={`scroll-reveal rounded-2xl border p-6 md:p-7 ${w.kleur}`} style={`--d:${i * 80}ms`}>
               <span class={`text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wide ${w.tagKleur} inline-block mb-3`}>{w.tag}</span>
               <p class="text-gray-700 text-sm leading-relaxed">{w.tekst}</p>
             </div>
@@ -198,20 +194,20 @@ const talenten = [
 
       <!-- TALENT -->
       <div>
-        <div class="flex items-center gap-3 mb-5">
-          <span class="bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">TALENT</span>
+        <div class="scroll-reveal flex items-center gap-3 mb-5">
+          <span class="font-display bg-[#07153b] text-yellow-400 font-extrabold text-lg px-4 py-1.5 rounded-xl tracking-wide">TALENT</span>
           <div class="flex-1 h-px bg-gray-200"></div>
         </div>
-        <p class="text-gray-500 text-sm mb-6">Ontdekken van talenten, interesses en vaardigheden van leerlingen. Kies het talent dat bij jou past:</p>
+        <p class="scroll-reveal text-gray-500 text-sm mb-6">Ontdekken van talenten, interesses en vaardigheden van leerlingen. Kies het talent dat bij jou past:</p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {talenten.map(t => (
-            <div class="bg-white rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-[#07153b]/20 transition">
+          {talenten.map((t, i) => (
+            <div class="scroll-reveal bg-white rounded-2xl border border-gray-200 shadow-card p-6" style={`--d:${Math.min(i * 80, 400)}ms`}>
               <div class="bg-[#07153b]/10 rounded-xl w-10 h-10 flex items-center justify-center mb-4">
                 <svg class="w-5 h-5 text-[#07153b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <Fragment set:html={t.icon} />
                 </svg>
               </div>
-              <div class="font-extrabold text-[#07153b] mb-0.5">{t.naam}</div>
+              <div class="font-display text-lg font-extrabold text-[#07153b] mb-0.5">{t.naam}</div>
               <div class="text-xs text-yellow-600 font-semibold mb-3">{t.subtitel}</div>
               <p class="text-gray-600 text-sm leading-relaxed">{t.tekst}</p>
             </div>
@@ -223,19 +219,19 @@ const talenten = [
   </section>
 
   <!-- ===== 2DE JAAR ===== -->
-  <section id="tweede-jaar" class="bg-gray-50 border-t border-gray-100 py-16 px-4">
+  <section id="tweede-jaar" class="bg-gray-50 py-16 md:py-24 px-4">
     <div class="max-w-5xl mx-auto">
 
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-1 h-8 bg-yellow-400 rounded-full"></div>
-        <h2 class="text-2xl font-extrabold text-[#07153b]">2de jaar</h2>
+      <div class="scroll-reveal mb-12">
+        <span class="eyebrow">Eerste keuze</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#07153b] mb-4">2de jaar</h2>
+        <p class="text-gray-600 leading-relaxed max-w-2xl">In het tweede jaar bouwen leerlingen verder op de basis van het eerste jaar en maken ze een eerste keuze richting de tweede graad.</p>
       </div>
-      <p class="text-gray-500 text-sm mb-8 pl-4">In het tweede jaar bouwen leerlingen verder op de basis van het eerste jaar en maken ze een eerste keuze richting de tweede graad.</p>
 
       <!-- 4 basisopties -->
-      <div class="mb-12">
-        <h3 class="font-extrabold text-[#07153b] mb-2 text-lg">4 basisopties</h3>
-        <p class="text-gray-500 text-sm mb-6 leading-relaxed">Leerlingen die in het 1ste jaar secundair reeds een keuze moeten maken, vinden het extreem moeilijk om de 'juiste' knoop door te hakken. Onderstaande omschrijvingen kunnen misschien een duwtje in de juiste richting geven&hellip;</p>
+      <div class="mb-16">
+        <h3 class="scroll-reveal text-xl md:text-2xl font-extrabold text-[#07153b] mb-2">4 basisopties</h3>
+        <p class="scroll-reveal text-gray-500 text-sm mb-6 leading-relaxed max-w-3xl">Leerlingen die in het 1ste jaar secundair reeds een keuze moeten maken, vinden het extreem moeilijk om de 'juiste' knoop door te hakken. Onderstaande omschrijvingen kunnen misschien een duwtje in de juiste richting geven&hellip;</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           {[
             {
@@ -262,8 +258,8 @@ const talenten = [
               tag: "bg-green-600 text-white",
               tekst: "Vind je sociale vaardigheden, sociale contacten, milieu, je eigen gezondheid en die van je naasten belangrijk? Twijfel niet en kies voor maatschappij en welzijn.",
             },
-          ].map(o => (
-            <div class={`rounded-2xl border-l-4 p-6 ${o.kleur}`}>
+          ].map((o, i) => (
+            <div class={`scroll-reveal rounded-2xl border-l-4 p-6 ${o.kleur}`} style={`--d:${i * 80}ms`}>
               <span class={`text-xs font-extrabold px-3 py-1 rounded-full inline-block mb-3 ${o.tag}`}>{o.naam}</span>
               <p class="text-gray-700 text-sm leading-relaxed">{o.tekst}</p>
             </div>
@@ -272,9 +268,9 @@ const talenten = [
       </div>
 
       <!-- Google Slides embed -->
-      <div class="mb-12">
-        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Presentatie 2de jaar</h3>
-        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm aspect-video">
+      <div class="mb-16">
+        <h3 class="scroll-reveal text-xl md:text-2xl font-extrabold text-[#07153b] mb-5">Presentatie 2de jaar</h3>
+        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-card aspect-video bg-white">
           <iframe
             src="https://docs.google.com/presentation/d/14Ooro8gEffPn706qD1AfCD-K0Bb98YyGVgWj6Cv2V_k/embed?start=false&loop=false&delayms=3000"
             class="w-full h-full"
@@ -286,8 +282,8 @@ const talenten = [
 
       <!-- Lessentabel 2de jaar -->
       <div>
-        <h3 class="font-extrabold text-[#07153b] mb-4 text-lg">Lessentabel 2de jaar</h3>
-        <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+        <h3 class="scroll-reveal text-xl md:text-2xl font-extrabold text-[#07153b] mb-5">Lessentabel 2de jaar</h3>
+        <div class="scroll-reveal rounded-2xl overflow-hidden border border-gray-200 shadow-card" style="--d:80ms">
           <img src="/lessentabellen/2des.png" alt="Lessentabel 2de jaar" class="w-full h-auto" />
         </div>
       </div>
@@ -296,16 +292,16 @@ const talenten = [
   </section>
 
   <!-- CTA -->
-  <section class="bg-[#07153b] text-white py-12 px-4 text-center">
-    <div class="max-w-2xl mx-auto">
-      <h2 class="text-xl font-extrabold mb-3">Meer weten over de 1ste graad?</h2>
-      <p class="text-blue-200 text-sm mb-6">Kom langs op onze opendeurdag of neem contact op met ons secretariaat.</p>
-      <div class="flex flex-wrap gap-3 justify-center">
-        <a href="/inschrijvingen" class="bg-yellow-400 text-[#07153b] font-bold px-6 py-3 rounded-xl hover:bg-yellow-300 transition text-sm">Inschrijven</a>
-        <a href="/contact" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">Contact</a>
-        <a href="/studieaanbod" class="border border-white/40 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/10 transition text-sm">&larr; Alle richtingen</a>
-      </div>
-    </div>
-  </section>
+  <PageCta title="Meer weten over de 1ste graad?" intro="Kom langs op onze opendeurdag of neem contact op met ons secretariaat.">
+    <a href="/inschrijvingen" class="btn btn-primary">
+      Inschrijven
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+    <a href="/contact" class="btn btn-ghost">Contact</a>
+    <a href="/studieaanbod" class="btn btn-ghost group">
+      <svg class="group-hover:-translate-x-[3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 17l-5-5m0 0l5-5m-5 5h12"/></svg>
+      Alle richtingen
+    </a>
+  </PageCta>
 
 </Layout>
